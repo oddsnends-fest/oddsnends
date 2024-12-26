@@ -17,6 +17,9 @@ importers:
       '@line/liff':
         specifier: ^2.25.1
         version: 2.25.1
+      '@line/liff-mock':
+        specifier: ^1.0.3
+        version: 1.0.3(@line/liff@2.25.1)
       '@prisma/client':
         specifier: ^5.14.0
         version: 5.22.0(prisma@5.22.0)
@@ -508,6 +511,11 @@ packages:
   '@line/bot-sdk@9.5.0':
     resolution: {integrity: sha512-PPtul1vzoyZ5HkNqh643YD0TCFqOHI6ld4x69c/prwAxornBxPaeXoHbHcFeK8gaD2W4/666mPQe5K3CmUMepw==}
     engines: {node: '>=18'}
+
+  '@line/liff-mock@1.0.3':
+    resolution: {integrity: sha512-9js4YXheVV4rTXvvLIMVSqC6ikmD7mRrpbFqFZBemqCmSu3YSfljQs1fzKVy9LVUCREmsESLwWqa57jS3LY45g==}
+    peerDependencies:
+      '@line/liff': '>= 2.19.0'
 
   '@line/liff@2.25.1':
     resolution: {integrity: sha512-sMP+WXCDI5mLuCN4vinqhLM5ULvWGLHJjVXg973KPc0ARyfbo9UOpw3FZNjpqt+7Tc9Y1YKEo1Zbol1nYfeplQ==}
@@ -2938,6 +2946,10 @@ snapshots:
       axios: 1.7.9
     transitivePeerDependencies:
       - debug
+
+  '@line/liff-mock@1.0.3(@line/liff@2.25.1)':
+    dependencies:
+      '@line/liff': 2.25.1
 
   '@line/liff@2.25.1':
     dependencies:

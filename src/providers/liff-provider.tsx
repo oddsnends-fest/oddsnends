@@ -1,5 +1,6 @@
 "use client";
-import type { Liff } from "@line/liff";
+import { liff, type Liff } from "@line/liff";
+import LiffMockPlugin from "@line/liff-mock";
 import {
   useState,
   useEffect,
@@ -25,20 +26,27 @@ export default function Layout({ children }: { children: ReactNode }) {
   // Execute liff.init() when the app is initialized
   useEffect(() => {
     // to avoid `window is not defined` error
-    void import("@line/liff")
-      .then((liff) => liff.default)
-      .then((liff) => {
-        console.log("LIFF init...");
-        liff
-          .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
-          .then(() => {
-            console.log("LIFF init succeeded.");
-            setLiffObject(liff);
-          })
-          .catch((error: Error) => {
-            console.log("LIFF init failed.");
-            setLiffError(error.toString());
-          });
+    console.log("LIFF init...");
+    liff.use(new LiffMockPlugin());
+    liff
+      .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID!, mock: true })
+      .then(() => {
+        console.log("LIFF init succeeded.");
+        if (!liff.isInClient()) liff.login();
+        liff.$mock.set((p) => ({
+          ...p,
+          getProfile: {
+            displayName: "Test User",
+            userId: "U846856f0da9cfd54706db8cb5dabd17a",
+            pictureUrl:
+              "https://cdn3.iconfinder.com/data/icons/leto-user-group/64/__user_person_profile-256.png ",
+          },
+        }));
+        setLiffObject(liff);
+      })
+      .catch((error: Error) => {
+        console.log("LIFF init failed.", error);
+        setLiffError(error.toString());
       });
   }, []);
 
