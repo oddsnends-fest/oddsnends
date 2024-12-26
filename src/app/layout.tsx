@@ -1,3 +1,4 @@
+import LiffProvider from "@/providers/liff-provider";
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
@@ -14,7 +15,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+      <LiffProvider>
+        <body>{children}</body>
+      </LiffProvider>
     </html>
   );
 }
