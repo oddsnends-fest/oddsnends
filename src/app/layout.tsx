@@ -16,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <LiffProvider>
-        <body>{children}</body>
+        <body className="relative mx-auto min-h-screen w-full max-w-md overflow-x-hidden overscroll-none">
+          {children}
+        </body>
       </LiffProvider>
     </html>
   );
