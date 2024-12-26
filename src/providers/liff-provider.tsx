@@ -1,4 +1,5 @@
 "use client";
+import { env } from "@/env";
 import { liff, type Liff } from "@line/liff";
 import LiffMockPlugin from "@line/liff-mock";
 import {
@@ -29,7 +30,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     console.log("LIFF init...");
     liff.use(new LiffMockPlugin());
     liff
-      .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID!, mock: true })
+      .init({ liffId: env.NEXT_PUBLIC_LIFF_ID, mock: true })
       .then(() => {
         console.log("LIFF init succeeded.");
         if (!liff.isInClient()) liff.login();
