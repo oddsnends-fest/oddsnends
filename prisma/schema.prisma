@@ -25,7 +25,6 @@ model User {
     age              Int
     occupation       String
     email            String    @unique
-    emailVerified    DateTime?
     channel          Channel
 }
 
