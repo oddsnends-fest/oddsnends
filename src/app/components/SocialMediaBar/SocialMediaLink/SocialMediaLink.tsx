@@ -11,6 +11,7 @@ interface SocialMediaLinkProps {
 function SocialMediaLink({ href, src, alt, title, label }: SocialMediaLinkProps) {
     return (
         <>
+            {/* Open oddsnend social media in a new tab */}
             <a
                 href={href}
                 target="_blank"

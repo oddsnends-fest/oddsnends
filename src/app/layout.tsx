@@ -22,6 +22,7 @@ export default function RootLayout({
           <main className="flex-grow overflow-y-auto">
             {children}
           </main>
+          {/* Social media bar */}
           <SocialMediaBar />
         </body>
       </LiffProvider>

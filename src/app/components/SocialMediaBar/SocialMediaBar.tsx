@@ -1,4 +1,4 @@
-import SocialMediaLink from "./SocialMediaLink/SocialMediaLink";
+import SocialMediaLink from "./SocialMediaLink/SocialMediaLink"; // Social media Link component
 
 function SocialMediaBar() {
     return (
