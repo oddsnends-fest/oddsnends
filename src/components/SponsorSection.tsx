@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const SponsorSection = () => {
   return (
-    <div className="w-screen flex flex-row justify-center gap-5">
+    <div className="mb-6 w-screen flex flex-row justify-center gap-5">
       <Image src="/" alt="" width={35} height={35} className="border"/>
       <Image src="/" alt="" width={35} height={35} className="border"/>
       <Image src="/" alt="" width={35} height={35} className="border"/>
