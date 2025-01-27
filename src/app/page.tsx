@@ -5,7 +5,7 @@ import SponsorSection from "@/components/SponsorSection";
 export default function HomePage() {
   return (
     <div className="flex flex-col h-screen">
-      <main className="flex flex-col pt-6 flex-grow">
+      <main className="flex flex-col mt-14 flex-grow">
         <Image src="/" alt="LogoImg" width={60} height={60} 
           className="border mx-auto"
           />
@@ -18,7 +18,7 @@ export default function HomePage() {
 
           <section className="flex flex-col justify-center items-center">
           <Image src="/" alt="Sliding Box" 
-            width={250} height={250} 
+            width={225} height={225} 
             className="border"
             />
           <div> . . . </div>
