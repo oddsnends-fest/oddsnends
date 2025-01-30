@@ -1,54 +1,55 @@
 import Link from "next/link";
 import Image from "next/image";
-import SponsorSection from "@/components/SponsorSection";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col h-screen">
-      <main className="flex flex-col mt-14 flex-grow">
-        {/* Logo */}
-        <Image src="/" alt="LogoImg" width={60} height={60} 
-          className="border mx-auto"
-          />
-
-        {/* Title */}
-        <div className="flex flex-col justify-center items-center gap-8 pt-5">
-          <h1 className="text-center text-4xl font-extrabold leading-[1.25]">
-            <div>The First</div>
-            <div>Sandbox Festival</div>
-          </h1>
-
-        {/* Sliding Box */}
-          <section className="flex flex-col justify-center items-center">
-          <Image src="/" alt="Sliding Box" 
-            width={225} height={225} 
-            className="border"
+    <div className="flex flex-col">
+        <main className="flex flex-col mt-16 flex-grow">
+            {/* Logo */}
+            <Image 
+                src="/"
+                alt="LogoImg"
+                width={60}
+                height={60} 
+                className="border mx-auto"
             />
-          <div> . . . </div>
-          </section>
 
-        {/* Buttons */}
-          <div className="flex flex-col items-center gap-8">
-            <Link href="/">
-              <button type="button" className="p-3 w-72 text-lg bg-custom-dark-gray text-white rounded-2xl transform hover:scale-105 transition-all duration-75"> 
-                <div>Interactive Game</div>
-              </button>
-            </Link>
+            <div className="flex flex-col justify-center items-center gap-8 pt-8">
 
-            <Link href="/">
-              <button type="button" className="p-3 w-72 text-lg bg-custom-dark-gray text-white rounded-2xl transform hover:scale-105 transition-all duration-75"> 
-                <div>ID Card</div>
-              </button>
-            </Link>
-          </div>
+                {/* Title */}
+                <h1 className="text-center text-4xl font-extrabold leading-[1.25]">
+                    <div>The First</div>
+                    <div>Sandbox Festival</div>
+                </h1>
 
-        </div>
-      </main>
+                {/* Sliding Box */}
+                <section className="pt-2 flex flex-col justify-center items-center">
+                    <Image 
+                    src="/" 
+                    alt="Sliding Box" 
+                    width={250} 
+                    height={250} 
+                    className="border"
+                    />
+                    <div> . . . </div>
+                </section>
 
-      <SponsorSection />
+                {/* Buttons */}
+                <div className="mt-4 flex flex-col items-center gap-10">
+                    <Link href="/">
+                        <button type="button" className="p-3 w-80 text-xl bg-custom-dark-gray text-white rounded-2xl transform hover:scale-105 transition-all duration-75"> 
+                            <div>Interactive Game</div>
+                        </button>
+                    </Link>
 
-      {/* Footer */}
-      <footer className="p-3 text-center bg-custom-light-gray">footer</footer>
+                    <Link href="/">
+                        <button type="button" className="p-3 w-80 text-xl bg-custom-dark-gray text-white rounded-2xl transform hover:scale-105 transition-all duration-75"> 
+                            <div>ID Card</div>
+                        </button>
+                    </Link>
+                </div>
+            </div>
+        </main>
     </div>
   );
 }
