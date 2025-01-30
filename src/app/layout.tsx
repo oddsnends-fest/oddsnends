@@ -18,10 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <LiffProvider>
-        <body className={`flex flex-col h-screen`}>
-          <main className="flex-grow overflow-y-auto">
-            {children}
-          </main>
+        <body className="relative mx-auto min-h-screen w-full max-w-md overflow-x-hidden overscroll-none">
+          {children}
           {/* Social media bar */}
           <SocialMediaBar />
         </body>
