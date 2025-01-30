@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col">
+    <div className="">
         <main className="flex flex-col mt-16 flex-grow">
             {/* Logo */}
             <Image 

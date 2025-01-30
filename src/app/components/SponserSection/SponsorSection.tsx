@@ -12,22 +12,22 @@ const sponsors = [
 
 const SponsorSection = () => {
   return (
-    <section className="mb-8 mx-6">
-      <ul className="flex flex-wrap justify-evenly items-center gap-2">
-          {sponsors.map(({ src, link }, idx) => (
-              <li key={idx}>
-                  <Link href={link}>
-                      <Image 
-                        src={src} 
-                        alt={`${idx + 1}`} 
-                        width={40} 
-                        height={40} 
-                        className="border"
-                      />
-                  </Link>
-              </li>
-          ))}
-      </ul>
+    <section className="mt-16 p-6 bg-white">
+        <ul className="flex flex-wrap justify-evenly items-center gap-2">
+            {sponsors.map(({ src, link }, idx) => (
+                <li key={idx}>
+                    <Link href={link}>
+                        <Image 
+                            src={src} 
+                            alt={`${idx + 1}`} 
+                            width={40} 
+                            height={40} 
+                            className="border"
+                        />
+                    </Link>
+                </li>
+            ))}
+        </ul>
   </section>
   )
 }
