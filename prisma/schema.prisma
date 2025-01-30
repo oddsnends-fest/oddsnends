@@ -26,6 +26,13 @@ model User {
     occupation       String
     email            String    @unique
     channel          Channel
+    photoid_name     String
+    dob              Date
+    spirit_animal    SpiritAnimal
+    signature        String
+    hobby            Hobby
+    updated_at       DateTime    @updatedAt
+    created_at       DateTime    @default(now())
 }
 
 enum Gender {
@@ -43,4 +50,28 @@ enum Channel {
     LINE
     FRIENDS
     POSTER
+}
+
+enum Hobby {
+    READING
+    PAINTING
+    GAMING
+    COOKING
+    PHOTOGRAPHY
+    TRAVELING
+    GARDENING
+    FISHING
+    WRITING
+}
+
+enum SpiritAnimal {
+    CAT
+    BUTTERFLY
+    FISH
+    DUCK
+    SQUIRREL
+    WATER_MONITOR
+    SWAN
+    DOG
+    OTTER
 }
