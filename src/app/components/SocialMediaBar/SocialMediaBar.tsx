@@ -3,7 +3,7 @@ import SocialMediaLink from "./SocialMediaLink/SocialMediaLink"; // Social media
 function SocialMediaBar() {
     return (
         <>
-            <footer className="bg-gray-200 text-black w-full px-4 py-4">
+            <footer className="bg-gray-200 text-black w-full px-4 py-4 sticky bottom-0">
                 <div className="flex items-center justify-around w-full">
                     <div className="flex items-center justify-center gap-2">
                         <SocialMediaLink
