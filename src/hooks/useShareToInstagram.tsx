@@ -6,6 +6,7 @@ import { toJpeg } from "html-to-image";
 
 export default function useShareToInstagram() {
   const [urlImage, setUrlImage] = useState("");
+  const [isSharing, setIsSharing] = useState(false);
 
   // Function to download the card as an image
   async function handleDownloadFile(cardRef: CardRef) {
@@ -42,24 +43,29 @@ export default function useShareToInstagram() {
   };
 
   const handleShare = async () => {
+    if (isSharing) return;
+    setIsSharing(true);
+
     if (urlImage) {
-      // Convert the base64 data URL to a Blob
-      const blob = await (await fetch(urlImage)).blob();
-
-      // Create a File object from the Blob
-      const file = new File([blob], "awesome_ticket.jpg", {
-        type: blob.type,
-      });
-
       try {
-        // Use the Web Share API to share the file
-        await navigator.share({
-          files: [file],
-          title: "Check out this image!",
-          text: "I just created this awesome image. Take a look!",
+        const blob = await (await fetch(urlImage)).blob();
+        const file = new File([blob], "awesome_ticket.jpg", {
+          type: blob.type,
         });
+
+        if (navigator.share) {
+          await navigator.share({
+            files: [file],
+            title: "Check out this image!",
+            text: "I just created this awesome image. Take a look!",
+          });
+        } else {
+          console.warn("Web Share API not supported");
+        }
       } catch (error) {
         console.error("Error sharing the image:", error);
+      } finally {
+        setIsSharing(false);
       }
     }
   };
