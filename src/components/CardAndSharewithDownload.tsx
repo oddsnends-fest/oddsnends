@@ -43,10 +43,10 @@ export default function ShareToInstagram() {
   const cardRef = useRef<HTMLDivElement | null>(null);
   console.log(cardRef.current, "cardref");
 
-  const { data, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/users/1", // change the path to retrive the data
-    fetcher,
-  );
+  // const { data, error, isLoading } = useSWR(
+  //   "https://jsonplaceholder.typicode.com/users/1", // change the path to retrive the data
+  //   fetcher,
+  // );
 
   function CardComponent() {
     // mock the ticket component
