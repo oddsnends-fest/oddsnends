@@ -34,6 +34,7 @@ export async function POST(request: Request): Promise<NextResponse> {
             throw new Error("Token payload is missing");
           }
 
+          // const { userId } = JSON.parse(tokenPayload);
 
           // Save the blob URL and metadata into your Neon database (adjust table/fields as necessary)
           // await db.user.create({
