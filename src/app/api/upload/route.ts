@@ -18,7 +18,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
         return {
           allowedContentTypes: ["image/jpeg", "image/png"], // Allow only specific content types
-          maximumSizeInBytes: 24657920, // Set maximum byte of 20 MB
+          maximumSizeInBytes: 20971520, // Set maximum byte of 20 MB
           tokenPayload: JSON.stringify({
             userId: "example_user_id", // Pass user info here (e.g., user ID from session or JWT)
           },
