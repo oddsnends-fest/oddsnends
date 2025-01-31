@@ -114,16 +114,18 @@ export default function ShareToInstagram() {
       )}
 
       {step === 1 && (
-        <div className="flex items-center justify-center gap-3 border border-black p-2">
+        <div className="flex items-center justify-center gap-4 p-2">
           <Button
             data-testid="download"
             onClick={() => handleDownloadFile(cardRef)}
+            className = 'rounded-full'
           >
             <Download />
           </Button>
           <Button
             data-testid="share"
             onClick={() => handleRouteToSharePage(cardRef, addStep)}
+            className = 'rounded-full'
           >
             <Share />
           </Button>
