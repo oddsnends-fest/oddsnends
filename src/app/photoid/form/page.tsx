@@ -20,6 +20,10 @@ export default function FormPage() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!name || !hobby || !date || !spiritAnimal) {
+      console.log("Please fill in all fields.");
+      return;
+    }
     const formData = {
       name,
       hobby,
