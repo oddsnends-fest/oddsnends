@@ -27,7 +27,7 @@ model User {
     email            String    @unique
     channel          Channel
     photoid_name     String
-    dob              Date
+    dob              DateTime
     spirit_animal    SpiritAnimal
     signature        String
     hobby            Hobby
