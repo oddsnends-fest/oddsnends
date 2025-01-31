@@ -143,12 +143,12 @@ export default function FormPage() {
             </select>
           </div>
         </div>
-        <Button
+        <button
           type="submit"
-          className="mx-auto w-1/2 rounded-xl bg-[#353535] p-3 text-white hover:bg-gray-500"
+          className="mx-auto mt-60 w-3/4 rounded-2xl bg-[#353535] p-2 text-white hover:bg-gray-500"
         >
           Send
-        </Button>
+        </button>
       </form>
     </div>
   );
