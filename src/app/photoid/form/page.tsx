@@ -141,7 +141,7 @@ export default function FormPage() {
         </div>
         <Button
           type="submit"
-          className="mx-auto w-1/2 rounded-xl bg-black p-3 text-white hover:bg-gray-500"
+          className="mx-auto w-1/2 rounded-xl bg-[#353535] p-3 text-white hover:bg-gray-500"
         >
           Send
         </Button>
