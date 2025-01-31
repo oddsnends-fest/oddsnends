@@ -20,6 +20,7 @@ export default function FormPage() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //prevent null submitting
     if (!name || !hobby || !date || !spiritAnimal) {
       console.log("Please fill in all fields.");
       return;
@@ -30,11 +31,13 @@ export default function FormPage() {
       date,
       spiritAnimal,
     };
+    //submit data
     console.log("Form Data Submitted:", formData);
   };
 
   return (
     <div className="h-screen overflow-hidden">
+      {/* logo */}
       <Image
         src="/"
         alt="LogoImage"
@@ -45,6 +48,8 @@ export default function FormPage() {
       <div className="mt-5 flex justify-center text-center text-4xl font-bold">
         Fill in
       </div>
+
+      {/* name */}
       <form onSubmit={handleSubmit} className="m-6 mt-20 grid gap-4">
         <div className="grid grid-cols-2 gap-8">
           <div>
@@ -60,6 +65,7 @@ export default function FormPage() {
             />
           </div>
 
+          {/* hobby */}
           <div>
             <label htmlFor="hobby" className="mb-2 text-xl font-medium">
               Hobby
@@ -85,6 +91,7 @@ export default function FormPage() {
             </select>
           </div>
 
+          {/* date of birth */}
           <div>
             <label htmlFor="date" className="mb-2 text-xl font-medium">
               Date of birth
@@ -118,6 +125,7 @@ export default function FormPage() {
             </div>
           </div>
 
+          {/* spirit animal */}
           <div>
             <label htmlFor="spirit-animal" className="mb-2 text-xl font-medium">
               Spirit Animal
@@ -143,6 +151,8 @@ export default function FormPage() {
             </select>
           </div>
         </div>
+
+        {/* send button */}
         <button
           type="submit"
           className="mx-auto mt-60 w-3/4 rounded-2xl bg-[#353535] p-2 text-white hover:bg-gray-500"
