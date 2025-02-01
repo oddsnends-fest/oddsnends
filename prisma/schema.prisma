@@ -21,7 +21,7 @@ model User {
     line_profile_pic String?
     phone            String
     gender           Gender
-    photo            String?
+    photo            String
     age              Int
     occupation       String
     email            String    @unique
