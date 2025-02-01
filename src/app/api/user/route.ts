@@ -4,11 +4,9 @@ import { User } from "@/server/validate/user.validate";
 
 export async function POST(request: Request): Promise<NextResponse> {
     try {
-      // Parse JSON request body
-      const jsonData = await request.json();
   
       // Validate input data
-      const parsedData = User.safeParse(jsonData);
+      const parsedData = User.safeParse(await request.json());
       if (!parsedData.success) {
         return NextResponse.json({ error: parsedData.error.format() }, { status: 400 });
       }
@@ -27,7 +25,6 @@ export async function POST(request: Request): Promise<NextResponse> {
           user_id,
           email,
           ...userData,
-          line_profile_pic: userData.line_profile_pic ?? "",
         },
       });
   
