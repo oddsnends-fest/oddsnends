@@ -26,6 +26,7 @@ export async function POST(request: Request): Promise<NextResponse> {
           email,
           ...userData, // Spread other fields
           line_profile_pic: userData.line_profile_pic ?? "", 
+          phone: userData.phone ?? null,
         },
       });
   
