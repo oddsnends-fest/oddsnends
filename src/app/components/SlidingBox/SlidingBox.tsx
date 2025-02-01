@@ -10,12 +10,12 @@ import "swiper/css/pagination"
 
 // src for event's image
 const imgSrc = [
-    {src: "/"},
-    {src: "/"},
-    {src: "/"},
-    {src: "/"},
-    {src: "/"},
-    {src: "/"},
+    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
+    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
+    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
+    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
+    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
+    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
 ]
 
 const autoPlayDelay = 3000; // in ms
@@ -53,7 +53,7 @@ const SlidingBox = () => {
                     className="w-full"
                 >
                     {/* Map through the image src links*/}
-                    {imgSrc.map(({src}, idx) => (
+                    {imgSrc.map(({src, link}, idx) => (
                         <SwiperSlide key={idx}>
                             <div 
                                 className={ // define transition to ensure smooth animation between box changing
@@ -64,13 +64,15 @@ const SlidingBox = () => {
                                     ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx > (imgSrc.length)/2 ? "-translate-x-20" : ""/* On the other hand, all the second half boxes are being move to the left*/}
                                 `}
                             >
-                                <Image 
-                                    src={src} 
-                                    alt={`Event ${idx+1}`} 
-                                    width={250}
-                                    height={250}
-                                    className="border text-black"
-                                />
+                                <a href={link} target="_blank" rel="noopener noreferrer">
+                                    <Image 
+                                        src={src} 
+                                        alt={`Event ${idx+1}`} 
+                                        width={250}
+                                        height={250}
+                                        className="border text-black"
+                                    />
+                                </a>
                             </div>
                         </SwiperSlide>
                     ))}
