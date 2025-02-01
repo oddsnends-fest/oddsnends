@@ -12,7 +12,7 @@ const sponsors = [
 
 const SponsorSection = () => {
   return (
-    <section className="mt-16 p-6 bg-white">
+    <section className="p-6 bg-white">
         <ul className="flex flex-wrap justify-evenly items-center gap-2">
             {sponsors.map(({ src, link }, idx) => (
                 <li key={idx}>
