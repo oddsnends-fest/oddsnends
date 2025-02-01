@@ -6,21 +6,21 @@ export async function PATCH(request: Request): Promise<NextResponse> {
   try {
     const jsonData = await request.json();
 
-    const parsedData = User.safeParse(jsonData);
+    const parsedData = User.safeParse(jsonData);  //Validatinga
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.format() }, { status: 400 });
     }
 
-    const { user_id, ...updateFields } = parsedData.data;
+    const { user_id, ...updateFields } = parsedData.data; //Destructuring
 
     const existingUser = await db.user.findUnique({ where: { user_id } });
     if (!existingUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const updatedUser = await db.user.update({
+    const updatedUser = await db.user.update({ //Updating
       where: { user_id },
-      data: { ...updateFields, updated_at: new Date() },
+      data: { ...updateFields },
     });
 
     return NextResponse.json({ message: "User updated successfully", data: updatedUser });
