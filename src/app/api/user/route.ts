@@ -27,6 +27,7 @@ export async function POST(request: Request): Promise<NextResponse> {
           user_id,
           email,
           ...userData,
+          line_profile_pic: userData.line_profile_pic ?? "",
         },
       });
   
