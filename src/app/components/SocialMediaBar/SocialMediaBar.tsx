@@ -1,8 +1,10 @@
+import SponsorSection from "../SponserSection/SponsorSection";
 import SocialMediaLink from "./SocialMediaLink/SocialMediaLink"; // Social media Link component
 
 function SocialMediaBar() {
     return (
         <>
+            <SponsorSection />
             <footer className="bg-gray-200 text-black w-full px-4 py-4 sticky bottom-0 z-10">
                 <div className="flex items-center justify-around w-full">
                     <div className="flex items-center justify-center gap-2">
