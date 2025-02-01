@@ -4,14 +4,12 @@ import { User } from "@/server/validate/user.validate";
 
 export async function PATCH(request: Request): Promise<NextResponse> {
   try {
-    const jsonData = await request.json();
-
-    const parsedData = User.safeParse(jsonData);  //Validatinga
-    if (!parsedData.success) {
-      return NextResponse.json({ error: parsedData.error.format() }, { status: 400 });
+    const data = User.safeParse(await request.json()); // Use Zod validation
+    if (!data.success) {
+      return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    const { user_id, ...updateFields } = parsedData.data; //Destructuring
+    const { user_id, ...updateFields } = data.data; //Destructuring
 
     const existingUser = await db.user.findUnique({ where: { user_id } });
     if (!existingUser) {
