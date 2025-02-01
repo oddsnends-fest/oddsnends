@@ -1,15 +1,50 @@
 "use client"
 import React from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import Modal from "../Modal/Modal";
 
 function PhotoUpload() {
     const photoInputRef = useRef<HTMLInputElement>(null);
+    const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);          // Zoom level of the image
 
     const handleClickUpload = () => {
         if (photoInputRef.current) {
             photoInputRef.current.click();
         }
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            try {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    setUploadedImage(reader.result as string);
+                    setIsModalOpen(true);
+                };
+                reader.readAsDataURL(file);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+
+        // Reset the input value to allow uploading the same file again
+        if (photoInputRef.current) {
+            photoInputRef.current.value = "";
+        }
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setUploadedImage(null);
+    };
+
+    const handleClickRefresh = () => {
+        closeModal();
+        console.log("refesh");
     };
 
     return (
@@ -43,11 +78,58 @@ function PhotoUpload() {
                 </div>
             </div>
 
+            {/* Modal for Cropping Image */}
+            {isModalOpen && (
+                <Modal
+                // onClick={closeModal}
+                >
+                    {uploadedImage && (
+                        <>
+                            <div
+                                className="flex flex-col justify-center items-center gap-4 p-4 text-black"
+                            >
+                                <h1
+                                    className="font-bold text-3xl"
+                                >
+                                    Crop Your Image
+                                </h1>
+                                <div
+                                    className="bg-white rounded-lg p-4"
+                                >
+                                    <Image
+                                        src={uploadedImage}
+                                        alt="Uploaded Image"
+                                        width={1440}
+                                        height={1440}
+                                    />
+                                </div>
+                                <div
+                                    className="flex gap-4 justify-center"
+                                >
+                                    <button
+                                        onClick={handleClickRefresh}
+                                        className="text-white font-bold bg-black border-black border-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-400 hover:text-white hover:border-gray-400"
+                                    >
+                                        ↻
+                                    </button>
+                                    <button
+                                        className="text-white font-bold bg-black border-black border-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-400 hover:text-white hover:border-gray-400"
+                                    >
+                                        ✓
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </Modal>
+            )}
+
             <input
                 type="file"
                 accept="image/jpeg, image/png, image/jpg"
                 className="hidden"
                 ref={photoInputRef}
+                onChange={handleFileChange}
             />
         </>
     );
