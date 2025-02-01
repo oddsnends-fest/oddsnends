@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import { RotateCcw, Check, Trash } from "lucide-react"; // Import Lucide icons
+import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 
 export default function Signature() {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
@@ -19,7 +19,6 @@ export default function Signature() {
     if (sigCanvas.current) {
       const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
       setImageURL(dataURL);
-      console.log(dataURL.search("png"))
       closeModal();
     }
   };
@@ -36,9 +35,10 @@ export default function Signature() {
 
   return (
     <div className="flex flex-col gap-2">
-      {/* Signature Pad Header with Delete Button */}
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-[22px]">Signature Box</p>
+      {/* Signature Pad Header with PenTool Icon */}
+      <div className="flex items-center gap-2 text-left mb-2">
+        <p className="text-[22px] font-medium">Signature</p>
+        <PenTool size={22} className="text-gray-700 transform " />
       </div>
 
       {/* Signature Pad Container */}
@@ -52,46 +52,54 @@ export default function Signature() {
       </div>
 
       {/* Modal for Signature Pad */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm"
-          onClick={closeModal}
-        >
+        {isModalOpen && (
           <div
-            className="bg-white rounded-lg p-[4px] w-auto max-w-[410px] h-[160px]"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center backdrop-blur-sm"
+            onClick={closeModal} // Clicking outside closes the modal
           >
-            <SignatureCanvas
-              ref={sigCanvas}
-              penColor="black"
-              canvasProps={{
-                width: 400,
-                height: 150,
-                className: "border border-gray-300 rounded-md",
-              }}
-            />
+            <div 
+              className="flex flex-col items-start w-auto bg-white rounded-lg p-4"
+              onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+            >
+              {/* Modal Header */}
+              <div className="flex items-center gap-2 text-left mb-4 px-4">
+                <p className="text-[22px] font-medium">Signature</p>
+                <PenTool size={22} className="text-gray-700 transform" />
+              </div>
 
-            {/* Buttons */}
-            <div className="flex justify-center gap-8 mt-4">
-              {/* Reset (Only clears modal signature) */}
-              <button
-                onClick={resetSignatureInModal}
-                className="p-3 bg-[#353535] text-white rounded-full"
-              >
-                <RotateCcw size={24} />
-              </button>
+              {/* Signature Canvas */}
+              <SignatureCanvas
+                ref={sigCanvas}
+                penColor="black"
+                canvasProps={{
+                  width: 400,
+                  height: 150,
+                  className: "border border-gray-300 rounded-md",
+                }}
+              />
 
-              {/* Save */}
-              <button
-                onClick={saveSignature}
-                className="p-3 bg-[#353535] text-white rounded-full"
-              >
-                <Check size={24} />
-              </button>
+              {/* Buttons */}
+              <div className="flex justify-center gap-8 mt-4">
+                {/* Reset */}
+                <button
+                  onClick={resetSignatureInModal}
+                  className="p-3 bg-gray-800 text-white rounded-full"
+                >
+                  <RotateCcw size={24} />
+                </button>
+
+                {/* Save */}
+                <button
+                  onClick={saveSignature}
+                  className="p-3 bg-gray-800 text-white rounded-full"
+                >
+                  <Check size={24} />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+
     </div>
   );
 }
