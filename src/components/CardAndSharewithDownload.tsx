@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import useShareToInstagram from "@/hooks/useShareToInstagram";
 
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 
 // import {
@@ -32,7 +32,7 @@ export default function ShareToInstagram() {
         className="flex items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
         <Image
-          className="h-auto w-48 rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
+          className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
           src="https://plus.unsplash.com/premium_photo-1673697239909-e11521d1ba94?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
           width={120}
@@ -55,16 +55,12 @@ export default function ShareToInstagram() {
     useShareToInstagram();
   return (
     <section
-      className={
-        step === 1
-          ? "flex h-[calc(100vh-8rem)] flex-col items-center justify-center"
-          : "flex h-[calc(100vh-8rem)] items-center justify-center"
-      }
+      className={step === 1 ? "flex flex-col items-center justify-center" : ""}
     >
       {step === 1 && <CardComponent />}
       {step === 2 && (
         <div onClick={handleShare} className="relative aspect-[9/16]">
-          <h1 className="w-full bg-[#D9D9D9] p-2 text-center text-black">
+          <h1 className="w-full bg-[#D9D9D9] text-center text-black">
             Press and hold images 3 seconds to save
           </h1>
           <Image

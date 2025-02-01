@@ -5,9 +5,7 @@ import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 
 export default function useShareToInstagram() {
-  const [urlImage, setUrlImage] = useState<string>(
-    "data:image/jpeg;base64,mockImageData",
-  ); // set state for testing don't worry about it
+  const [urlImage, setUrlImage] = useState<string>("");
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
 
   // Function to download the card as an image
@@ -16,6 +14,7 @@ export default function useShareToInstagram() {
       // console.log("cardRef.current:", cardRef.current); // Debugging line
       html2canvas(cardRef.current).then((canvas) => {
         const link = document.createElement("a");
+        console.log(canvas.toDataURL("image/jpg"), "canvas.toDataURL");
         link.href = canvas.toDataURL("image/jpg");
         link.download = "image-mock.jpg";
         link.click();
