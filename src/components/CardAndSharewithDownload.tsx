@@ -1,48 +1,23 @@
 "use client";
 import { useRef, useState } from "react";
 import useShareToInstagram from "@/hooks/useShareToInstagram";
-// import { Button } from "./ui/button";
-// import { Download, Share } from "lucide-react";
-// import { BellRing, Check } from "lucide-react";
-// import useSWR from "swr";
-// import { cn } from "@/lib/utils";
+
 import Link from "next/link";
 import Image from "next/image";
-// import { toJpeg } from "html-to-image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import html2canvas from "html2canvas";
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-];
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// import {
+//   Card,
+// } from "@/components/ui/card";
 
-type CardProps = React.ComponentProps<typeof Card>;
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+// type CardProps = React.ComponentProps<typeof Card>;
 
 export default function ShareToInstagram() {
-  // const { ticketRef, shareToInstagram } = useShareToInstagram();
   const [step, addStep] = useState(1);
 
   const cardRef = useRef<HTMLDivElement | null>(null);
-  console.log(cardRef.current, "cardref");
+  // console.log(cardRef.current, "cardref");
 
   // const { data, error, isLoading } = useSWR(
   //   "https://jsonplaceholder.typicode.com/users/1", // change the path to retrive the data
@@ -54,10 +29,10 @@ export default function ShareToInstagram() {
     return (
       <div
         ref={cardRef}
-        className="flex flex-col items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row"
+        className="flex items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
         <Image
-          className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          className="h-auto w-48 rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
           src="https://plus.unsplash.com/premium_photo-1673697239909-e11521d1ba94?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
           width={120}
@@ -79,18 +54,24 @@ export default function ShareToInstagram() {
   const { handleRouteToSharePage, handleDownloadFile, urlImage, handleShare } =
     useShareToInstagram();
   return (
-    <section className="flex-1">
+    <section
+      className={
+        step === 1
+          ? "flex h-[calc(100vh-8rem)] flex-col items-center justify-center"
+          : "flex h-[calc(100vh-8rem)] items-center justify-center"
+      }
+    >
       {step === 1 && <CardComponent />}
       {step === 2 && (
-        <div
-          onClick={handleShare}
-          className="aspect-[470/980] w-full overflow-hidden"
-        >
+        <div onClick={handleShare} className="relative aspect-[9/16]">
+          <h1 className="w-full bg-[#D9D9D9] p-2 text-center text-black">
+            Press and hold images 3 seconds to save
+          </h1>
           <Image
-            className="object-cover"
+            className="object-contain"
             src={urlImage}
-            width={500}
-            height={500}
+            fill
+            priority
             alt="image"
           />
         </div>

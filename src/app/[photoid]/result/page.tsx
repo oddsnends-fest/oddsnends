@@ -6,10 +6,10 @@ export default function HomePage() {
   console.log(photoid); // extract the photoid from backend api???
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center border border-black bg-gradient-to-b text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 text-black">
+    <section className="flex-1 border border-black bg-gradient-to-b text-white">
+      <div className="container text-black">
         <ShareToInstagram />
       </div>
-    </main>
+    </section>
   );
 }
