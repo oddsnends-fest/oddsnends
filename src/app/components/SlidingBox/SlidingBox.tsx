@@ -19,7 +19,7 @@ const imgSrc = [
 ]
 
 const autoPlayDelay = 3000; // in ms
-const autoPlaySwipeSpeed = 800 // in ms
+const autoPlaySwipeSpeed = 500 // in ms
 
 const SlidingBox = () => {
     // State of the focused Box
@@ -69,7 +69,7 @@ const SlidingBox = () => {
                                     alt={`Event ${idx+1}`} 
                                     width={250}
                                     height={250}
-                                    className="border border-black bg-white text-black"
+                                    className="border text-black"
                                 />
                             </div>
                         </SwiperSlide>
