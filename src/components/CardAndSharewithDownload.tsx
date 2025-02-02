@@ -29,7 +29,7 @@ export default function ShareToInstagram() {
     return (
       <div
         ref={cardRef}
-        className="flex items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="flex aspect-[9/16] items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
         <Image
           className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
@@ -54,20 +54,19 @@ export default function ShareToInstagram() {
   const { handleRouteToSharePage, handleDownloadFile, urlImage, handleShare } =
     useShareToInstagram();
   return (
-    <section
-      className={step === 1 ? "flex flex-col items-center justify-center" : ""}
-    >
+    <>
       {step === 1 && <CardComponent />}
+
       {step === 2 && (
-        <div onClick={handleShare} className="relative aspect-[9/16]">
+        <div onClick={handleShare}>
           <h1 className="w-full bg-[#D9D9D9] text-center text-black">
             Press and hold images 3 seconds to save
           </h1>
           <Image
             className="object-contain"
             src={urlImage}
-            fill
-            priority
+            width={500}
+            height={200}
             alt="image"
           />
         </div>
@@ -121,6 +120,6 @@ export default function ShareToInstagram() {
           </button>
         </div>
       )}
-    </section>
+    </>
   );
 }
