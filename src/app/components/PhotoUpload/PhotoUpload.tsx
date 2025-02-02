@@ -3,18 +3,26 @@ import React from "react";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Modal from "../Modal/Modal";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 function PhotoUpload() {
     const photoInputRef = useRef<HTMLInputElement>(null);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);          // Zoom level of the image
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [confirm, setConfirm] = useState(false);
+    // cropped image base64 result from ImageCropper (can be used to process further)
+    const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
+    // handle clicking the hidden input button
     const handleClickUpload = () => {
         if (photoInputRef.current) {
+            // Scroll to the top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             photoInputRef.current.click();
         }
     };
 
+    // read the upload image and open modal for cropping
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -37,6 +45,7 @@ function PhotoUpload() {
         }
     };
 
+    // close the modal and reset the uploaded image data
     const closeModal = () => {
         setIsModalOpen(false);
         setUploadedImage(null);
@@ -44,7 +53,18 @@ function PhotoUpload() {
 
     const handleClickRefresh = () => {
         closeModal();
-        console.log("refesh");
+    };
+
+    // set confirm to true => trigger cropped image save in ImageCropper
+    const handleClickConfirm = () => {
+        setConfirm(true);
+    }
+
+    // set CroppedImage to base64 data from ImageCropper
+    const handleSaveCrop = (croppedImage: string) => {
+        setCroppedImage(croppedImage);
+        closeModal();
+        setConfirm(false);
     };
 
     return (
@@ -81,7 +101,7 @@ function PhotoUpload() {
             {/* Modal for Cropping Image */}
             {isModalOpen && (
                 <Modal
-                // onClick={closeModal}
+                    className="flex items-center justify-center max-h-screen"
                 >
                     {uploadedImage && (
                         <>
@@ -96,11 +116,10 @@ function PhotoUpload() {
                                 <div
                                     className="bg-white rounded-lg p-4"
                                 >
-                                    <Image
+                                    <ImageCropper
                                         src={uploadedImage}
-                                        alt="Uploaded Image"
-                                        width={1440}
-                                        height={1440}
+                                        onSaveCrop={handleSaveCrop}
+                                        confirm={confirm}
                                     />
                                 </div>
                                 <div
@@ -113,6 +132,7 @@ function PhotoUpload() {
                                         ↻
                                     </button>
                                     <button
+                                        onClick={handleClickConfirm}
                                         className="text-white font-bold bg-black border-black border-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-400 hover:text-white hover:border-gray-400"
                                     >
                                         ✓
@@ -124,6 +144,7 @@ function PhotoUpload() {
                 </Modal>
             )}
 
+            {/* Hidden File Input */}
             <input
                 type="file"
                 accept="image/jpeg, image/png, image/jpg"
@@ -131,6 +152,17 @@ function PhotoUpload() {
                 ref={photoInputRef}
                 onChange={handleFileChange}
             />
+            {/* For testing cropped results */}
+            {/* {croppedImage && (
+                <>
+                    <Image
+                        src={croppedImage}
+                        alt="Cropped Image"
+                        width={1440}
+                        height={1440}
+                    />
+                </>
+            )} */}
         </>
     );
 }
