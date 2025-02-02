@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Modal from "../Modal/Modal";
-import ImageCropper from "../ImageCropper/ImageCropper";
+import ImageCropper from "./ImageCropper/ImageCropper";
 
 function PhotoUpload() {
     const photoInputRef = useRef<HTMLInputElement>(null);
