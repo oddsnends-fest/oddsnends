@@ -17,7 +17,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         return {
-          allowedContentTypes: ["image/jpeg", "image/png"], // Allow only specific content types
+          allowedContentTypes: ["image/jpeg", "image/png", "image/svg"], // Allow only specific content types
           maximumSizeInBytes: 20971520, // Set maximum byte of 20 MB
         };
       },
