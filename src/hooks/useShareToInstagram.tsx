@@ -71,7 +71,7 @@ export default function useShareToInstagram() {
   };
   // Function to convert the card to an image and update the URL
   const handleRouteToSharePage = async (
-    cardRef: CardRef,
+    cardRef: { current: HTMLDivElement | null },
     addStep: React.Dispatch<React.SetStateAction<number>>,
   ) => {
     if (cardRef.current) {
