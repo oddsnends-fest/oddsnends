@@ -5,13 +5,7 @@ import useShareToInstagram from "@/hooks/useShareToInstagram";
 // import Link from "next/link";
 import Image from "next/image";
 
-// import {
-//   Card,
-// } from "@/components/ui/card";
-
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-// type CardProps = React.ComponentProps<typeof Card>;
 
 export default function ShareToInstagram() {
   const [step, addStep] = useState(1);
@@ -59,7 +53,7 @@ export default function ShareToInstagram() {
 
       {step === 2 && (
         <div onClick={handleShare}>
-          <h1 className="w-full bg-[#D9D9D9] text-center text-black">
+          <h1 className="w-full bg-accent text-center text-black">
             Press and hold images 3 seconds to save
           </h1>
           <Image

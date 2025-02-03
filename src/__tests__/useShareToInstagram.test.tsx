@@ -24,8 +24,19 @@ describe("useShareToInstagram", () => {
     mockCardRef.current.style.width = "100px"; // Add styles if needed
     mockCardRef.current.style.height = "100px";
 
-    const mockLink = { href: "", download: "", click: jest.fn() };
-    document.createElement = jest.fn(() => mockLink) as any;
+    // Mock document.createElement to return an HTMLAnchorElement
+    const mockLink: HTMLAnchorElement = {
+      href: "",
+      download: "",
+      click: jest.fn(),
+    } as unknown as HTMLAnchorElement;
+
+    document.createElement = jest.fn().mockImplementation((tagName: string) => {
+      if (tagName === "a") {
+        return mockLink;
+      }
+      return document.createElement(tagName); // Fallback for other tags
+    }) as any; // Cast to 'any' to bypass type-checking for the mock implementation
 
     await act(async () => {
       await result.current.handleDownloadFile(mockCardRef);
