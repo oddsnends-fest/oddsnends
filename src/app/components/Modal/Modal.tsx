@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import { useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 interface ModalProps {
     children: React.ReactNode;
@@ -33,7 +34,11 @@ function Modal({ children, onClick, allowScrolling = false, className }: ModalPr
     return (
         <div
             onClick={onClick}
-            className={`absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md ${className ?? ""}`}
+            className={cn(
+                "absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md",
+                className
+            )}
+            // className={`absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md ${className ?? ""}`}
         >
             {children}
         </div>
