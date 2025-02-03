@@ -10,12 +10,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import React from "react";
-import Image from "next/image";
 
 export default function FormPage() {
   const [name, setName] = useState("");
   const [hobby, setHobby] = useState("");
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
