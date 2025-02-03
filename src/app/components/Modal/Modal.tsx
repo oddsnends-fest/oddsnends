@@ -24,15 +24,15 @@ function Modal({ children, onClick, allowScrolling = false, className }: ModalPr
         };
     }, [allowScrolling]); // Runs whenever `isOpen` changes
 
-    const handleClick = () => {
-        if (onClick) {
-            onClick();
-        }
-    }
+    // const handleClick = () => {
+    //     if (onClick) {
+    //         onClick();
+    //     }
+    // }
 
     return (
         <div
-            onClick={handleClick}
+            onClick={onClick}
             className={`absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md ${className ?? ""}`}
         >
             {children}
