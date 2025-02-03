@@ -37,14 +37,6 @@ export default function FormPage() {
 
   return (
     <div className="h-screen overflow-hidden">
-      {/* logo */}
-      <Image
-        src="/"
-        alt="LogoImage"
-        width={60}
-        height={60}
-        className="mx-auto mt-14 border"
-      />
       <div className="mt-5 flex justify-center text-center text-4xl font-bold">
         Fill in
       </div>
