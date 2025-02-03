@@ -11,15 +11,19 @@ export default function useShareToInstagram() {
   // Function to download the card as an image
   async function handleDownloadFile(cardRef: CardRef) {
     if (cardRef.current) {
-      // console.log("cardRef.current:", cardRef.current); // Debugging line
-      html2canvas(cardRef.current).then((canvas) => {
+      try {
+        const canvas = await html2canvas(cardRef.current);
         const link = document.createElement("a");
-        console.log(canvas.toDataURL("image/jpg"), "canvas.toDataURL");
-        link.href = canvas.toDataURL("image/jpg");
+        const dataURL = canvas.toDataURL("image/jpg");
+        // console.log(dataURL, "canvas.toDataURL");
+        link.href = dataURL;
         link.download = "image-mock.jpg";
         link.click();
-      });
-      // change html element to canvas and download jpg file
+      } catch (error) {
+        console.error("Error capturing and downloading the image:", error);
+      }
+    } else {
+      console.warn("cardRef.current is null or undefined.");
     }
   }
 
@@ -66,7 +70,10 @@ export default function useShareToInstagram() {
     }
   };
   // Function to convert the card to an image and update the URL
-  const handleRouteToSharePage = async (cardRef: CardRef, addStep: any) => {
+  const handleRouteToSharePage = async (
+    cardRef: CardRef,
+    addStep: React.Dispatch<React.SetStateAction<number>>,
+  ) => {
     if (cardRef.current) {
       const dataUrl = await convertImage(cardRef.current);
       setUrlImage(dataUrl); // Update the URL state

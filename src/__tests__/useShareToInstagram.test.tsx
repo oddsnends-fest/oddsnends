@@ -57,7 +57,7 @@ describe("useShareToInstagram", () => {
     };
     mockCardRef.current.innerHTML = "<p>Mock content</p>"; // Add content to the element
 
-    console.log(mockCardRef, "mockCardRef");
+    // console.log(mockCardRef, "mockCardRef");
 
     const mockAddStep = jest.fn();
 
@@ -76,7 +76,7 @@ describe("useShareToInstagram", () => {
     const mockUrlImage = "data:image/jpeg;base64,mockImageData";
     result.current.urlImage = mockUrlImage;
 
-    console.log("urlImage before handleShare:", result.current.urlImage); // Debugging line
+    // console.log("urlImage before handleShare:", result.current.urlImage); // Debugging line
 
     (global.fetch as jest.Mock) = jest.fn(() =>
       Promise.resolve({
@@ -90,9 +90,9 @@ describe("useShareToInstagram", () => {
       await result.current.handleShare();
     });
 
-    console.log(mockUrlImage, "urlImage");
+    // console.log(mockUrlImage, "urlImage");
 
-    console.log("fetch calls:", (global.fetch as jest.Mock).mock.calls); // Debugging line
+    // console.log("fetch calls:", (global.fetch as jest.Mock).mock.calls); // Debugging line
 
     expect(global.fetch).toHaveBeenCalledWith(mockUrlImage);
   });
