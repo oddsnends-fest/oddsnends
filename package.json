@@ -44,9 +44,6 @@
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "react-icons": "^5.4.0",
-    "react-signature-canvas": "^1.0.7",
-    "swiper": "^11.2.1",
     "zod": "^3.23.3"
   },
   "devDependencies": {
@@ -76,6 +73,9 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "prisma": "^5.14.0",
+    "react-icons": "^5.4.0",
+    "react-signature-canvas": "^1.0.7",
+    "swiper": "^11.2.2",
     "swr": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.2.5",
