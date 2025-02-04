@@ -4,6 +4,7 @@ import useShareToInstagram from "@/hooks/useShareToInstagram";
 
 // import Link from "next/link";
 import Image from "next/image";
+import BackButton from "@/app/components/BackButton/BackButton";
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -23,7 +24,7 @@ export default function ShareToInstagram() {
     return (
       <div
         ref={cardRef}
-        className="flex aspect-[9/16] items-center border border-gray-200 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="flex bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
         <Image
           className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
@@ -48,12 +49,18 @@ export default function ShareToInstagram() {
   const { handleRouteToSharePage, handleDownloadFile, urlImage, handleShare } =
     useShareToInstagram();
   return (
-    <>
+    <section
+      className={`flex h-[calc(100vh-18rem)] flex-col items-center ${step === 1 ? "justify-center" : "justify-between"}`}
+    >
+      {step === 1 && <BackButton />}
       {step === 1 && <CardComponent />}
 
       {step === 2 && (
-        <div onClick={handleShare}>
-          <h1 className="w-full bg-accent text-center text-black">
+        <div
+          onClick={handleShare}
+          className="flex h-[calc(100vh-20rem)] flex-col justify-center gap-24 border"
+        >
+          <h1 className="w-full bg-accent py-6 text-center text-black">
             Press and hold images 3 seconds to save
           </h1>
           <Image
@@ -67,7 +74,7 @@ export default function ShareToInstagram() {
       )}
 
       {step === 1 && (
-        <div className="flex items-center justify-center gap-6 p-2">
+        <div className="flex items-center justify-center gap-6 px-4 py-6">
           <button
             data-testid="download"
             onClick={() => handleDownloadFile(cardRef)}
@@ -114,6 +121,6 @@ export default function ShareToInstagram() {
           </button>
         </div>
       )}
-    </>
+    </section>
   );
 }
