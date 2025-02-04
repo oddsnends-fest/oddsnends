@@ -18,14 +18,14 @@ model User {
     user_id          String    @id
     display_name     String
     full_name        String
-    line_profile_pic String?
+    line_profile_pic String
     phone            String?
-    gender           Gender
-    photo            String
-    age              Int
-    occupation       String
+    gender           Gender?     
+    photo            String?
+    age              Int?
+    occupation       String?
     email            String    @unique
-    channel          Channel
+    channel          Channel?
 }
 
 enum Gender {
