@@ -12,7 +12,7 @@ function BackButton() {
   return (
     <button
       onClick={handleClick}
-      className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-transparent text-black hover:bg-black hover:text-white"
+      className="fixed left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-transparent text-black hover:bg-black hover:text-white"
     >
       ←
     </button>
