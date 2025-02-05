@@ -10,6 +10,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import React from "react";
+import { ANIMALS } from "@/constants/spirit-animals";
+import { HOBBY } from "@/constants/hobby";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -70,33 +72,11 @@ export default function FormPage() {
               <option value="" disabled className="text-gray-400">
                 Select. . .
               </option>
-              <option value="reading" className="text-black">
-                Reading
-              </option>
-              <option value="painting" className="text-black">
-                Painting
-              </option>
-              <option value="gaming" className="text-black">
-                Gaming
-              </option>
-              <option value="cooking" className="text-black">
-                Cooking
-              </option>
-              <option value="photography" className="text-black">
-                Photography
-              </option>
-              <option value="traveling" className="text-black">
-                Traveling
-              </option>
-              <option value="gardening" className="text-black">
-                Gardening
-              </option>
-              <option value="fishing" className="text-black">
-                Fishing
-              </option>
-              <option value="writing" className="text-black">
-                Writing
-              </option>
+              {HOBBY.map(({ value, label }) => (
+                <option key={value} value={value} className="text-black">
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -148,33 +128,11 @@ export default function FormPage() {
               <option value="" disabled className="text-gray-400">
                 Select. . .
               </option>
-              <option value="cat" className="text-black">
-                Cat
-              </option>
-              <option value="butterfly" className="text-black">
-                Butterfly
-              </option>
-              <option value="fish" className="text-black">
-                Fish
-              </option>
-              <option value="duck" className="text-black">
-                Duck
-              </option>
-              <option value="squirrel" className="text-black">
-                Squirrel
-              </option>
-              <option value="water_monitor" className="text-black">
-                Water monitor
-              </option>
-              <option value="swan" className="text-black">
-                Swan
-              </option>
-              <option value="dog" className="text-black">
-                Dog
-              </option>
-              <option value="otter" className="text-black">
-                Otter
-              </option>
+              {ANIMALS.map(({ value, label }) => (
+                <option key={value} value={value} className="text-black">
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
         </div>
