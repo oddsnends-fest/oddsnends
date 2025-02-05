@@ -92,9 +92,6 @@ importers:
       react-signature-canvas:
         specifier: ^1.0.7
         version: 1.0.7(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tailwind-merge:
-        specifier: ^3.0.1
-        version: 3.0.1
       swiper:
         specifier: ^11.2.1
         version: 11.2.2
@@ -1495,10 +1492,6 @@ packages:
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
-
-  clsx@2.1.1:
-    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
-    engines: {node: '>=6'}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -5321,8 +5314,6 @@ snapshots:
       clsx: 2.1.1
 
   client-only@0.0.1: {}
-
-  clsx@2.1.1: {}
 
   clsx@2.1.1: {}
 
