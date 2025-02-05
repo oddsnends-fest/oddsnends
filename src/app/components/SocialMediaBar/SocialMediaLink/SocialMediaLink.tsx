@@ -21,8 +21,8 @@ function SocialMediaLink({ href, src, alt, title, label }: SocialMediaLinkProps)
         loading="lazy"
         alt={alt}
         title={title}
-        width={24}
-        height={24}
+        width={64}
+        height={64}
         className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
       />
       <span className="text-sm sm:text-base md:text-lg lg:text-xl">{label}</span>
