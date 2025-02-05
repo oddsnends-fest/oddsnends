@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function Header() {
     return (
-        <header className="flex items-end justify-center w-full pt-12 pb-2 sticky top-0 bg-white text-black">
+        <header className="flex items-end justify-center w-full pt-12 pb-2 sticky top-0 bg-white text-black z-50">
             <Image
                 src={"/images/oddsnend-logo.png"}
                 loading="lazy"
