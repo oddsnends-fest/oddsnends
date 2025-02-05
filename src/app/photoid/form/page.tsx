@@ -146,7 +146,7 @@ export default function FormPage() {
         {/* send button */}
         <button
           type="submit"
-          className="mx-auto mt-60 w-3/4 rounded-2xl bg-[#353535] p-2 text-white hover:bg-gray-500"
+          className="mx-auto mt-60 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-white hover:bg-custom-light-gray"
         >
           Send
         </button>
