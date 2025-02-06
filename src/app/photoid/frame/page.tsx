@@ -13,6 +13,17 @@ function Frame() {
     const [selectedFrame, setSelectedFrame] = useState<number | null>(null);
     const [checked, setChecked] = useState(false);
 
+    const handleClickCheckBox = (index: number) => {
+        // Store user's selection
+        setChecked(true);
+        setSelectedFrame(index);
+
+        // Wait 2 seconds before proceeding to photid form
+        setTimeout(() => {
+            router.push("/photoid/form");
+        }, 2000);
+    }
+
     return (
         <>
             <BackButton />
@@ -25,18 +36,6 @@ function Frame() {
                     className="w-[80%] grid grid-cols-1 gap-6"
                 >
                     {frameSrc.map((src, index) => {
-
-                        const handleClickCheckBox = () => {
-                            // Store user's selection
-                            setChecked(true);
-                            setSelectedFrame(index);
-
-                            // Wait 2 seconds before proceeding to photid form
-                            setTimeout(() => {
-                                router.push("/photoid/form");
-                            }, 2000);
-                        }
-
                         return (
                             <div
                                 key={index}
@@ -48,7 +47,7 @@ function Frame() {
                             >
                                 {/* Checkbox */}
                                 <Checkbox
-                                    onClick={handleClickCheckBox}
+                                    onClick={() => handleClickCheckBox(index)}
                                     className="absolute top-2 left-2"
                                     color="blue"
                                     // disable all checkbox after the user has made a selection
