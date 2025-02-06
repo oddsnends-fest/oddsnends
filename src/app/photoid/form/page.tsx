@@ -38,7 +38,7 @@ export default function FormPage() {
 
   return (
     <div className="h-screen overflow-hidden">
-      <div className="mt-5 flex justify-center text-center text-4xl font-bold">
+      <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
         Fill in
       </div>
 
@@ -46,7 +46,7 @@ export default function FormPage() {
       <form onSubmit={handleSubmit} className="m-6 mt-20 grid gap-4">
         <div className="grid grid-cols-2 gap-8">
           <div>
-            <label htmlFor="name" className="mb-2 text-xl font-medium">
+            <label htmlFor="name" className="mb-2 text-2xl font-medium">
               Name
             </label>
             <input
@@ -54,18 +54,18 @@ export default function FormPage() {
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="h-8 w-full rounded-lg border-2 border-black p-2 text-xs"
+              className="h-10 w-full rounded-lg border-2 border-black p-2 text-sm"
             />
           </div>
 
           {/* hobby */}
           <div>
-            <label htmlFor="hobby" className="mb-2 text-xl font-medium">
+            <label htmlFor="hobby" className="mb-2 text-2xl font-medium">
               Hobby
             </label>
             <select
               id="hobby"
-              className={`h-8 w-full rounded-md border-2 border-black p-2 text-xs ${hobby == "" ? "text-gray-400" : "text-black"}`}
+              className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${hobby == "" ? "text-gray-400" : "text-black"}`}
               value={hobby}
               onChange={(e) => setHobby(e.target.value)}
             >
@@ -82,12 +82,12 @@ export default function FormPage() {
 
           {/* date of birth */}
           <div>
-            <label htmlFor="date" className="mb-2 text-xl font-medium">
+            <label htmlFor="date" className="mb-2 text-2xl font-medium">
               Date of birth
             </label>
             <div className="flex items-center gap-2">
               <div
-                className={`h-8 w-full rounded-md border-2 border-black p-2 text-xs ${date ? "text-black" : "text-gray-400"}`}
+                className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${date ? "text-black" : "text-gray-400"}`}
               >
                 {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
               </div>
@@ -95,7 +95,7 @@ export default function FormPage() {
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
-                    className="flex h-8 w-10 items-center justify-center border-2 border-black p-0"
+                    className="flex h-10 w-12 items-center justify-center border-2 border-black p-0"
                   >
                     <CalendarIcon className="h-5 w-5" />
                   </Button>
@@ -116,12 +116,15 @@ export default function FormPage() {
 
           {/* spirit animal */}
           <div>
-            <label htmlFor="spirit-animal" className="mb-2 text-xl font-medium">
+            <label
+              htmlFor="spirit-animal"
+              className="mb-2 text-2xl font-medium"
+            >
               Spirit Animal
             </label>
             <select
               id="spirit-animal"
-              className={`h-8 w-full rounded-md border-2 border-black p-2 text-xs ${spiritAnimal == "" ? "text-gray-400" : "text-black"}`}
+              className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${spiritAnimal == "" ? "text-gray-400" : "text-black"}`}
               value={spiritAnimal}
               onChange={(e) => setSpiritAnimal(e.target.value)}
             >
@@ -140,7 +143,7 @@ export default function FormPage() {
         {/* send button */}
         <button
           type="submit"
-          className="mx-auto mt-60 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-white hover:bg-custom-light-gray"
+          className="mx-auto mt-60 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
         >
           Send
         </button>
