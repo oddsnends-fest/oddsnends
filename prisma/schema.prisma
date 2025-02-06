@@ -33,7 +33,6 @@ model User {
     hobby            Hobby
     updated_at       DateTime    @updatedAt
     created_at       DateTime    @default(now())
-    channel          Channel?
 }
 
 enum Gender {
