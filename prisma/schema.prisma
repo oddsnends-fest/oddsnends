@@ -25,12 +25,12 @@ model User {
     age              Int?
     occupation       String?
     email            String    @unique
-    channel          Channel
+    channel          Channel?
     photoid_name     String?
     dob              DateTime?
-    spirit_animal    SpiritAnimal
-    signature        String
-    hobby            Hobby
+    spirit_animal    SpiritAnimal?
+    signature        String?
+    hobby            Hobby?
     updated_at       DateTime    @updatedAt
     created_at       DateTime    @default(now())
 }
