@@ -26,8 +26,8 @@ model User {
     occupation       String?
     email            String    @unique
     channel          Channel
-    photoid_name     String
-    dob              DateTime
+    photoid_name     String?
+    dob              DateTime?
     spirit_animal    SpiritAnimal
     signature        String
     hobby            Hobby
