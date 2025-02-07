@@ -89,9 +89,6 @@ importers:
       react-icons:
         specifier: ^5.4.0
         version: 5.4.0(react@18.3.1)
-      react-image-crop:
-        specifier: ^11.0.7
-        version: 11.0.7(react@18.3.1)
       react-signature-canvas:
         specifier: ^1.0.7
         version: 1.0.7(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -183,6 +180,9 @@ importers:
       prisma:
         specifier: ^5.14.0
         version: 5.22.0
+      react-image-crop:
+        specifier: ^11.0.7
+        version: 11.0.7(react@18.3.1)
       swr:
         specifier: ^2.3.0
         version: 2.3.2(react@18.3.1)
