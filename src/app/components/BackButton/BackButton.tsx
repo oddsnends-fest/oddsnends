@@ -9,14 +9,16 @@ function BackButton() {
     router.back(); // Go back to the previous page
   };
 
-  return (
-    <button
-      onClick={handleClick}
-      className="fixed left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-transparent text-black hover:bg-black hover:text-white"
-    >
-      ←
-    </button>
-  );
-}
+
+    return (
+        <button
+            onClick={handleClick}
+            className="fixed top-4 left-4 text-black bg-transparent border-black border-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black hover:text-white z-30"
+        >
+            ←
+        </button>
+    );
+};
+
 
 export default BackButton;
