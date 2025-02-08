@@ -17,35 +17,13 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         return {
-          allowedContentTypes: ["image/jpeg", "image/png", "image/gif"], // Allow only specific content types
-          tokenPayload: JSON.stringify({
-            userId: "example_user_id", // Pass user info here (e.g., user ID from session or JWT)
-          }),
+          allowedContentTypes: ["image/jpeg", "image/png", "image/svg"], // Allow only specific content types
+          maximumSizeInBytes: 20971520, // Set maximum byte of 20 MB
         };
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
         // Get notified when the file upload is complete
         console.log("Blob upload completed", blob, tokenPayload);
-
-        try {
-          if (!tokenPayload) {
-            throw new Error("Token payload is missing");
-          }
-
-          // const { userId } = JSON.parse(tokenPayload);
-
-          // Save the blob URL and metadata into your Neon database (adjust table/fields as necessary)
-          // await db.user.create({
-          // data: {
-          //   userId: userId,
-          //   blobUrl: blob.url,
-          // },
-          // });
-          console.log("File metadata saved to database");
-        } catch (error) {
-          console.error("Error saving file metadata", error);
-          throw new Error("Could not update user");
-        }
       },
     });
 
