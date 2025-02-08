@@ -1,14 +1,6 @@
-import React from 'react'
-import PhotoIDCard from '@/app/components/PhotoIDCard/PhotoIDCard'
-
-export default function page() {
-  return (
-    <div>
-        <PhotoIDCard>
-            
-        </PhotoIDCard>
-
-
-    </div>
-  )
+"use client";
+import ShareToInstagram from "@/components/CardAndSharewithDownload";
+// import { useParams } from "next/navigation";
+export default function HomePage() {
+  return <ShareToInstagram />;
 }
