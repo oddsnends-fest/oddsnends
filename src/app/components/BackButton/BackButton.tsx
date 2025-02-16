@@ -1,13 +1,14 @@
-"use client"
-import React from 'react';
-import { useRouter } from 'next/navigation';
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
 
 function BackButton() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleClick = () => {
-        router.back(); // Go back to the previous page
-    };
+  const handleClick = () => {
+    router.back(); // Go back to the previous page
+  };
+
 
     return (
         <button
@@ -18,5 +19,6 @@ function BackButton() {
         </button>
     );
 };
+
 
 export default BackButton;
