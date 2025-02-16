@@ -13,7 +13,7 @@ export const User = z.object({
   email: z.string().email("Invalid email format"),
   channel: z.enum(["INSTAGRAM", "FACEBOOK", "TIKTOK", "LINE", "FRIENDS", "POSTER"]),
   photoid_name: z.string(),
-  dob: z.coerce.date().optional(),
+  dob: z.coerce.date(),
   spirit_animal: z.enum(["CAT", "BUTTERFLY", "FISH", "DUCK", "SQUIRREL", "WATER_MONITOR", "SWAN", "DOG", "OTTER"]).optional(),
   signature: z.string().optional(),
   hobby: z.enum(["READING", "PAINTING", "GAMING", "COOKING", "PHOTOGRAPHY", "TRAVELING", "GARDENING", "FISHING", "WRITING"]).optional()
