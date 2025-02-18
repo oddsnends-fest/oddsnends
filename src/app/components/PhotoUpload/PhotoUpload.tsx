@@ -82,7 +82,7 @@ function PhotoUpload() {
                     className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
                 />
                 <div
-                    className="ml-2"
+                    className="ml-6"
                 > {/* Added margin-left for spacing between image and text */}
                     <span
                         className="font-bold"
