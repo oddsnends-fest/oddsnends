@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import BackButton from "@/app/components/BackButton/BackButton";
-import Checkbox from "@/app/components/Checkbox/Checkbox";
+import BackButton from "@/components/BackButton/BackButton";
+import Checkbox from "@/components/Checkbox/Checkbox";
 import { cn } from "@/lib/utils";
 
 function Frame() {
