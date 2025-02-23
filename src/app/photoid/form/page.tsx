@@ -12,6 +12,8 @@ import {
 import React from "react";
 import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
+import Signature from "@/components/Signature";
+import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -139,7 +141,8 @@ export default function FormPage() {
             </select>
           </div>
         </div>
-
+        <Signature />
+        <PhotoUpload />
         {/* send button */}
         <button
           type="submit"
