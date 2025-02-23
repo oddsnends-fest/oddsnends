@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { User } from "@/server/validate/user.validate";
+import { UserPatch } from "@/server/validate/user.validate";
 
 export async function PATCH(request: Request): Promise<NextResponse> {
   try {
-    const data = User.safeParse(await request.json()); // Use Zod validation
+    const data = UserPatch.safeParse(await request.json()); // Use Zod validation
     if (!data.success) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
