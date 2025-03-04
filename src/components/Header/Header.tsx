@@ -1,19 +1,19 @@
 import Image from "next/image";
 
 function Header() {
-    return (
-        <header className="flex items-end justify-center w-full pt-12 pb-2 sticky top-0 bg-white text-black z-20">
-            <Image
-                src={"/images/oddsnend-logo.png"}
-                loading="lazy"
-                alt={"OddsnEnds Logo"}
-                title={"OddsnEnds Logo"}
-                width={24}
-                height={24}
-                className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
-            />
-        </header>
-    );
+  return (
+    <header className="top-0 z-20 flex w-full items-end justify-center bg-white pt-7 text-black">
+      <Image
+        src={"/images/oddsnends-logo.png"}
+        loading="lazy"
+        alt={"OddsnEnds Logo"}
+        title={"OddsnEnds Logo"}
+        width={64}
+        height={64}
+        className="sm:h-8 sm:w-8 md:h-10 md:w-10"
+      />
+    </header>
+  );
 }
 
 export default Header;
