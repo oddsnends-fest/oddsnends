@@ -8,23 +8,21 @@ import { cn } from "@/lib/utils";
 interface OneOutOfFourPickerProps {
     question: string;
     srcs: string[];
-    onSelectionChange: (selectedIndex: number) => void;
+    selected: number[];
+    onSelectionChange: (selectedIndex: number[]) => void;
 }
 
-export default function OneOutOfFourPicker({ question, srcs, onSelectionChange }: OneOutOfFourPickerProps) {
+export default function OneOutOfFourPicker({ question, srcs, selected, onSelectionChange }: OneOutOfFourPickerProps) {
     if (srcs.length !== 4) {
         throw new Error("OneOutOfFourPicker requires exactly 4 srcs");
     }
 
-    const [selected, setSelected] = useState<number[]>([]);
-
     const handleSelect = (index: number) => {
         if (selected.includes(index)) {
-            setSelected(selected.filter((i) => i !== index));
+            onSelectionChange(selected.filter((i) => i !== index));
         } else if (selected.length < 1) {
-            setSelected([...selected, index]);
+            onSelectionChange([...selected, index]);
         }
-        onSelectionChange(index);
     };
 
     return (
