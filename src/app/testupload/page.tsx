@@ -3,6 +3,7 @@
 import { type PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
 import { useState, useRef } from "react";
+import Link from "next/link";
 
 export default function AvatarUploadPage() {
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -28,6 +29,8 @@ export default function AvatarUploadPage() {
             handleUploadUrl: "/api/upload",
           });
 
+          console.log(newBlob, "newnblob from testupload");
+
           setBlob(newBlob);
         }}
       >
@@ -37,7 +40,10 @@ export default function AvatarUploadPage() {
 
       {blob && (
         <div>
-          Blob url: <a href={blob.url}>{blob.url}</a>
+          Blob url:{" "}
+          <Link target="_blank" href={blob.url}>
+            {blob.url}
+          </Link>
         </div>
       )}
     </>

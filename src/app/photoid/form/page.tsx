@@ -1,5 +1,5 @@
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -14,6 +14,7 @@ import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
+import { useRouter } from "next/navigation";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -21,7 +22,15 @@ export default function FormPage() {
   const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [gotoResultPage, setGotoResultPage] = useState(false);
+
+  const router = useRouter();
+
+  // when submit submit  = true change isSubmitted to true and isSubmitted set timeout in 3 sec and
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //prevent null submitting
     if (!name || !hobby || !date || !spiritAnimal) {
@@ -36,13 +45,56 @@ export default function FormPage() {
     };
     //submit data
     console.log("Form Data Submitted:", formData);
+
+    setIsSubmitted(true);
+
+    // try {
+    //   const response = await fetch("/api/submit", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
+
+    //   if (response.ok) {
+    //     alert("Data submitted successfully!");
+    //     setIsSubmitted(true);
+    //     console.log("Data submitted successfully!");
+    //     // setFormData({ name: "", email: "" }); // Reset form
+    //   } else {
+    //     alert("Failed to submit data.");
+    //   }
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   alert("An error occurred while submitting the form.");
+    // }
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      console.log(isSubmitted, "after handleSubmit");
+      const timeId = setInterval(() => {
+        setIsSubmitted((prev) => {
+          return !prev;
+        });
+        setGotoResultPage(true);
+      }, 3000);
+      return () => clearInterval(timeId); // Proper cleanup
+    }
+
+    if (!isSubmitted && gotoResultPage) {
+      router.push("/photoid/result");
+    }
+  }, [isSubmitted]);
 
   return (
     <div className="h-screen overflow-hidden">
-      <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
-        Fill in
-      </div>
+      {!isSubmitted && (
+        <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
+          Fill in
+        </div>
+      )}
 
       {/* name */}
       <form onSubmit={handleSubmit} className="m-6 mt-20 grid gap-4">
@@ -154,3 +206,18 @@ export default function FormPage() {
     </div>
   );
 }
+
+/*
+problem 1
+submit the photo but will give the error ==> handleSubmit should be modified (nested form)
+separate component but integrate similar one 
+
+solution should write the input and not use form for preventing nested problem ==> eextract data to 
+
+problem 2
+submit the data and route to the result page 
+
+problem 3 
+
+
+*/
