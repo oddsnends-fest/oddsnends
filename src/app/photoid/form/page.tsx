@@ -21,6 +21,7 @@ export default function FormPage() {
   const [hobby, setHobby] = useState("");
   const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
+  const [openCalendar, setOpenCalendar] = useState(false);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -145,11 +146,12 @@ export default function FormPage() {
               >
                 {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
               </div>
-              <Popover>
+              <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className="flex h-10 w-12 items-center justify-center border-2 border-black p-0"
+                    onClick={() => setOpenCalendar(true)}
                   >
                     <CalendarIcon className="h-5 w-5" />
                   </Button>
@@ -158,9 +160,12 @@ export default function FormPage() {
                   <Calendar
                     mode="single"
                     selected={date}
-                    onSelect={(selectedDate) =>
-                      selectedDate && setDate(selectedDate)
-                    }
+                    onSelect={(selectedDate) => {
+                      if (selectedDate) {
+                        setDate(selectedDate);
+                        setOpenCalendar(false);
+                      }
+                    }}
                     initialFocus
                   />
                 </PopoverContent>
