@@ -37,7 +37,7 @@ const SlidingBox = () => {
 
     return (
         <>  
-            <div className="w-full py-5 flex flex-col items-center overflow-hidden">
+            <div className="w-full py-4 flex flex-col items-center overflow-hidden">
                 <Swiper
                     spaceBetween={20} // boxes gap
                     slidesPerView={1.6} // box per screen
@@ -87,8 +87,8 @@ const SlidingBox = () => {
                     {`
                         .custom-pagination .swiper-pagination-bullet {
                             margin: 0 4px !important; 
-                            width: 6px;
-                            height: 6px;
+                            width: 8px;
+                            height: 8px;
                             background-color: #C4C4C4; /* Light Gray from the project Figma */
                             opacity: 1;
                             transition: background-color 0.3s ease;
