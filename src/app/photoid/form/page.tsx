@@ -14,6 +14,8 @@ import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
+import { Progress } from "@radix-ui/react-progress";
+import ProgressBar from "@/components/ProgressBar/ProgressBar";
 
 export default function FormPage() {
   const [name, setName] = useState("");
