@@ -10,7 +10,7 @@ import "swiper/css/pagination"
 
 // src for event's image
 const imgSrc = [
-    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
+    {src: "/images/events/DIYCookie.png", link: "/"},
     {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
     {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
     {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
@@ -37,10 +37,10 @@ const SlidingBox = () => {
 
     return (
         <>  
-            <div className="w-full py-5 flex flex-col items-center overflow-hidden">
+            <div className="w-full flex flex-col items-center overflow-hidden">
                 <Swiper
-                    spaceBetween={20} // boxes gap
-                    slidesPerView={1.6} // box per screen
+                    spaceBetween={60} // boxes gap
+                    slidesPerView={1.55} // box per screen
                     centeredSlides={true}
                     pagination={{ clickable: true, el: ".custom-pagination" }} // Use the custom pagination
                     loop={imgSrc.length >= 4} // SwiperJs doesn't support loop mode for less than 4 events
@@ -68,9 +68,9 @@ const SlidingBox = () => {
                                     <Image 
                                         src={src} 
                                         alt={`Event ${idx+1}`} 
-                                        width={250}
-                                        height={250}
-                                        className="border text-black"
+                                        width={275}
+                                        height={275}
+                                        className="text-black rounded-3xl bg-white"
                                     />
                                 </a>
                             </div>
@@ -79,16 +79,16 @@ const SlidingBox = () => {
                 </Swiper>
                 
                 {/* Use custom pagination, the default one stays in the box*/}
-                <div className="custom-pagination mt-2 text-center"></div>
+                <div className="custom-pagination mt-5 text-center"></div>
                 
                 
                 {/* CSS for the custom-pagination */}
                 <style jsx global>
                     {`
                         .custom-pagination .swiper-pagination-bullet {
-                            margin: 0 4px !important; 
-                            width: 6px;
-                            height: 6px;
+                            margin: 0 5px !important; 
+                            width: 10px;
+                            height: 10px;
                             background-color: #C4C4C4; /* Light Gray from the project Figma */
                             opacity: 1;
                             transition: background-color 0.3s ease;

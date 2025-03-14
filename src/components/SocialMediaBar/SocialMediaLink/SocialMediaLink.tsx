@@ -14,7 +14,7 @@ function SocialMediaLink({ href, src, alt, title, label }: SocialMediaLinkProps)
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1"
+      className="inline-flex items-center gap-2"
     >
       <Image
         src={src}
@@ -23,9 +23,9 @@ function SocialMediaLink({ href, src, alt, title, label }: SocialMediaLinkProps)
         title={title}
         width={64}
         height={64}
-        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 filter invert"
       />
-      <span className="text-sm sm:text-base md:text-lg lg:text-xl">{label}</span>
+      <span className="text-sm font-thin tracking-wider sm:text-base md:text-lg lg:text-xl">{label}</span>
     </a>
   );
 }
