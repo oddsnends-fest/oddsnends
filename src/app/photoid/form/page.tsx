@@ -12,12 +12,17 @@ import {
 import React from "react";
 import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
+import Signature from "@/components/Signature";
+import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
+import { Progress } from "@radix-ui/react-progress";
+import ProgressBar from "@/components/ProgressBar/ProgressBar";
 
 export default function FormPage() {
   const [name, setName] = useState("");
   const [hobby, setHobby] = useState("");
   const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
+  const [openCalendar, setOpenCalendar] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,11 +96,12 @@ export default function FormPage() {
               >
                 {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
               </div>
-              <Popover>
+              <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className="flex h-10 w-12 items-center justify-center border-2 border-black p-0"
+                    onClick={() => setOpenCalendar(true)}
                   >
                     <CalendarIcon className="h-5 w-5" />
                   </Button>
@@ -104,9 +110,12 @@ export default function FormPage() {
                   <Calendar
                     mode="single"
                     selected={date}
-                    onSelect={(selectedDate) =>
-                      selectedDate && setDate(selectedDate)
-                    }
+                    onSelect={(selectedDate) => {
+                      if (selectedDate) {
+                        setDate(selectedDate);
+                        setOpenCalendar(false);
+                      }
+                    }}
                     initialFocus
                   />
                 </PopoverContent>
@@ -139,7 +148,8 @@ export default function FormPage() {
             </select>
           </div>
         </div>
-
+        <Signature />
+        <PhotoUpload />
         {/* send button */}
         <button
           type="submit"

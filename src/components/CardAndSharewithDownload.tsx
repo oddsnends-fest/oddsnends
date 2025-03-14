@@ -4,7 +4,7 @@ import useShareToInstagram from "@/hooks/useShareToInstagram";
 import PhotoIDCard from "@/app/components/PhotoIDCard/PhotoIDCard";
 // import Link from "next/link";
 import Image from "next/image";
-import BackButton from "@/app/components/BackButton/BackButton";
+import BackButton from "@/components/BackButton/BackButton";
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 

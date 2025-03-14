@@ -69,32 +69,29 @@ function PhotoUpload() {
 
     return (
         <>
-            {/* Grid Layout */}
+            {/* Image + Text aligned horizontally */}
             <div
-                className="grid grid-cols-[1fr,2fr] grid-rows-2 gap-x-2 p-2 text-black bg-white cursor-pointer"
+                className="flex items-center justify-center"
                 onClick={handleClickUpload}
             >
-                {/* Left Column (Spanning 2 rows) */}
+                <Image
+                    src="/images/camera.png"
+                    alt="Upload"
+                    width={64}
+                    height={64}
+                    className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
+                />
                 <div
-                    className="row-span-2 flex justify-center items-center"
-                >
-                    <Image
-                        src="/images/camera.png"
-                        alt="Upload"
-                        width={64}
-                        height={64}
-                        className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
-                    />
-                </div>
-
-                {/* Right Column */}
-                <div>
+                    className="ml-6"
+                > {/* Added margin-left for spacing between image and text */}
                     <span
                         className="font-bold"
-                    >Upload Image</span>
-                </div>
-                <div>
-                    <span>*jpeg, png*</span>
+                    >
+                        Upload Image
+                    </span>
+                    <div>
+                        <span>*jpeg, png*</span>
+                    </div>
                 </div>
             </div>
 

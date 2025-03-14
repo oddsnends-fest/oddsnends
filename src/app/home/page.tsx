@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import SlidingBox from "../components/SlidingBox/SlidingBox";
+import SlidingBox from "@/components/SlidingBox/SlidingBox";
 
 export default function HomePage() {
   return (
