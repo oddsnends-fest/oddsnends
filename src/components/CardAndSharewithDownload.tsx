@@ -24,7 +24,7 @@ export default function ShareToInstagram() {
     return (
       <div
         ref={cardRef}
-        className="flex bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="flex w-4/5 bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
         {/* <Image
           className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
@@ -44,7 +44,6 @@ export default function ShareToInstagram() {
         </div> */}
         <PhotoIDCard></PhotoIDCard>
       </div>
-    
     );
   }
 
