@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import useShareToInstagram from "@/hooks/useShareToInstagram";
-
+import PhotoIDCard from "@/app/components/PhotoIDCard/PhotoIDCard";
 // import Link from "next/link";
 import Image from "next/image";
 import BackButton from "@/app/components/BackButton/BackButton";
@@ -26,11 +26,11 @@ export default function ShareToInstagram() {
         ref={cardRef}
         className="flex bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
-        <Image
+        {/* <Image
           className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
           src="https://plus.unsplash.com/premium_photo-1673697239909-e11521d1ba94?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
-          width={120}
+          width={120}zs
           height={120}
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
@@ -41,8 +41,10 @@ export default function ShareToInstagram() {
             Here are the biggest enterprise technology acquisitions of 2021 so
             far, in reverse chronological order.
           </p>
-        </div>
+        </div> */}
+        <PhotoIDCard></PhotoIDCard>
       </div>
+    
     );
   }
 

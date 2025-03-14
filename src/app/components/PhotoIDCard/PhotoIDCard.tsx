@@ -1,14 +1,11 @@
 import React from 'react'
 import tyler from 'src/app/components/PhotoIDCard/tyler.png'
 
-//todo
-//1.round a card corner 
-// 2. จัดtextฝั่งขวาปรับขนาดฟ้อน 
-// 3.  เส้น______ ทำให้เป็นเส้นดีๆ
+ 
 const PhotoIDCard = () => {
   return (
     <div> 
-        <div className='flex w-full bg-amber-200 gap-3 m-auto rounded-t-lg ' >
+        <div className='flex w-4/5 bg-amber-200 gap-3 m-auto rounded-t-lg ' >
             <div className='w-1/3'>
                 <img src = {tyler.src} className='w-full h-4/5 m-4' />
             </div>
@@ -27,10 +24,10 @@ const PhotoIDCard = () => {
                 <div>
                         <div className='flex items-baseline gap-2 mt-3'>
                             <p>Date of birth</p>
-                            <p className='flex-1 border-b border-black'>25 yr ago</p>
+                            <p className='flex-1 border-b border-black'></p>
                         </div>
                         <div className='flex items-baseline gap-2 mt-3'>
-                            <p>Hobbby</p>
+                            <p>Hobby</p>
                             <div className='flex-1 border-b border-black'></div>
                         </div>
                         <div className='flex items-baseline gap-2 mt-3'>
@@ -40,11 +37,11 @@ const PhotoIDCard = () => {
                 </div>
             </div>
         </div>
-<div className="flex bg-amber-200 justify-between items-center rounded-b-lg">
+<div className="flex w-4/5 bg-amber-200 justify-between m-auto items-center rounded-b-lg">
   {/* Date of Issue Section */}
   <div className="flex items-center gap-2">
     <p>Date of issue</p>
-    <div className="w-32 border-b border-black"></div>
+    <div className="w-20 border-b border-black"></div>
   </div>
 
   {/* Signature Section */}
@@ -56,6 +53,6 @@ const PhotoIDCard = () => {
 
     </div>
   )
-}
+}  
 
 export default PhotoIDCard
