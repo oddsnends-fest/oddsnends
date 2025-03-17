@@ -149,7 +149,6 @@ export default function FormPage() {
         </div>
         <Signature />
         <PhotoUpload />
-        <SliderBox maxPoint={100} minPoint={0} />
         {/* send button */}
         <button
           type="submit"

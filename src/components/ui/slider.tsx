@@ -28,10 +28,10 @@ const Slider = React.forwardRef<
       }}
       {...props}
     >
-      <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20">
+      <SliderPrimitive.Track className="relative h-3 w-full grow overflow-hidden rounded-full border-2 border-custom-light-gray bg-white">
         <SliderPrimitive.Range className="absolute h-full bg-primary" />
       </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+      <SliderPrimitive.Thumb className="block h-6 w-6 rounded-full border-2 border-black bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
         <div className="absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-custom-light-gray p-1 text-xs">
           {buttonValue?.[0] ?? props.min}
         </div>

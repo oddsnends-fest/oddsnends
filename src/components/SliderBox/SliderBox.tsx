@@ -9,7 +9,7 @@ interface SliderBoxProps {
 function SliderBox({ maxPoint, minPoint }: SliderBoxProps) {
   const [value, setValue] = useState(minPoint);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Slider
         defaultValue={[minPoint]}
         min={minPoint}
@@ -25,7 +25,6 @@ function SliderBox({ maxPoint, minPoint }: SliderBoxProps) {
           {maxPoint}
         </div>
       </div>
-      <div>{value}</div>
     </div>
   );
 }
