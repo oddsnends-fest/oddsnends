@@ -6,6 +6,7 @@ import { type Metadata } from "next";
 
 import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
 import Header from "@/components/Header/Header";
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
 
 export const metadata: Metadata = {
   title: "Odds & Ends Festival",
@@ -21,7 +22,8 @@ export default function RootLayout({
       <LiffProvider>
         <body className="relative mx-auto flex min-h-screen w-full max-w-md flex-col overflow-x-hidden overscroll-none">
           <Header />
-          <div className="flex-grow">{children}</div>
+          {children}
+          <SponsorSection />
           {/* Social media bar */}
           <SocialMediaBar />
         </body>

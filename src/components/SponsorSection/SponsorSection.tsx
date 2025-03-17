@@ -1,30 +1,33 @@
 import Image from "next/image"
-import Link from "next/link"
 
 const sponsors = [
-  { src: "/", link: "/"},
-  { src: "/", link: "/"},
-  { src: "/", link: "/"},
-  { src: "/", link: "/"},
-  { src: "/", link: "/"},
-  { src: "/", link: "/"},
+  { src: "/images/sponsors/SlowCombo.png", link: "https://www.instagram.com/slowcombo/?hl=en", size: 110},
+  { src: "/images/sponsors/IOIC.png", link: "https://www.instagram.com/ioic_chula/?hl=en", size: 95},
+//   { src: "/", link: "/"},
+//   { src: "/", link: "/"},
+//   { src: "/", link: "/"},
+//   { src: "/", link: "/"},
 ]
 
 const SponsorSection = () => {
   return (
-    <section className="p-6 bg-white">
-        <ul className="flex flex-wrap justify-evenly items-center gap-2">
-            {sponsors.map(({ src, link }, idx) => (
+    <section className="mb-12 bg-transparent z-10">
+        <ul className="flex flex-wrap justify-center items-end ">
+            {sponsors.map(({ src, link, size }, idx) => (
                 <li key={idx}>
-                    <Link href={link}>
+                    <a 
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <Image 
                             src={src} 
                             alt={`${idx + 1}`} 
-                            width={40} 
-                            height={40} 
-                            className="border"
+                            width={size} 
+                            height={size}
+                            className=""
                         />
-                    </Link>
+                    </a>
                 </li>
             ))}
         </ul>
