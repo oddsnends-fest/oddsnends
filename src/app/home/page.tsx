@@ -5,7 +5,9 @@ export default function HomePage() {
   return (
     <>  
         {/* Background */}
-        <div className="absolute top-0 h-full w-full bg-[url('public/images/background/home.png')] bg-center bg-cover -z-10" />
+        <div className="absolute top-0 h-full w-full bg-center bg-cover -z-10"
+            style={{ backgroundImage: "url('images/background/home.png')"}}
+        />
         
         {/* content */}
         <main className="mt-5 flex flex-col justify-center items-center gap-8">
