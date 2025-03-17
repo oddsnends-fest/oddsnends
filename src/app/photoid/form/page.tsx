@@ -14,6 +14,7 @@ import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
+import SliderBox from "@/components/SliderBox/SliderBox";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -148,6 +149,7 @@ export default function FormPage() {
         </div>
         <Signature />
         <PhotoUpload />
+        <SliderBox maxPoint={100} minPoint={0} />
         {/* send button */}
         <button
           type="submit"
