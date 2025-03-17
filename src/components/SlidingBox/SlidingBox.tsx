@@ -10,12 +10,12 @@ import "swiper/css/pagination"
 
 // src for event's image
 const imgSrc = [
-    {src: "/images/events/DIYCookie.png", link: "/"},
-    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
-    {src: "/", link: "https://www.instagram.com/oddsnends.fest"},
-    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
-    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
-    {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
+    {src: "/images/events/Thumbnail_DIYCookie.png", link: "https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"},
+    {src: "/images/events/Thumbnail_Web.png", link: ""},
+    {src: "/images/events/Thumbnail_Launch.png", link: ""},
+    {src: "/images/events/Thumbnail_RoadTo.png", link: ""},
+    // {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
+    // {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
 ]
 
 const autoPlayDelay = 3000; // in ms
@@ -39,8 +39,8 @@ const SlidingBox = () => {
         <>  
             <div className="w-full flex flex-col items-center overflow-hidden">
                 <Swiper
-                    spaceBetween={60} // boxes gap
-                    slidesPerView={1.55} // box per screen
+                    spaceBetween={20} // boxes gap
+                    slidesPerView={1.6} // box per screen
                     centeredSlides={true}
                     pagination={{ clickable: true, el: ".custom-pagination" }} // Use the custom pagination
                     loop={imgSrc.length >= 4} // SwiperJs doesn't support loop mode for less than 4 events
@@ -50,7 +50,7 @@ const SlidingBox = () => {
                     speed={autoPlaySwipeSpeed}
                     modules={[Pagination, Autoplay]} // modules used
                     onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // set the focused index to our state
-                    className="w-full"
+                    className="w-full drop-shadow-[0_4px_2px_rgba(0,0,0,0.25)] "
                 >
                     {/* Map through the image src links*/}
                     {imgSrc.map(({src, link}, idx) => (
@@ -64,12 +64,14 @@ const SlidingBox = () => {
                                     ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx > (imgSrc.length)/2 ? "-translate-x-20" : ""/* On the other hand, all the second half boxes are being move to the left*/}
                                 `}
                             >
-                                <a href={link} target="_blank" rel="noopener noreferrer">
+                                <a href={link} target="_blank" rel="noopener noreferrer"
+                                    className={`${link.length === 0 && "pointer-events-none"}`}
+                                >
                                     <Image 
                                         src={src} 
                                         alt={`Event ${idx+1}`} 
-                                        width={275}
-                                        height={275}
+                                        width={260}
+                                        height={260}
                                         className="text-black rounded-3xl bg-white"
                                     />
                                 </a>
@@ -86,16 +88,16 @@ const SlidingBox = () => {
                 <style jsx global>
                     {`
                         .custom-pagination .swiper-pagination-bullet {
-                            margin: 0 5px !important; 
-                            width: 10px;
-                            height: 10px;
-                            background-color: #C4C4C4; /* Light Gray from the project Figma */
+                            margin: 0 4px !important; 
+                            width: 12px;
+                            height: 12px;
+                            background-color: #FFFFFF;
                             opacity: 1;
                             transition: background-color 0.3s ease;
                         }
 
                         .custom-pagination .swiper-pagination-bullet-active {
-                            background-color: #353535 !important; /* Dark Gray from project Figma */
+                            background-color: #553B82 !important;
                         }
                     `}
                 </style>

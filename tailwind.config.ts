@@ -10,7 +10,8 @@ export default {
   			sans: [
   				'var(--font-geist-sans)',
                     ...fontFamily.sans
-                ]
+                ],
+			cooper: ['Cooper Std', ...fontFamily.sans],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

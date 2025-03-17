@@ -8,9 +8,9 @@ function Header() {
         loading="lazy"
         alt={"OddsnEnds Logo"}
         title={"OddsnEnds Logo"}
-        width={75}
-        height={75}
-        className="sm:h-8 sm:w-8 md:h-10 md:w-10"
+        width={100}
+        height={100}
+        className="sm:h-8 sm:w-8 md:h-10 md:w-10 drop-shadow-[0_4px_2px_rgba(0,0,0,0.15)]"
       />
     </header>
   );

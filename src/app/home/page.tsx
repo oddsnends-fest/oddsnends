@@ -1,65 +1,49 @@
-import Link from "next/link";
 import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
 
-const links = [
-    { href: "/", label: "LAUNCH EVENT", imgSrc: "/images/ticket.png"},
-    { href: "/", label: "DIY COOKIE", imgSrc: "/images/oddie.png"},
-]
-
-
 export default function HomePage() {
   return (
-    <div className="absolute top-0 h-[100dvh] w-full bg-[url('public/images/background/bg-home.png')] bg-center bg-cover">
-        <main className="mt-48 mb-16 flex flex-col justify-center items-center gap-8">
+    <>  
+        {/* Background */}
+        <div className="absolute top-0 h-full w-full bg-[url('public/images/background/home.png')] bg-center bg-cover -z-10" />
+        
+        {/* content */}
+        <main className="mt-5 flex flex-col justify-center items-center gap-8">
+            {/* Title */}
+            <div className="text-center text-white drop-shadow-[0px_2px_1px_rgba(0,0,0,0.3)] leading-[1.75]">
+                <h1 className="text-[2rem] tracking-[0.1em] font-cooper">Sandbox Space</h1>
+                <div className="font-semibold tracking-wider">FOR ARTISTS, ENTREPRENEURS, AND BEYOND</div>
+            </div>
+            
+            
             {/* Sliding Box */}
             <SlidingBox />
 
             {/* Buttons */}
-            <div className="flex flex-col items-center gap-5">
-                {links.map(({href, label, imgSrc}, idx) => (
-                    <Link
-                        key={idx}
-                        href={href}
-                        className="text-white font-semibold text-xl tracking-wider "
+            <div className="mb-20 flex flex-col justify-center items-center drop-shadow-[0_0_75px_rgba(218,188,144,0.75)]">
+                <Image 
+                    src="/images/oddie.png"
+                    alt="oddie.png"
+                    width={100}
+                    height={100}
+                    className="z-10 drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
+                />
+                <button 
+                    type="button"
+                    className="absolute top-[83px] py-4 w-72 rounded-full bg-purple-gradient text-white text-2xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
+                >
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"
+                        target="_blank"
+                        rel="noopener noreferrer"
                     >
-                        {idx % 2 === 0 ? ( 
-                        <div className="flex justify-center items-center gap-1">
-                            <button 
-                                type="button"
-                                className="p-4 w-64 rounded-full bg-purple-gradient transition-all active:scale-95 duration-75"
-                            >
-                                {label}
-                            </button>
-                            <Image 
-                                src={imgSrc}
-                                alt="eventImg"
-                                width={120}
-                                height={120}
-                                className=""
-                            />
-                        </div>
-                        ) : (
-                        <div className="flex justify-center items-center gap-1">
-                            <Image 
-                                src={imgSrc}
-                                alt="eventImg"
-                                width={120}
-                                height={120}
-                                className=""
-                            />
-                            <button 
-                                type="button"
-                                className="p-4 w-64 rounded-full bg-purple-gradient transition-all active:scale-95 duration-75"
-                            >
-                                {label}
-                            </button>
-                        </div>
-                        )}
-                    </Link>
-                ))}
+                        DIY COOKIE
+                    </a>
+                </button>
             </div>
         </main>
-    </div>
+
+        <div className="absolute bottom-0 h-96 w-full bg-black -z-20" />
+    </>
   );
 }
