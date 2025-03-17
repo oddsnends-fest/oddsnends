@@ -13,6 +13,12 @@ const Slider = React.forwardRef<
   }
 >(({ className, value, onValueChange, ...props }, ref) => {
   const [buttonValue, setButtonValue] = useState(value);
+  const [isSliding, setIsSliding] = useState(false);
+  const handlePointerUp = () => {
+    setTimeout(() => {
+      setIsSliding(false);
+    }, 500);
+  };
 
   return (
     <SliderPrimitive.Root
@@ -26,15 +32,19 @@ const Slider = React.forwardRef<
         onValueChange?.(val);
         setButtonValue(val);
       }}
+      onPointerDown={() => setIsSliding(true)}
+      onPointerUp={handlePointerUp}
       {...props}
     >
       <SliderPrimitive.Track className="relative h-3 w-full grow overflow-hidden rounded-full border-2 border-custom-light-gray bg-white">
         <SliderPrimitive.Range className="absolute h-full bg-primary" />
       </SliderPrimitive.Track>
       <SliderPrimitive.Thumb className="block h-6 w-6 rounded-full border-2 border-black bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-custom-light-gray p-1 text-xs">
-          {buttonValue?.[0] ?? props.min}
-        </div>
+        {isSliding && (
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-custom-light-gray p-1 text-xs">
+            {buttonValue?.[0] ?? props.min}
+          </div>
+        )}
       </SliderPrimitive.Thumb>
     </SliderPrimitive.Root>
   );
