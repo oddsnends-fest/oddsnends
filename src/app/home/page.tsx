@@ -14,7 +14,7 @@ export default function HomePage() {
             {/* Title */}
             <div className="text-center text-white drop-shadow-[0px_2px_1px_rgba(0,0,0,0.3)] leading-[1.75]">
                 <h1 className="text-[2rem] tracking-[0.1em] font-cooper">Sandbox Space</h1>
-                <div className="font-semibold tracking-wider">FOR ARTISTS, ENTREPRENEURS, AND BEYOND</div>
+                <div className="font-semibold px-5">FOR ARTISTS, ENTREPRENEURS, AND BEYOND</div>
             </div>
             
             
