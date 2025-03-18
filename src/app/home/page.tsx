@@ -13,8 +13,8 @@ export default function HomePage() {
         <main className="mt-5 flex flex-col justify-center items-center gap-8">
             {/* Title */}
             <div className="text-center text-white drop-shadow-[0px_2px_1px_rgba(0,0,0,0.3)] leading-[1.75]">
-                <h1 className="text-[2rem] tracking-[0.1em] font-cooper">Sandbox Space</h1>
-                <div className="font-semibold px-4">FOR ARTISTS, ENTREPRENEURS, AND BEYOND</div>
+                <h1 className="text-[1.8rem] tracking-[0.1em] font-cooper">Sandbox Space</h1>
+                <div className="font-semibold text-[0.9rem] px-2 tracking-wide">FOR ARTISTS, ENTREPRENEURS, AND BEYOND</div>
             </div>
             
             
@@ -32,7 +32,7 @@ export default function HomePage() {
                 />
                 <button 
                     type="button"
-                    className="absolute top-[83px] py-4 w-72 rounded-full bg-purple-gradient text-white text-2xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
+                    className="absolute top-[83px] py-4 w-64 rounded-full bg-purple-gradient text-white text-xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
                 >
                     <a
                         href="https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"
