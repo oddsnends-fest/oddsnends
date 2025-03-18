@@ -22,7 +22,7 @@ export default function HomePage() {
             <SlidingBox />
 
             {/* Buttons */}
-            <div className="relative mb-15 flex flex-col justify-center items-center drop-shadow-[0_0_70px_rgba(218,188,144,1)]">
+            <div className="relative mb-16 flex flex-col justify-center items-center drop-shadow-[0_0_70px_rgba(218,188,144,1)]">
                 <Image 
                     src="/images/oddie.png"
                     alt="oddie.png"
