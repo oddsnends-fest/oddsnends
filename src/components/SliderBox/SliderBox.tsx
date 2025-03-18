@@ -4,14 +4,15 @@ import { useState } from "react";
 interface SliderBoxProps {
   maxPoint: number;
   minPoint: number;
+  defaultValue?: number;
 }
 
-function SliderBox({ maxPoint, minPoint }: SliderBoxProps) {
-  const [value, setValue] = useState(minPoint);
+function SliderBox({ maxPoint, minPoint, defaultValue }: SliderBoxProps) {
+  const [value, setValue] = useState(defaultValue ?? minPoint);
   return (
     <div className="flex flex-col gap-3">
       <Slider
-        defaultValue={[minPoint]}
+        defaultValue={[defaultValue ?? minPoint]}
         min={minPoint}
         max={maxPoint}
         step={1}
