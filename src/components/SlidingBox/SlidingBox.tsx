@@ -81,7 +81,7 @@ const SlidingBox = () => {
                 </Swiper>
                 
                 {/* Use custom pagination, the default one stays in the box*/}
-                <div className="custom-pagination mt-5 text-center"></div>
+                <div className="custom-pagination mt-4 text-center"></div>
                 
                 
                 {/* CSS for the custom-pagination */}
@@ -89,8 +89,8 @@ const SlidingBox = () => {
                     {`
                         .custom-pagination .swiper-pagination-bullet {
                             margin: 0 4px !important; 
-                            width: 12px;
-                            height: 12px;
+                            width: 9px;
+                            height: 9px;
                             background-color: #FFFFFF;
                             opacity: 1;
                             transition: background-color 0.3s ease;

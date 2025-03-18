@@ -22,17 +22,17 @@ export default function HomePage() {
             <SlidingBox />
 
             {/* Buttons */}
-            <div className="relative mb-20 flex flex-col justify-center items-center drop-shadow-[0_0_75px_rgba(218,188,144,0.75)]">
+            <div className="relative mb-15 flex flex-col justify-center items-center drop-shadow-[0_0_70px_rgba(218,188,144,1)]">
                 <Image 
                     src="/images/oddie.png"
                     alt="oddie.png"
-                    width={100}
-                    height={100}
+                    width={90}
+                    height={90}
                     className="z-10 drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
                 />
                 <button 
                     type="button"
-                    className="absolute top-[83px] py-4 w-64 rounded-full bg-purple-gradient text-white text-xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
+                    className="absolute top-[75px] py-4 w-64 rounded-full bg-purple-gradient text-white text-xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
                 >
                     <a
                         href="https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"
