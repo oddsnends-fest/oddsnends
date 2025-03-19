@@ -1,0 +1,40 @@
+name: Setup Environment
+description: Sets up Node.js and pnpm with caching and installs dependencies.
+
+inputs:
+  node-version:
+    description: "Node.js version to use"
+    required: true
+  pnpm-version:
+    description: "pnpm version to install"
+    required: true
+  project-dir:
+    description: "Project directory to install dependencies"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "pnpm"
+        cache-dependency-path: ${{ inputs.project-dir }}/pnpm-lock.yaml
+
+    - name: Verify pnpm Installation
+      run: pnpm --version
+      shell: bash
+
+    - name: Install Dependencies
+      run: pnpm install
+      working-directory: ${{ inputs.project-dir }}
+      shell: bash
