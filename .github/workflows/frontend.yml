@@ -9,7 +9,7 @@ on:
 env:
   NODE_VERSION: "18"
   FRONTEND_DIR: "."
-  PNPM_VERSION: "9"
+  # PNPM_VERSION: "9.12.1"
 
 jobs:
   setup:
