@@ -67,6 +67,8 @@ jobs:
       - name: Run Build
         run: pnpm run build
         working-directory: ${{ env.FRONTEND_DIR }}
+        env:
+          SKIP_ENV_VALIDATION: true
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
