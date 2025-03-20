@@ -11,7 +11,7 @@ import SponsorSection from "@/components/SponsorSection/SponsorSection";
 export const metadata: Metadata = {
   title: "Odds & Ends Festival",
   description: "Odds & Ends Festival",
-  icons: [{ rel: "icon", url: "/images/circle.png" }],
+  icons: [{ rel: "icon", url: "/images/oddsnends-logo.png" }],
 };
 
 export default function RootLayout({
