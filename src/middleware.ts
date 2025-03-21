@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.json({ message: "Unauthorized", error: errorData }, { status: 401 });
         }
 
-        const responseJson: VerifiedToken = await response.json();
+        const responseJson = (await response.json()) as VerifiedToken;
         const res = NextResponse.next();
 
         // Set user details in custom headers
