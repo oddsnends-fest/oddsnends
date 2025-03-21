@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
         });
         
         if (!response.ok) {
-            const errorData: LineApiError = await response.json();
+            const errorData = (await response.json()) as LineApiError;
             console.log("Error verifying token:", errorData);
             return NextResponse.json({ message: "Unauthorized", error: errorData }, { status: 401 });
         }
