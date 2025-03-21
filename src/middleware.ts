@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { VerifiedToken } from './types/apiModel';
+import { LineApiError, VerifiedToken } from './types/apiModel';
 
 export async function middleware(request: NextRequest) {
 
     // Extract the ID token from the Authorization header
     const idtoken = request.headers.get('Authorization')?.split('Bearer ')[1];
-    
+
     if (!idtoken) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
         });
         
         if (!response.ok) {
-            const errorData = await response.json();
+            const errorData: LineApiError = await response.json();
             console.log("Error verifying token:", errorData);
             return NextResponse.json({ message: "Unauthorized", error: errorData }, { status: 401 });
         }

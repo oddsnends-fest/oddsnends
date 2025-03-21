@@ -1,3 +1,8 @@
+export interface LineApiError {
+  error: string;
+  error_description: string;
+}
+
 export interface VerifiedToken {
   iss: string;
   sub: string;
