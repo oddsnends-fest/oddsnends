@@ -28,7 +28,7 @@ export default function RootLayout({
           <div className="flex-grow">{children}</div>
           <SponsorSection />
           {/* Social media bar */}
-          <SocialMediaBar />
+          {/* <SocialMediaBar /> */}
           <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />
           <VercelAnalytics />
         </body>
