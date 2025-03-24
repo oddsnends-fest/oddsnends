@@ -19,13 +19,20 @@ model User {
     display_name     String
     full_name        String
     line_profile_pic String
-    phone            String
-    gender           Gender
-    photo            String
-    age              Int
-    occupation       String
+    phone            String?
+    gender           Gender?     
+    photo            String?
+    age              Int?
+    occupation       String?
     email            String    @unique
-    channel          Channel
+    channel          Channel?
+    photoid_name     String?
+    dob              DateTime?
+    spirit_animal    SpiritAnimal?
+    signature        String?
+    hobby            Hobby?
+    updated_at       DateTime    @updatedAt
+    created_at       DateTime    @default(now())
 }
 
 enum Gender {
@@ -43,4 +50,28 @@ enum Channel {
     LINE
     FRIENDS
     POSTER
+}
+
+enum Hobby {
+    READING
+    PAINTING
+    GAMING
+    COOKING
+    PHOTOGRAPHY
+    TRAVELING
+    GARDENING
+    FISHING
+    WRITING
+}
+
+enum SpiritAnimal {
+    CAT
+    BUTTERFLY
+    FISH
+    DUCK
+    SQUIRREL
+    WATER_MONITOR
+    SWAN
+    DOG
+    OTTER
 }
