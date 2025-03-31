@@ -5,6 +5,7 @@ import Modal from "@/components/Modal/Modal";
 import { Eraser } from 'lucide-react';
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { dateFormat } from "@/lib/utils";
 
 interface ConfirmFormProps {
     name: string;
@@ -30,14 +31,16 @@ interface LabelBoxProps {
 
 const useConfirmForm = (): UseConfirmFormReturn => {
     const router = useRouter();
+    const [formData, setFormData] = useState<ConfirmFormProps>({
+        name: '',
+        hobby: '',
+        dob: new Date(),
+        animal: '',
+        photo: '',
+        signature: '',
+        redirect: '',
+    });
     const [show, setShow] = useState(false);
-    const [name, setName] = useState("");
-    const [hobby, setHobby] = useState("");
-    const [dob, setDob] = useState<Date>();
-    const [animal, setAnimal] = useState("");
-    const [photo, setPhoto] = useState("");
-    const [signature, setSignature] = useState("");
-    const [redirect, setRedirect] = useState("");
 
     const LabelBox: React.FC<LabelBoxProps> = ({ labelEng = 'EN', labelThai = 'TH', value = 'value' }) => {
         return (
@@ -55,17 +58,20 @@ const useConfirmForm = (): UseConfirmFormReturn => {
     };
 
     const showConfirm = ({ name, hobby, dob, animal, photo, signature, redirect }: ConfirmFormProps) => {
-        setName(name);
-        setHobby(hobby);
-        setDob(dob);
-        setAnimal(animal);
-        setPhoto(photo);
-        setSignature(signature);
-        setRedirect(redirect);
+        setFormData({ name, hobby, dob, animal, photo, signature, redirect });
         setShow(true);
     };
 
     const hideConfirm = () => {
+        setFormData({
+            name: "",
+            hobby: "",
+            dob: new Date(),
+            animal: "",
+            photo: "",
+            signature: "",
+            redirect: ""
+        });
         setShow(false);
     };
 
@@ -105,23 +111,17 @@ const useConfirmForm = (): UseConfirmFormReturn => {
                         <LabelBox
                             labelEng="Name"
                             labelThai="ชื่อ"
-                            value={name}
+                            value={formData.name}
                         />
                         <LabelBox
                             labelEng="Hobby"
                             labelThai="งานอดิเรก"
-                            value={hobby}
+                            value={formData.hobby}
                         />
                         <LabelBox
                             labelEng="Date of birth"
                             labelThai="ว/ด/ป เกิด"
-                            value={dob ? (() => {
-                                const date = new Date(dob); // Convert to Date object
-                                const day = String(date.getDate()).padStart(2, '0'); // Day with leading zero
-                                const month = String(date.getMonth() + 1).padStart(2, '0'); // Month (0-based)
-                                const year = date.getFullYear();
-                                return `${day}/${month}/${year}`; // Format as dd/mm/yyyy
-                            })() : ''}
+                            value={formData.dob ? dateFormat(formData.dob) : ''}
                         />
                     </div>
 
@@ -137,7 +137,7 @@ const useConfirmForm = (): UseConfirmFormReturn => {
                                 className="flex rounded-lg border-[1px] border-custom-purple h-[144px] w-[144px]"
                             >
                                 <Image
-                                    src={animal}
+                                    src={formData.animal}
                                     alt={'animal'}
                                     width={393}
                                     height={852}
@@ -153,7 +153,7 @@ const useConfirmForm = (): UseConfirmFormReturn => {
                                 className="flex rounded-lg border-[1px] border-custom-purple h-[144px] w-[144px]"
                             >
                                 <Image
-                                    src={photo}
+                                    src={formData.photo}
                                     alt={'photo'}
                                     width={393}
                                     height={852}
@@ -172,7 +172,7 @@ const useConfirmForm = (): UseConfirmFormReturn => {
                             className="flex rounded-lg border-[1px] border-custom-purple h-[144px]"
                         >
                             <Image
-                                src={signature}
+                                src={formData.signature}
                                 alt={'signature'}
                                 width={393}
                                 height={852}
@@ -188,7 +188,7 @@ const useConfirmForm = (): UseConfirmFormReturn => {
                 >
                     <Button
                         className="py-6 px-16 bg-white text-custom-purple rounded-3xl hover:bg-custom-purple hover:text-white"
-                        onClick={() => router.push(redirect)}
+                        onClick={() => router.push(formData.redirect)}
                     >
                         <div
                             className="flex items-center text-center text-2xl font-extrabold font-cooper"
