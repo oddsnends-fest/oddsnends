@@ -92,6 +92,17 @@ function PhotoUpload() {
 
   // set CroppedImage to base64 data from ImageCropper
   const handleSaveCrop = async (croppedImage: string) => {
+    setCroppedImage(croppedImage);
+    closeModal();
+    setConfirm(false);
+  };
+
+  const handleSubmitUpload = async (croppedImage: string) => {
+    if (!croppedImage) {
+      alert("Please crop and choose the image before uploading.");
+      return;
+    }
+
     const file = dataURLtoFile(croppedImage, "cropped-image.png");
 
     const newBlob = await upload(file.name, file, {
@@ -100,14 +111,6 @@ function PhotoUpload() {
     });
 
     setBlob(newBlob);
-    setCroppedImage(croppedImage);
-    closeModal();
-    setConfirm(false);
-  };
-
-  const handleSubmitUpload = () => {
-    const file = photoInputRef.current?.files?.[0];
-    console.log(file);
 
     console.log("upload already");
   };
@@ -115,30 +118,32 @@ function PhotoUpload() {
   return (
     <div>
       {/* Image + Text aligned horizontally */}
-      <div
-        className="flex items-center justify-center"
-        onClick={handleClickUpload}
-      >
-        <Image
-          src="/images/camera.png"
-          alt="Upload"
-          width={64}
-          height={64}
-          className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
-        />
-        <div className="ml-6">
-          {" "}
-          {/* Added margin-left for spacing between image and text */}
-          <span className="font-bold">Upload Image</span>
-          <div>
-            <span>*jpeg, png*</span>
+      {!croppedImage && (
+        <div
+          className="flex items-center justify-center"
+          onClick={handleClickUpload}
+        >
+          <Image
+            src="/images/camera.png"
+            alt="Upload"
+            width={64}
+            height={64}
+            className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
+          />
+          <div className="ml-6">
+            {" "}
+            {/* Added margin-left for spacing between image and text */}
+            <span className="font-bold">Upload Image</span>
+            <div>
+              <span>*jpeg, png*</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Modal for Cropping Image */}
       {isModalOpen && (
-        <Modal className="flex max-h-screen items-center justify-center">
+        <Modal className="z-20 flex max-h-screen items-center justify-center">
           {uploadedImage && (
             <>
               <div className="flex flex-col items-center justify-center gap-4 p-4 text-black">
@@ -179,28 +184,35 @@ function PhotoUpload() {
         onChange={handleFileChange}
       />
 
-      {blob && (
+      {/* {blob && (
         <div>
           uploaded photo:{" "}
           <Link target="_blank" href={blob.url}>
             {blob.url}
           </Link>
-          {/* <Image src={blob.url} alt={blob.pathname} width="200" height="200" /> */}
+         
         </div>
-      )}
+      )} */}
 
       {/* For testing cropped results */}
       {croppedImage && (
-        <>
+        <div className="relative z-0 w-fit">
+          <div
+            className="absolute right-0 top-0 h-6 w-6 -translate-y-1/2 translate-x-1/2 rounded-full bg-primary"
+            onClick={handleClickUpload}
+          ></div>
           <Image
             src={croppedImage}
             alt="Cropped Image"
             width={200}
             height={200}
+            className="-z-20"
           />
-        </>
+        </div>
       )}
-      <button onClick={handleSubmitUpload}>Upload</button>
+      <button onClick={() => handleSubmitUpload(croppedImage || "")}>
+        Upload
+      </button>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Signature() {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
-  const [imageURL, setImageURL] = useState<string | null>(null);
+  const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
@@ -35,10 +35,10 @@ export default function Signature() {
     return new File([blob], filename, { type: blob.type });
   }
 
-  const handleUploadSignature = async (base64Image: string) => {
+  const handleUploadSignature = async (base64ImageUrl: string) => {
     try {
       // Convert base64 to Blob or File
-      const file = dataURLtoFile(base64Image, "signature.png");
+      const file = dataURLtoFile(base64ImageUrl, "signature.png");
 
       // Upload to Vercel Blob
       const newBlob = await upload(file.name, file, {
@@ -46,7 +46,7 @@ export default function Signature() {
         handleUploadUrl: "/api/upload",
       });
 
-      console.log("Blob URL:", newBlob.url);
+      console.log("Blob URL:", newBlob);
       return newBlob.url; // Return the blob URL
     } catch (error) {
       console.error("Error uploading signature:", error);
@@ -67,20 +67,26 @@ export default function Signature() {
       return;
     }
 
-    const base64Image = sigCanvas.current
+    const base64ImageUrl = sigCanvas.current
       .getTrimmedCanvas()
       .toDataURL("image/png"); // base64
 
-    const url = await handleUploadSignature(base64Image);
+    setBase64ImageUrl(base64ImageUrl);
+
+    console.log(base64ImageUrl, "dataUrl");
+
+    closeModal();
+  };
+
+  const handleUploadandCreateBlobSignature = async () => {
+    if (!base64ImageUrl) {
+      alert("Please sign your name first.");
+      return;
+    }
+    const url = await handleUploadSignature(base64ImageUrl);
     if (url) {
       setBlobUrl(url);
     }
-
-    setImageURL(base64Image);
-
-    console.log(base64Image, "dataUrl");
-
-    closeModal();
   };
 
   // Function to open modal
@@ -105,9 +111,9 @@ export default function Signature() {
       <div className="relative h-[80px] w-[350px] rounded-md border border-gray-300 p-4">
         {/* Clickable Signature Box */}
         <div onClick={openModal} className="h-full w-full cursor-pointer">
-          {imageURL ? (
+          {base64ImageUrl ? (
             <img
-              src={imageURL}
+              src={base64ImageUrl}
               alt="Saved Signature"
               className="h-full w-full object-contain"
             />
@@ -118,7 +124,7 @@ export default function Signature() {
       {/* Modal for Signature Pad */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 backdrop-blur-sm"
+          className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-white bg-opacity-50 backdrop-blur-sm"
           onClick={closeModal} // Clicking outside closes the modal
         >
           <div
@@ -163,12 +169,7 @@ export default function Signature() {
           </div>
         </div>
       )}
-      {blobUrl && (
-        <div>
-          <p>Signature uploaded:</p>
-          <Image src={blobUrl} alt="Signature" width={200} height={100} />
-        </div>
-      )}
+      <button onClick={handleUploadandCreateBlobSignature}>Upload</button>
     </div>
   );
 }
