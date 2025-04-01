@@ -15,6 +15,7 @@ import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import SliderBox from "@/components/SliderBox/SliderBox";
+import FourChoice from "@/components/FourChoice/FourChoice";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -45,7 +46,7 @@ export default function FormPage() {
       <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
         Fill in
       </div>
-
+      
       {/* name */}
       <form onSubmit={handleSubmit} className="m-6 mt-20 grid gap-4">
         <div className="grid grid-cols-2 gap-8">
