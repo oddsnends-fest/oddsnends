@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const questions = ["Choice 1", "Choice 2", "Choice 3", "Choice 4"];
 
-export default function FourChoice() {
-  const [selected, setSelected] = useState(0);
-
+export default function FourChoice({ questions, selected, setSelected } : { questions:Array<string>, selected:number, setSelected: (selected: number) => void}) {
   return (
     <div className="bg-slate-200 p-6 rounded-lg w-64 mx-auto">
       {questions.map((question, index) => (
@@ -15,7 +11,7 @@ export default function FourChoice() {
           <Checkbox
             id={`question-${index}`}
             checked={selected === index}
-            onCheckedChange={() => setSelected(index)}
+            onCheckedChange={(checked) => setSelected(checked ? index : selected)}
           />
           <label
             htmlFor={`question-${index}`}
