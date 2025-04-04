@@ -10,7 +10,9 @@ export default {
   			sans: [
   				'var(--font-geist-sans)',
                     ...fontFamily.sans
-                ]
+                ],
+			cooper: ['Cooper Std', ...fontFamily.sans],
+			poppins: ['Poppins', ...fontFamily.sans]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -20,6 +22,9 @@ export default {
   		colors: {
 			'custom-dark-gray': '#353535',
         	'custom-light-gray': '#C4C4C4',
+			'custom-purple': '#553B82',
+			'custom-pink': '#B56A95',
+			'custom-dark-purple': '#1C1026',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -54,13 +59,16 @@ export default {
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
   			chart: {
-  				'1': 'hsl(var(--chart-1))',
+				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
-  		}
+			}
+		},
+		backgroundImage: {
+			'purple-gradient': 'linear-gradient(to bottom, #B56A95 -30%, #553B82 90%)',
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

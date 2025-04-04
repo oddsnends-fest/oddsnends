@@ -15,6 +15,7 @@ import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import { useRouter } from "next/navigation";
+// import SliderBox from "@/components/SliderBox/SliderBox";
 
 export default function FormPage() {
   const [name, setName] = useState("");
