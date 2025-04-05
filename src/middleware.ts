@@ -43,6 +43,8 @@ export async function middleware(request: NextRequest) {
         res.headers.set("X-User-Name", responseJson.name);
         res.headers.set("X-User-Picture", responseJson.picture);
         res.headers.set("X-User-Email", responseJson.email);
+        res.headers.set("X-User-Id", responseJson.sub);
+
 
         return res;
     }
