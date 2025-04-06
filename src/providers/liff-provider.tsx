@@ -1,18 +1,18 @@
 "use client";
 import { env } from "@/env";
 import { liff, type Liff } from "@line/liff";
-import LiffMockPlugin from "@line/liff-mock";
-import {
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-  type ReactNode,
-} from "react";
+import { useState, useEffect, createContext, useContext, type ReactNode } from "react";
 
 interface LiffContextProps {
   liff: Liff | null;
   liffError: string | null;
+}
+
+interface JWTPayload {
+  sub: string;  // ID issued by mongoose
+  role: string; // Your new information that is causing error
+  iat: number;
+  exp: number;
 }
 
 const LiffContext = createContext<LiffContextProps>({
@@ -23,32 +23,41 @@ const LiffContext = createContext<LiffContextProps>({
 export default function Layout({ children }: { children: ReactNode }) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
+  const [token, setToken] = useState<JWTPayload | null>(null);
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
-    // to avoid `window is not defined` error
-    console.log("LIFF init...");
-    liff.use(new LiffMockPlugin());
-    liff
-      .init({ liffId: env.NEXT_PUBLIC_LIFF_ID, mock: true })
-      .then(() => {
-        console.log("LIFF init succeeded.");
-        if (!liff.isInClient()) liff.login();
-        liff.$mock.set((p) => ({
-          ...p,
-          getProfile: {
-            displayName: "Test User",
-            userId: "U846856f0da9cfd54706db8cb5dabd17a",
-            pictureUrl:
-              "https://cdn3.iconfinder.com/data/icons/leto-user-group/64/__user_person_profile-256.png ",
-          },
-        }));
+    const initLiff = async () => {
+      try {
+        await liff.init({ liffId: env.NEXT_PUBLIC_LIFF_ID });
+
         setLiffObject(liff);
-      })
-      .catch((error: Error) => {
-        console.log("LIFF init failed.", error);
-        setLiffError(error.toString());
-      });
+
+        liff.ready.then(() => {
+          if(!liff.isLoggedIn() && !liff.isInClient()) {
+            console.log('User not logged in and not in LINE app, redirecting to login');
+            // Either redirect to login page
+            // router.replace('/login')
+            // Or directly trigger login
+            liff.login();
+          } else {
+            console.log('User is already logged in or is in LINE app');
+          }
+        })
+
+        // const decodedIDToken = liff.getDecodedIDToken() as JWTPayload | null;
+        // console.log("User is logged in. ID token:", decodedIDToken);
+        // setToken(decodedIDToken); // Store JWT token in state
+
+        // After successful login or initialization, set LIFF object
+        
+      } catch (error: any) {
+        console.error("LIFF initialization failed.", error);
+        setLiffError(error.toString()); // Store the error if something goes wrong
+      }
+    };
+
+    initLiff(); // Call the initialization function
   }, []);
 
   return (
@@ -65,7 +74,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
 export const useLiff = () => {
   const context = useContext(LiffContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useLiff must be used within a LiffProvider");
   }
   return context;

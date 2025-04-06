@@ -1,4 +1,4 @@
-import Signature from "../components/Signature";
+import Signature from "@/components/Signature";
 
 export default function SignaturePage() {
   return (
