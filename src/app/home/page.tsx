@@ -24,7 +24,7 @@ export default function HomePage() {
             {/* Buttons */}
             <div className="relative mb-16 flex flex-col justify-center items-center drop-shadow-[0_0_70px_rgba(218,188,144,1)]">
                 <Image 
-                    src="/images/oddie.png"
+                    src="/images/oddie-2.png"
                     alt="oddie.png"
                     width={90}
                     height={90}
@@ -39,7 +39,7 @@ export default function HomePage() {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        DIY COOKIE
+                        GET YOUR <span className="text-[#FFDF58]">ID CARD!</span>
                     </a>
                 </button>
             </div>
