@@ -59,9 +59,6 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.10.1
         version: 0.10.1(typescript@5.7.3)(zod@3.24.1)
-      '@types/jwt-decode':
-        specifier: ^3.1.0
-        version: 3.1.0
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@15.1.6(@babel/core@7.26.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -147,6 +144,9 @@ importers:
       '@types/jsdom':
         specifier: ^21.1.7
         version: 21.1.7
+      '@types/jwt-decode':
+        specifier: ^3.1.0
+        version: 3.1.0
       '@types/node':
         specifier: ^20.14.10
         version: 20.17.17

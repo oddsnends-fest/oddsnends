@@ -2,28 +2,40 @@
 import { env } from "@/env";
 import { liff, type Liff } from "@line/liff";
 import { useState, useEffect, createContext, useContext, type ReactNode } from "react";
+import { jwtDecode } from "jwt-decode";
 
 interface LiffContextProps {
   liff: Liff | null;
   liffError: string | null;
+  idToken: string | null;
+  userProfile: UserProfile | null;
 }
 
-interface JWTPayload {
-  sub: string;  // ID issued by mongoose
-  role: string; // Your new information that is causing error
-  iat: number;
-  exp: number;
+interface DecodedToken {
+  name: string;
+  picture?: string;
+  sub: string;
+}
+
+interface UserProfile {
+  displayName: string; 
+  pictureUrl?: string; 
+  userId: string
 }
 
 const LiffContext = createContext<LiffContextProps>({
   liff: null,
   liffError: null,
+  idToken: null,
+  userProfile: null,
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
+
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
-  const [token, setToken] = useState<JWTPayload | null>(null);
+  const [idToken, setIdToken] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
@@ -34,23 +46,28 @@ export default function Layout({ children }: { children: ReactNode }) {
         setLiffObject(liff);
 
         liff.ready.then(() => {
-          if(!liff.isLoggedIn() && !liff.isInClient()) {
-            console.log('User not logged in and not in LINE app, redirecting to login');
-            // Either redirect to login page
-            // router.replace('/login')
-            // Or directly trigger login
+          if (!liff.isLoggedIn()) {
+            console.log("User not logged in, initiating login...");
             liff.login();
           } else {
-            console.log('User is already logged in or is in LINE app');
+            console.log("User is already logged in, decoding ID token...");
+            const token = liff.getIDToken();
+            if (token) {
+              console.log("ID Token:", token);
+              setIdToken(token)
+              try {
+                  const decoded: DecodedToken = jwtDecode(token);
+                  setUserProfile({
+                      displayName: decoded.name,
+                      pictureUrl: decoded.picture,
+                      userId: decoded.sub,
+                  });
+              } catch (err) {
+                  console.error("Error decoding ID token:", err);
+              }
+            }
           }
         })
-
-        // const decodedIDToken = liff.getDecodedIDToken() as JWTPayload | null;
-        // console.log("User is logged in. ID token:", decodedIDToken);
-        // setToken(decodedIDToken); // Store JWT token in state
-
-        // After successful login or initialization, set LIFF object
-        
       } catch (error: any) {
         console.error("LIFF initialization failed.", error);
         setLiffError(error.toString()); // Store the error if something goes wrong
@@ -65,6 +82,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       value={{
         liff: liffObject,
         liffError,
+        idToken,
+        userProfile,
       }}
     >
       {children}
