@@ -37,12 +37,12 @@ export default function ShareToInstagram() {
   // To Fetch User PhotoId Info
   useEffect(() => {
     try {
-      const fetchData = async () => {
-        // const response = await fetch('/api/....');
-        // const data = await response.json();
-        // setUserInfo(data);
-      }
-      fetchData();
+      // const fetchData = async () => {
+      //   // const response = await fetch('/api/....');
+      //   // const data = await response.json();
+      //   // setUserInfo(data);
+      // }
+      // fetchData();
 
     } catch(error) {
       console.log(error);
