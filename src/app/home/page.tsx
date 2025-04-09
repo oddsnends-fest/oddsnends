@@ -24,7 +24,7 @@ export default function HomePage() {
             {/* Buttons */}
             <div className="relative mb-16 flex flex-col justify-center items-center drop-shadow-[0_0_70px_rgba(218,188,144,1)]">
                 <Image 
-                    src="/images/oddie.png"
+                    src="/images/oddie-2.png"
                     alt="oddie.png"
                     width={90}
                     height={90}
@@ -35,11 +35,11 @@ export default function HomePage() {
                     className="absolute top-[75px] py-4 w-64 rounded-full bg-purple-gradient text-white text-xl font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
                 >
                     <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSdVmKSrSb4eHuxhudDcDosVWejYXvboW3Perl6z3a0zD-HPDA/viewform"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        DIY COOKIE
+                        JOIN OUR <span className="text-[#FFDF58]">WORKSHOP!</span>
                     </a>
                 </button>
             </div>

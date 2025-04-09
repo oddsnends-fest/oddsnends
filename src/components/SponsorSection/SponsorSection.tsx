@@ -49,13 +49,7 @@ const SponsorSection = () => {
         {sponsors.map(({ src, link, size }, idx) => (
           <li key={idx}>
             <a href={link} target="_blank" rel="noopener noreferrer">
-              <Image
-                src={src}
-                alt={`${idx + 1}`}
-                width={size}
-                height={size}
-                className=""
-              />
+              <Image src={src} alt={`${idx + 1}`} width={size} height={size} />
             </a>
           </li>
         ))}
