@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useShareToInstagram from "@/hooks/useShareToInstagram";
 
 // import Link from "next/link";
@@ -8,39 +8,93 @@ import BackButton from "@/components/BackButton/BackButton";
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+type userInfoType = {
+  image: string;
+  name: string;
+  birth: Date;
+  hobby: string;
+  animal: string;
+  dateOfIssue: Date;
+  sign: string;
+  frame: number;
+}
+
 export default function ShareToInstagram() {
   const [step, addStep] = useState(1);
 
   const cardRef = useRef<HTMLDivElement | null>(null);
-  // // console.log(cardRef.current, "cardref");
+  const [userInfo, setUserInfo] = useState<userInfoType>({
+    image: "/",
+    name: "Black Cat",
+    birth: new Date(),
+    hobby: "Listening To Music",
+    animal: "The Enigmatic Wanderer",
+    dateOfIssue: new Date(),
+    sign: "/images/sign-mock.png",
+    frame: 1,
+  });
 
-  // const { data, error, isLoading } = useSWR(
-  //   "https://jsonplaceholder.typicode.com/users/1", // change the path to retrive the data
-  //   fetcher,
-  // );
+  // To Fetch User PhotoId Info
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        // const response = await fetch('/api/....');
+        // const data = await response.json();
+        // setUserInfo(data);
+      }
+      fetchData();
+
+    } catch(error) {
+      console.log(error);
+    }
+  }, []);
+
+  const frameImagePath = (userInfo.frame == 1) ? "/images/frame/pink.png" : "/images/frame/blue.png";
+  const textColor = (userInfo.frame == 1) ? 'text-[#553b82]' : "text-[#181748]";
 
   function CardComponent() {
-    // mock the ticket component
+    // MOCK
+    const formatDate = (date: Date): string => {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
     return (
       <div
         ref={cardRef}
-        className="flex bg-white shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className={`flex font-schoolbell w-[330px] h-[196px] rounded-xl max-w-screen-sm shadow-2xl ${textColor}`}
       >
-        <Image
-          className="h-auto rounded-t-lg object-cover md:rounded-none md:rounded-s-lg"
-          src="https://plus.unsplash.com/premium_photo-1673697239909-e11521d1ba94?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          width={120}
-          height={120}
-        />
-        <div className="flex flex-col justify-between p-4 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
+        <div
+          style={{ backgroundImage: `url('${frameImagePath}')` }}
+          className="relative w-full bg-cover bg-center rounded-lg"
+        >
+          <Image 
+            src={"/"}
+            alt="userImg"
+            width={90}
+            height={112}
+            className="absolute top-[40px] left-[14px] bg-blue-300"
+          />
+          <div className="absolute top-[60px] right-[14px] flex flex-col text-[0.6rem] leading-[1.07rem] text-right">
+            <div>{userInfo.name}</div>
+            <div>{formatDate(userInfo.birth)}</div>
+            <div>{userInfo.hobby}</div>
+            <div>{userInfo.animal}</div>
+          </div>
+          <div className="absolute top-[135px] left-[145px] flex flex-col text-[0.65rem] text-right">
+            <div>{formatDate(userInfo.dateOfIssue)}</div>
+          </div>
+
+          <div className="absolute top-[135px] left-[210px] w-28">
+            <Image 
+                src={userInfo.sign}
+                alt="sign"
+                width={40}
+                height={50}
+                className="mx-auto"
+              />
+          </div>
         </div>
       </div>
     );
