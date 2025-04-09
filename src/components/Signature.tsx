@@ -2,16 +2,24 @@
 
 import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
-import { upload } from "@vercel/blob/client";
+// import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
+// import { upload } from "@vercel/blob/client";
 import Image from "next/image";
-
-export default function Signature() {
+import BackGround from "./BackgroundPhotoId";
+import SponsorSection from "./SponsorSection/SponsorSection";
+import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
+export default function Signature({
+  base64ImageUrl,
+  setBase64ImageUrl,
+}: {
+  base64ImageUrl: string | null;
+  setBase64ImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
-  const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
+  // const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+  // const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
   // refactor this function for future use convert dataUrl to blob response
   function dataURLtoBlob(dataURL: string): Blob {
@@ -30,29 +38,29 @@ export default function Signature() {
 
   // refactor function for blob response for future use
 
-  function dataURLtoFile(dataURL: string, filename: string): File {
-    const blob = dataURLtoBlob(dataURL);
-    return new File([blob], filename, { type: blob.type });
-  }
+  // function dataURLtoFile(dataURL: string, filename: string): File {
+  //   const blob = dataURLtoBlob(dataURL);
+  //   return new File([blob], filename, { type: blob.type });
+  // }
 
-  const handleUploadSignature = async (base64ImageUrl: string) => {
-    try {
-      // Convert base64 to Blob or File
-      const file = dataURLtoFile(base64ImageUrl, "signature.png");
+  // const handleUploadSignature = async (base64ImageUrl: string) => {
+  //   try {
+  //     // Convert base64 to Blob or File
+  //     const file = dataURLtoFile(base64ImageUrl, "signature.png");
 
-      // Upload to Vercel Blob
-      const newBlob = await upload(file.name, file, {
-        access: "public",
-        handleUploadUrl: "/api/upload",
-      });
+  //     // Upload to Vercel Blob
+  //     const newBlob = await upload(file.name, file, {
+  //       access: "public",
+  //       handleUploadUrl: "/api/upload",
+  //     });
 
-      console.log("Blob URL:", newBlob);
-      return newBlob.url; // Return the blob URL
-    } catch (error) {
-      console.error("Error uploading signature:", error);
-      return null;
-    }
-  };
+  //     console.log("Blob URL:", newBlob);
+  //     return newBlob.url; // Return the blob URL
+  //   } catch (error) {
+  //     console.error("Error uploading signature:", error);
+  //     return null;
+  //   }
+  // };
 
   console.log(sigCanvas.current, "sigCanvas response");
 
@@ -78,16 +86,16 @@ export default function Signature() {
     closeModal();
   };
 
-  const handleUploadandCreateBlobSignature = async () => {
-    if (!base64ImageUrl) {
-      alert("Please sign your name first.");
-      return;
-    }
-    const url = await handleUploadSignature(base64ImageUrl);
-    if (url) {
-      setBlobUrl(url);
-    }
-  };
+  // const handleUploadandCreateBlobSignature = async () => {
+  //   if (!base64ImageUrl) {
+  //     alert("Please sign your name first.");
+  //     return;
+  //   }
+  //   const url = await handleUploadSignature(base64ImageUrl);
+  //   if (url) {
+  //     setBlobUrl(url);
+  //   }
+  // };
 
   // Function to open modal
   const openModal = () => {
@@ -99,43 +107,71 @@ export default function Signature() {
     setIsModalOpen(false);
   };
 
+  console.log(base64ImageUrl, "base64ImageUrl");
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
-      <div className="mb-2 flex items-center gap-2 text-left">
-        <p className="text-[22px] font-medium">Signature</p>
-        <PenTool size={22} className="transform text-gray-700" />
-      </div>
 
       {/* Signature Pad Container */}
-      <div className="relative h-[80px] w-[350px] rounded-md border border-gray-300 p-4">
+      <div className="relative rounded-md border border-gray-300">
         {/* Clickable Signature Box */}
-        <div onClick={openModal} className="h-full w-full cursor-pointer">
-          {base64ImageUrl ? (
-            <img
+        <div onClick={openModal} className="cursor-pointer">
+          {base64ImageUrl && base64ImageUrl.length > 500 ? (
+            <Image
+              width={30}
+              height={30}
               src={base64ImageUrl}
               alt="Saved Signature"
-              className="h-full w-full object-contain"
+              className="h-[80px] w-[80px]"
             />
-          ) : null}
+          ) : (
+            <div className="flex items-center justify-center bg-white py-4">
+              <Image
+                width={40}
+                height={40}
+                src="/photoid/Pentool.png"
+                alt="Pentool signature"
+              />
+            </div>
+          )}
         </div>
       </div>
 
       {/* Modal for Signature Pad */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-white bg-opacity-50 backdrop-blur-sm"
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center"
           onClick={closeModal} // Clicking outside closes the modal
         >
+          <div className="absolute top-20 mt-5">
+            <h1 className="title-photoid">Your Signature</h1>
+            <p className="subtitle-photoid">วาดลายเซ็นของคุณ</p>
+          </div>
+          <div className="absolute top-0 -z-10 h-full w-full">
+            <Image
+              src="/photoid/starlogo.png"
+              alt="starlogo"
+              width={200}
+              height={200}
+              className=""
+            />
+          </div>
+          <div className="absolute top-0 mt-10">
+            <Image
+              src="/images/oddsnends-logo.png"
+              alt=""
+              width={50}
+              height={50}
+            />
+          </div>
+
+          <BackGround></BackGround>
           <div
-            className="flex w-auto flex-col items-start rounded-lg bg-white p-4"
+            className="relative flex w-auto flex-col items-start rounded-lg bg-white"
             onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
           >
             {/* Modal Header */}
-            <div className="mb-4 flex items-center gap-2 px-4 text-left">
-              <p className="text-[22px] font-medium">Signature</p>
-              <PenTool size={22} className="transform text-gray-700" />
-            </div>
 
             {/* Signature Canvas */}
             <SignatureCanvas
@@ -143,33 +179,45 @@ export default function Signature() {
               penColor="black"
               canvasProps={{
                 width: 400,
-                height: 150,
+                height: 300,
                 className: "border border-gray-300 rounded-md",
               }}
             />
+            <button
+              onClick={resetSignatureInModal}
+              className="absolute right-2 top-2"
+            >
+              <Image
+                src="/photoid/eraser.svg"
+                alt="eraser"
+                width={30}
+                height={30}
+              />
+            </button>
 
             {/* Buttons */}
-            <div className="mt-4 flex justify-center gap-8">
-              {/* Reset */}
-              <button
-                onClick={resetSignatureInModal}
-                className="rounded-full bg-gray-800 p-3 text-white"
-              >
-                <RotateCcw size={24} />
-              </button>
-
-              {/* Save */}
-              <button
-                onClick={saveSignature}
-                className="rounded-full bg-gray-800 p-3 text-white"
-              >
-                <Check size={24} />
-              </button>
-            </div>
           </div>
+          <div className="mt-4 flex w-full justify-center gap-8">
+            {/* Reset */}
+
+            {/* Save */}
+            <button
+              onClick={saveSignature}
+              style={{
+                background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
+              }}
+              className="rounded-full px-20 py-2 text-white"
+            >
+              Next
+            </button>
+          </div>
+
+          <SponsorSection />
+          <SocialMediaBar />
         </div>
       )}
-      <button onClick={handleUploadandCreateBlobSignature}>Upload</button>
+
+      {/* <button onClick={handleUploadandCreateBlobSignature}>Upload</button> */}
     </div>
   );
 }

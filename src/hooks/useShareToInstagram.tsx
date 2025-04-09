@@ -5,7 +5,7 @@ import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 
 export default function useShareToInstagram() {
-  const [urlImage, setUrlImage] = useState<string>("");
+  const [urlImage, setUrlImage] = useState("");
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
 
   // Function to download the card as an image
@@ -34,7 +34,7 @@ export default function useShareToInstagram() {
     const maxAttempts = 20;
 
     for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
-      dataUrl = await toJpeg(element, { quality: 1 });
+      dataUrl = await toJpeg(element, { quality: 2, width: 500, height: 200 });
     }
 
     return dataUrl;
@@ -42,11 +42,22 @@ export default function useShareToInstagram() {
 
   // convert dataUrl from jpeg element
 
-  const handleShare = async () => {
+  const handleShare = async () => {};
+  // Function to convert the card to an image and update the URL
+  const handleRouteToSharePage = async (cardRef: {
+    current: HTMLDivElement | null;
+  }) => {
+    console.log("share route");
+    if (!cardRef.current) {
+      return;
+    }
+
+    const dataUrl = await convertImage(cardRef.current);
+
     if (isSharing) return;
     setIsSharing(true);
 
-    if (urlImage) {
+    if (dataUrl) {
       try {
         const blob = await (await fetch(urlImage)).blob();
         const file = new File([blob], "awesome_ticket.jpg", {
@@ -67,17 +78,6 @@ export default function useShareToInstagram() {
       } finally {
         setIsSharing(false);
       }
-    }
-  };
-  // Function to convert the card to an image and update the URL
-  const handleRouteToSharePage = async (
-    cardRef: { current: HTMLDivElement | null },
-    addStep: React.Dispatch<React.SetStateAction<number>>,
-  ) => {
-    if (cardRef.current) {
-      const dataUrl = await convertImage(cardRef.current);
-      setUrlImage(dataUrl); // Update the URL state
-      addStep((prev: number) => prev + 1); // Proceed to the next step
     }
   };
 

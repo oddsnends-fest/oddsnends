@@ -1,26 +1,51 @@
+"use client";
 import Image from "next/image";
-
-const sponsors = [
-  {
-    src: "/images/sponsors/SlowCombo.png",
-    link: "https://www.instagram.com/slowcombo/?hl=en",
-    size: 110,
-  },
-  {
-    src: "/images/sponsors/IOIC.png",
-    link: "https://www.instagram.com/ioic_chula/?hl=en",
-    size: 95,
-  },
-  //   { src: "/", link: "/"},
-  //   { src: "/", link: "/"},
-  //   { src: "/", link: "/"},
-  //   { src: "/", link: "/"},
-];
+import { usePathname } from "next/navigation";
 
 const SponsorSection = () => {
+  const pathName = usePathname();
+  console.log(pathName, "pathName");
+  const isPhotoIdRoute = pathName.split("/").includes("photoid");
+
+  const sponsors = [
+    {
+      src: isPhotoIdRoute
+        ? "/images/sponsors/SlowCombo(1).png"
+        : "/images/sponsors/SlowCombo.png",
+      link: "https://www.instagram.com/slowcombo/?hl=en",
+      size: 80,
+    },
+    {
+      src: isPhotoIdRoute
+        ? "/images/sponsors/IOIC(1).png"
+        : "/images/sponsors/IOIC.png",
+      link: "https://www.instagram.com/ioic_chula/?hl=en",
+      size: 95,
+    },
+
+    {
+      src: isPhotoIdRoute
+        ? "/images/sponsors/Binancelogo.png"
+        : "/images/sponsors/Binancelogo.png",
+      link: "https://www.instagram.com/binance/?hl=en",
+      size: 120, // provide link please
+    },
+
+    //   { src: "/", link: "/"},
+    //   { src: "/", link: "/"},
+    //   { src: "/", link: "/"},
+    //   { src: "/", link: "/"},
+  ];
+
   return (
-    <section className="z-10 mb-14 bg-transparent">
-      <ul className="flex flex-wrap items-end justify-center">
+    <section
+      className={
+        isPhotoIdRoute
+          ? "absolute bottom-2 left-1/2 z-0 mb-14 -translate-x-1/2 bg-transparent"
+          : "z-10 mb-14 bg-transparent"
+      }
+    >
+      <ul className="flex items-center justify-center">
         {sponsors.map(({ src, link, size }, idx) => (
           <li key={idx}>
             <a href={link} target="_blank" rel="noopener noreferrer">

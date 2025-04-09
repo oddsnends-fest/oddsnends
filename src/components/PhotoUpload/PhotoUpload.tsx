@@ -2,13 +2,22 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import ImageCropper from "./ImageCropper/ImageCropper";
 
 import { type PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
-import Link from "next/link";
-function PhotoUpload() {
+// import Link from "next/link";
+import BackGround from "../BackgroundPhotoId";
+import SponsorSection from "../SponsorSection/SponsorSection";
+import SocialMediaBar from "../SocialMediaBar/SocialMediaBar";
+function PhotoUpload({
+  croppedImage,
+  setCroppedImage,
+}: {
+  croppedImage: string | null;
+  setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
   const photoInputRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
@@ -16,7 +25,7 @@ function PhotoUpload() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
   // cropped image base64 result from ImageCropper (can be used to process further)
-  const [croppedImage, setCroppedImage] = useState<string | null>(null);
+  // const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
   // handle clicking the hidden input button
   const handleClickUpload = () => {
@@ -116,63 +125,85 @@ function PhotoUpload() {
   };
 
   return (
-    <div>
+    <div className="">
       {/* Image + Text aligned horizontally */}
       {!croppedImage && (
-        <div
-          className="flex items-center justify-center"
+        <button
+          className="relative flex w-full items-center justify-center bg-white py-4"
           onClick={handleClickUpload}
         >
           <Image
-            src="/images/camera.png"
+            className=""
+            src="/photoid/add_photo_alternate.svg"
             alt="Upload"
-            width={64}
-            height={64}
-            className="h-4/5 w-auto" // Fill height 80% and maintain aspect ratio for width
+            width={40}
+            height={40}
+
+            // Fill height 80% and maintain aspect ratio for width
           />
           <div className="ml-6">
             {" "}
             {/* Added margin-left for spacing between image and text */}
-            <span className="font-bold">Upload Image</span>
+            {/* <span className="font-bold">Upload Image</span>
             <div>
               <span>*jpeg, png*</span>
-            </div>
+            </div> */}
           </div>
-        </div>
+        </button>
       )}
 
       {/* Modal for Cropping Image */}
       {isModalOpen && (
-        <Modal className="z-20 flex max-h-screen items-center justify-center">
+        <div className="absolute inset-0 top-0 z-20 flex flex-col items-center justify-center">
+          <BackGround />
+          <Image
+            className="absolute"
+            src="/photoid/starlogo.png"
+            alt="starlogo"
+            width={200}
+            height={200}
+          />
+          <div className="absolute top-20 flex w-full flex-col justify-center">
+            <h1 className="title-photoid">Your Signature</h1>
+            <p className="subtitle-photoid">วาดลายเซ็นของคุณ</p>
+          </div>
           {uploadedImage && (
-            <>
-              <div className="flex flex-col items-center justify-center gap-4 p-4 text-black">
-                <h1 className="text-3xl font-bold">Crop Your Image</h1>
-                <div className="rounded-lg bg-white p-4">
-                  <ImageCropper
-                    src={uploadedImage}
-                    onSaveCrop={handleSaveCrop}
-                    confirm={confirm}
+            <div className="flex flex-col items-center justify-center gap-4 p-4 text-black">
+              <div className="relative flex h-[400px] w-[300px] items-center justify-center rounded-lg bg-white">
+                <ImageCropper
+                  src={uploadedImage}
+                  onSaveCrop={handleSaveCrop}
+                  confirm={confirm}
+                />
+                <button
+                  onClick={handleClickRefresh}
+                  className="absolute right-2 top-2 rounded-full px-4 py-2"
+                >
+                  <Image
+                    src="/photoid/Refresh.png"
+                    alt="refresh"
+                    width={20}
+                    height={20}
                   />
-                </div>
-                <div className="flex justify-center gap-4">
-                  <button
-                    onClick={handleClickRefresh}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-black font-bold text-white hover:border-gray-400 hover:bg-gray-400 hover:text-white"
-                  >
-                    ↻
-                  </button>
-                  <button
-                    onClick={handleClickConfirm}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-black font-bold text-white hover:border-gray-400 hover:bg-gray-400 hover:text-white"
-                  >
-                    ✓
-                  </button>
-                </div>
+                </button>
               </div>
-            </>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={handleClickConfirm}
+                  style={{
+                    background:
+                      "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
+                  }}
+                  className="rounded-full px-20 py-2 text-white"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
           )}
-        </Modal>
+          <SponsorSection />
+          <SocialMediaBar />
+        </div>
       )}
 
       {/* Hidden File Input */}
@@ -196,23 +227,19 @@ function PhotoUpload() {
 
       {/* For testing cropped results */}
       {croppedImage && (
-        <div className="relative z-0 w-fit">
-          <div
-            className="absolute right-0 top-0 h-6 w-6 -translate-y-1/2 translate-x-1/2 rounded-full bg-primary"
-            onClick={handleClickUpload}
-          ></div>
+        <div className="relative z-0 w-fit" onClick={handleClickUpload}>
           <Image
             src={croppedImage}
             alt="Cropped Image"
-            width={200}
-            height={200}
-            className="-z-20"
+            width={80}
+            height={80}
+            className="-z-20 h-[80px] w-[80px]"
           />
         </div>
       )}
-      <button onClick={() => handleSubmitUpload(croppedImage || "")}>
+      {/* <button onClick={() => handleSubmitUpload(croppedImage || "")}>
         Upload
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -2,21 +2,27 @@
 import { useState, FormEvent, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Image from "next/image";
 import React from "react";
 import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import { useRouter } from "next/navigation";
+import BackGround from "@/components/BackgroundPhotoId";
+import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 // import SliderBox from "@/components/SliderBox/SliderBox";
-
+// import StarCanvas from "@/image/Frame 13879.png";
+import BackButton from "@/components/BackButton/BackButton";
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
+// import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
 export default function FormPage() {
   const [name, setName] = useState("");
   const [hobby, setHobby] = useState("");
@@ -24,68 +30,70 @@ export default function FormPage() {
   const [spiritAnimal, setSpiritAnimal] = useState("");
   const [openCalendar, setOpenCalendar] = useState(false);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false); // set to false later
+  const [isEditData, setIsEditData] = useState(false);
+
+  const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
+
+  const [croppedImage, setCroppedImage] = useState<string | null>(null);
+
+  // const [stepForm, setStepForm] = useState(1);
 
   const [gotoResultPage, setGotoResultPage] = useState(false);
 
   const router = useRouter();
 
+  console.log(name, hobby, date, spiritAnimal, base64ImageUrl, "information");
   // when submit submit  = true change isSubmitted to true and isSubmitted set timeout in 3 sec and
 
   const handleSubmit = async () => {
     //prevent null submitting
     if (!name || !hobby || !date || !spiritAnimal) {
-      console.log("Please fill in all fields.");
+      alert("Please fill in all fields.");
       return;
     }
 
-    // question is how to get the data the other info that I mocked
     const formData = {
-      user_id: "1", // if don't fill either user_id or email response status 500
-      // email: "emailuser@gmail.com",
-      display_name: "nameUser",
-      full_name: name, // full_name is required
-      email: "emailUser@gmail.com", // must follow this format
-      // the other one is optional so recommended to have but don't need to
-
+      name,
       hobby,
-      dob: date,
-      age: 23, // age is required
-      occupation: "occupation",
-      channel: "INSTAGRAM",
-      // line_profile_pic, phone, gender, photo,
-      spirit_animal: spiritAnimal,
-      photoid_name: "photoid_name",
-      // signature optional hobby
+      date,
+      spiritAnimal,
+      base64ImageUrl,
+      croppedImage,
     };
+
+    // question is how to get the data the other info that I mocked
+    // const formData = {
+    //   user_id: "1", // if don't fill either user_id or email response status 500
+    //   // email: "emailuser@gmail.com",
+    //   display_name: "nameUser",
+    //   full_name: name, // full_name is required
+    //   email: "emailUser@gmail.com", // must follow this format
+    //   // the other one is optional so recommended to have but don't need to
+
+    //   hobby,
+    //   dob: date,
+    //   age: 23, // age is required
+    //   occupation: "occupation",
+    //   channel: "INSTAGRAM",
+    //   // line_profile_pic, phone, gender, photo,
+    //   spirit_animal: spiritAnimal,
+    //   photoid_name: "photoid_name",
+    //   // signature optional hobby
+    // };
+    window.localStorage.setItem("info", JSON.stringify(formData));
     //submit data
     console.log("Form Data Submitted:", formData);
+    // localStorage should set here
 
-    try {
-      const response = await fetch("/api/photoid", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    setIsSubmitted(true);
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setName("");
-        setHobby("");
-        setDate(new Date());
-        setSpiritAnimal("");
-        alert("Data submitted successfully!");
-
-        // setFormData({ name: "", email: "" }); // Reset form
-      } else {
-        alert("Failed to submit data.");
-      } // error some formdata submission
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred while submitting the form.");
-    }
+    setName("");
+    setHobby("");
+    setDate(new Date());
+    setSpiritAnimal("");
+    setBase64ImageUrl(null);
+    setCroppedImage(null);
   };
 
   useEffect(() => {
@@ -100,31 +108,34 @@ export default function FormPage() {
     if (!isSubmitted && gotoResultPage) {
       router.push("/photoid/result");
     }
-  }, [isSubmitted, gotoResultPage]);
+  }, [isSubmitted, gotoResultPage]); // uncomment for design
+
+  const isFilledAllData =
+    name && hobby && date && spiritAnimal && base64ImageUrl && croppedImage;
 
   return (
     // when isSubmit is false ==> show form and fill in
     // when status of gotoresultpage is true
     // isSubmitted is false
     // cannot show fill in
-    <div className="h-screen overflow-hidden">
+    <div className="overflow-hidden text-[#3D245B]">
+      <BackGround />
+      <BackButton />
+      <ImageCanvas />
       {!isSubmitted && !gotoResultPage && (
-        <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
-          Fill in
+        <div className="mt-5">
+          <h1 className="title-photoid">Your info</h1>
+          <p className="subtitle-photoid">ใส่ข้อมูลของคุณ</p>
         </div>
-      )}
-
-      {(isSubmitted || (!isSubmitted && gotoResultPage)) && (
-        <div>Video page submission...</div>
       )}
 
       {/* name */}
       {!isSubmitted && !gotoResultPage && (
-        <section className="m-6 grid gap-4">
-          <div className="grid grid-cols-2 gap-8">
+        <section className="grid gap-4 p-6">
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="name" className="mb-2 text-2xl font-medium">
-                Name
+              <label htmlFor="name" className="mb-2 text-xs font-medium">
+                Name <span>ชื่อ</span>
               </label>
               <input
                 id="name"
@@ -137,8 +148,8 @@ export default function FormPage() {
 
             {/* hobby */}
             <div>
-              <label htmlFor="hobby" className="mb-2 text-2xl font-medium">
-                Hobby
+              <label htmlFor="hobby" className="mb-2 text-xs font-medium">
+                Hobby <span>งานอดิเรก</span>
               </label>
               <select
                 id="hobby"
@@ -158,25 +169,25 @@ export default function FormPage() {
             </div>
 
             {/* date of birth */}
-            <div>
-              <label htmlFor="date" className="mb-2 text-2xl font-medium">
-                Date of birth
+            <div className="col-span-1">
+              <label htmlFor="date" className="mb-2 text-xs font-medium">
+                Date of birth <span>ชื่อ</span>
               </label>
               <div className="flex items-center gap-2">
-                <div
-                  className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${date ? "text-black" : "text-gray-400"}`}
-                >
-                  {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
-                </div>
                 <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                   <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className="flex h-10 w-12 items-center justify-center border-2 border-black p-0"
+                    <div
                       onClick={() => setOpenCalendar(true)}
+                      className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${date ? "text-black" : "text-gray-400"}`}
                     >
-                      <CalendarIcon className="h-5 w-5" />
-                    </Button>
+                      {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
+                    </div>
+                    {/* <Button
+                        variant={"outline"}
+                        className="flex h-10 w-12 items-center justify-center border-2 border-black p-0"
+                      >
+                        <CalendarIcon className="h-5 w-5" />
+                      </Button> */}
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="end">
                     <Calendar
@@ -194,43 +205,107 @@ export default function FormPage() {
                 </Popover>
               </div>
             </div>
+            <div className="col-span-1"></div>
 
             {/* spirit animal */}
-            <div>
+            <div className="col-span-2">
               <label
                 htmlFor="spirit-animal"
-                className="mb-2 text-2xl font-medium"
+                className="mb-2 text-xs font-medium"
               >
-                Spirit Animal
+                Spirit Animal <span>เลือกสัตว์ที่ต้องการ</span>
               </label>
-              <select
-                id="spirit-animal"
-                className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${spiritAnimal == "" ? "text-gray-400" : "text-black"}`}
-                value={spiritAnimal}
-                onChange={(e) => setSpiritAnimal(e.target.value)}
-              >
-                <option value="" disabled className="text-gray-400">
-                  Select. . .
-                </option>
+
+              <ul className="flex gap-4 overflow-auto">
                 {ANIMALS.map(({ value, label }) => (
-                  <option key={value} value={value} className="text-black">
+                  <li
+                    onClick={() => {
+                      setSpiritAnimal(value);
+                    }}
+                    key={value}
+                    value={value}
+                    className="flex items-center justify-center bg-white text-black"
+                  >
                     {label}
-                  </option>
+                  </li>
                 ))}
-              </select>
+              </ul>
             </div>
           </div>
-          <Signature />
-          <PhotoUpload />
+          <section className="grid grid-cols-3 gap-6 place-self-start">
+            <label
+              htmlFor="signature"
+              className="col-span-1 mb-2 text-xs font-medium"
+            >
+              Your signature<p>ลายเซ็น</p>
+            </label>
+            <Signature
+              base64ImageUrl={base64ImageUrl}
+              setBase64ImageUrl={setBase64ImageUrl}
+            />
+            <div className="col-span-1"></div>
+          </section>
+
+          <section className="grid grid-cols-3 gap-6 place-self-start">
+            <label
+              htmlFor="signature"
+              className="col-span-1 mb-2 text-xs font-medium"
+            >
+              Your Photo ID<p>รูปถ่าย</p>
+            </label>
+            <PhotoUpload
+              croppedImage={croppedImage}
+              setCroppedImage={setCroppedImage}
+            />
+            <div className="col-span-1"></div>
+          </section>
+          <div className="relative mt-6 flex items-center justify-center">
+            <button
+              style={{
+                background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
+              }}
+              className="absolute w-[16rem] rounded-full py-2 text-white"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div>
+
           {/* send button */}
-          <button
-            onClick={handleSubmit}
-            className="mx-auto w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
-          >
-            Send
-          </button>
+        </section>
+      )}
+      {/* Printing Page */}
+      {(isSubmitted || (!isSubmitted && gotoResultPage)) && (
+        <section className="">
+          <div>
+            <BackButton />
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-[calc(50%)] -translate-y-[calc(50%+4rem)]">
+            <div className="flex flex-col items-center justify-center gap-6">
+              <h1 className="text-3xl">Printing...</h1>
+              <Image
+                src="/photoid/photo_prints.png"
+                alt="oddie.png"
+                width={90}
+                height={90}
+              />
+              <div className="flex justify-center gap-2">
+                <div className="h-4 w-4 rounded-full bg-[#3D245B]"></div>
+                <div className="h-4 w-4 rounded-full bg-[#3D245B]"></div>
+                <div className="h-4 w-4 rounded-full bg-[#3D245B]"></div>
+              </div>
+              <h2 className="text-2xl">Almost Done</h2>
+            </div>
+          </div>
+          <div>
+            <SponsorSection />
+          </div>
         </section>
       )}
     </div>
   );
 }
+
+// when click step 1 add signature verfication
+// when click step 2 add signature verification
+// when click step 3 confirm the verification and go

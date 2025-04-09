@@ -107,3 +107,11 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.title-photoid {
+  @apply text-center text-4xl font-extrabold leading-[1.25] text-[#3D245B];
+}
+
+.subtitle-photoid {
+  @apply text-center align-middle font-sans text-base font-normal leading-none tracking-normal text-[#3D245B];
+}
