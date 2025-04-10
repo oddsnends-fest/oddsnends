@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
 import { useLiff } from "@/providers/liff-provider";
