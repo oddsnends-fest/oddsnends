@@ -18,8 +18,8 @@ interface DecodedToken {
 }
 
 interface UserProfile {
-  displayName: string; 
-  pictureUrl?: string; 
+  displayName: string;
+  pictureUrl?: string;
   userId: string
 }
 
@@ -31,7 +31,6 @@ const LiffContext = createContext<LiffContextProps>({
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
-
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
@@ -42,39 +41,42 @@ export default function Layout({ children }: { children: ReactNode }) {
     const initLiff = async () => {
       try {
         await liff.init({ liffId: env.NEXT_PUBLIC_LIFF_ID });
-
         setLiffObject(liff);
-
-        liff.ready.then(() => {
-          if (!liff.isLoggedIn()) {
-            console.log("User not logged in, initiating login...");
-            liff.login();
-          } else {
-            console.log("User is already logged in, decoding ID token...");
-            const token = liff.getIDToken();
-            if (token) {
-              console.log("ID Token:", token);
-              setIdToken(token)
-              try {
-                  const decoded: DecodedToken = jwtDecode(token);
-                  setUserProfile({
-                      displayName: decoded.name,
-                      pictureUrl: decoded.picture,
-                      userId: decoded.sub,
-                  });
-              } catch (err) {
-                  console.error("Error decoding ID token:", err);
-              }
+        
+        // Convert this promise chain to await
+        await liff.ready;
+        
+        if (!liff.isLoggedIn()) {
+          console.log("User not logged in, initiating login...");
+          liff.login();
+        } else {
+          console.log("User is already logged in, decoding ID token...");
+          const token = liff.getIDToken();
+          if (token) {
+            console.log("ID Token:", token);
+            setIdToken(token)
+            try {
+              const decoded: DecodedToken = jwtDecode(token);
+              setUserProfile({
+                displayName: decoded.name,
+                pictureUrl: decoded.picture,
+                userId: decoded.sub,
+              });
+            } catch (err) {
+              console.error("Error decoding ID token:", err);
             }
           }
-        })
-      } catch (error: any) {
+        }
+      } catch (error) {
+        // Fix the any type
         console.error("LIFF initialization failed.", error);
-        setLiffError(error.toString()); // Store the error if something goes wrong
+        // Properly handle error with type checking
+        setLiffError(error instanceof Error ? error.message : String(error));
       }
     };
-
-    initLiff(); // Call the initialization function
+    
+    // Fix the floating promise by using void operator
+    void initLiff();
   }, []);
 
   return (
