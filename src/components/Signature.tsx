@@ -22,45 +22,19 @@ export default function Signature({
   // const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
   // refactor this function for future use convert dataUrl to blob response
-  function dataURLtoBlob(dataURL: string): Blob {
-    const arr = dataURL.split(",");
-    const mime = arr[0]?.match(/:(.*?);/)![1]; // Extract MIME type
-    const bstr = atob(arr[1]!); // Decode base64 string
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
+  // function dataURLtoBlob(dataURL: string): Blob {
+  //   const arr = dataURL.split(",");
+  //   const mime = arr[0]?.match(/:(.*?);/)![1]; // Extract MIME type
+  //   const bstr = atob(arr[1]!); // Decode base64 string
+  //   let n = bstr.length;
+  //   const u8arr = new Uint8Array(n);
 
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new Blob([u8arr], { type: mime });
-  }
-
-  // refactor function for blob response for future use
-
-  // function dataURLtoFile(dataURL: string, filename: string): File {
-  //   const blob = dataURLtoBlob(dataURL);
-  //   return new File([blob], filename, { type: blob.type });
-  // }
-
-  // const handleUploadSignature = async (base64ImageUrl: string) => {
-  //   try {
-  //     // Convert base64 to Blob or File
-  //     const file = dataURLtoFile(base64ImageUrl, "signature.png");
-
-  //     // Upload to Vercel Blob
-  //     const newBlob = await upload(file.name, file, {
-  //       access: "public",
-  //       handleUploadUrl: "/api/upload",
-  //     });
-
-  //     console.log("Blob URL:", newBlob);
-  //     return newBlob.url; // Return the blob URL
-  //   } catch (error) {
-  //     console.error("Error uploading signature:", error);
-  //     return null;
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
   //   }
-  // };
+
+  //   return new Blob([u8arr], { type: mime });
+  // }
 
   console.log(sigCanvas.current, "sigCanvas response");
 

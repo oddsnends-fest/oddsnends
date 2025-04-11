@@ -47,15 +47,16 @@ export default function ShareToInstagram() {
     if (typeof window === "undefined") {
       return;
     }
-    const dataParsed = window.localStorage.getItem("info");
+    const dataParsed: string | null = window.localStorage.getItem("info");
     return dataParsed ? JSON.parse(dataParsed) : null;
   });
 
-  const [selectedFrame] = useState(() => {
+  const [selectedFrame] = useState<number | null>(() => {
     if (typeof window === "undefined") {
       return;
     }
-    const selectedFrameParsed = window.localStorage.getItem("frame");
+    const selectedFrameParsed: string | null =
+      window.localStorage.getItem("frame");
     return selectedFrameParsed ? JSON.parse(selectedFrameParsed) : null;
   });
 
@@ -85,16 +86,15 @@ export default function ShareToInstagram() {
           style={{ backgroundImage: `url('${frameImagePath}')` }}
           className="relative w-full rounded-lg bg-cover bg-center"
         >
-          {userInfo && (
-            <Image
-              src={userInfo!.croppedImage}
-              alt="userImg"
-              width={90}
-              height={112}
-              quality={1.0}
-              className="absolute left-[14px] top-[40px] bg-blue-300"
-            />
-          )}
+          <Image
+            src={userInfo!.croppedImage}
+            alt="userImg"
+            width={90}
+            height={112}
+            quality={1.0}
+            className="absolute left-[14px] top-[40px] bg-blue-300"
+          />
+
           <div className="absolute right-[14px] top-[60px] flex flex-col text-right text-[0.6rem] leading-[1.07rem]">
             <div>{userInfo!.name}</div>
             <div>{formatDate(new Date(userInfo!.date))}</div>
@@ -130,7 +130,7 @@ export default function ShareToInstagram() {
       <BackButton />
       <div className="">
         <div className="mt-6">
-          <p className="pb-2 text-center">Here's your ID card</p>
+          <p className="pb-2 text-center">Here &apos; s your ID card</p>
           <p className="pb-2 text-center">Thanks to joining us</p>
         </div>
 
@@ -193,3 +193,5 @@ export default function ShareToInstagram() {
     </section>
   );
 }
+
+// 145, 163 line of function handle promise resolve and reject.

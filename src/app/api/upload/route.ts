@@ -8,7 +8,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     const jsonResponse = await handleUpload({
       body,
       request,
-      onBeforeGenerateToken: async (pathname, clientPayload) => {
+      onBeforeGenerateToken: async () => {
+        // pass the argument pathName and clientPayload in async argument
         // Authenticate the user, for example, with a session or JWT token
         // Replace this with your actual authentication logic
         const isAuthenticated = true; // Replace with actual authentication check
