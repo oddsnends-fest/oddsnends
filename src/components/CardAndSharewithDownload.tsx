@@ -24,6 +24,36 @@ import { redirect } from "next/navigation";
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function ShareToInstagram() {
+  function useLocalStorage<T>(
+    key: string,
+    initialValue: T,
+  ): [T, (value: T) => void] {
+    const [storedValue, setStoredValue] = useState<T>(() => {
+      if (typeof window === "undefined") {
+        return initialValue;
+      }
+      try {
+        const item = window.localStorage.getItem(key);
+        return item ? JSON.parse(item) : initialValue;
+      } catch (error) {
+        console.error(error);
+        return initialValue;
+      }
+    });
+
+    const setValue = (value: T) => {
+      try {
+        setStoredValue(value);
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(key, JSON.stringify(value));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return [storedValue, setValue];
+  }
   // const [step, addStep] = useState(1);
   const [userAgentData, setUserAgentData] = useState<string>();
   console.log(userAgentData, "userAgentData");
@@ -36,28 +66,19 @@ export default function ShareToInstagram() {
     setUserAgentData(parser.getDevice().model);
   }, []);
 
-  const [userInfo] = useState<{
+  const [userInfo, setUserInfo] = useLocalStorage<{
     name: string;
-    hobby: string;
     date: string;
+    hobby: string;
     spiritAnimal: string;
-    base64ImageUrl: string;
     croppedImage: string;
-  } | null>(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-    const dataParsed: string | null = window.localStorage.getItem("info");
-    if (dataParsed) {
-      return JSON.parse(dataParsed);
-    }
-    return null;
-  });
+    base64ImageUrl: string;
+  } | null>("info", null);
 
-  const [selectedFrame] = useState<number | null>(() => {
-    const selectedFrameParsed: string | null = localStorage.getItem("frame");
-    return selectedFrameParsed ? JSON.parse(selectedFrameParsed) : null;
-  });
+  const [selectedFrame, setSelectedFrame] = useLocalStorage<number | null>(
+    "frame",
+    null,
+  );
 
   const frameImagePath =
     selectedFrame === 1 ? "/images/frame/pink.png" : "/images/frame/blue.png";
@@ -179,6 +200,8 @@ export default function ShareToInstagram() {
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("info");
+              setSelectedFrame(null);
+              setUserInfo(null);
               redirect("/photoid/frame");
             }}
             style={{
