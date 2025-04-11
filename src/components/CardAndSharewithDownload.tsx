@@ -36,7 +36,14 @@ export default function ShareToInstagram() {
     setUserAgentData(parser.getDevice().model);
   }, []);
 
-  const [userInfo] = useState(() => {
+  const [userInfo] = useState<{
+    name: string;
+    hobby: string;
+    date: string;
+    spiritAnimal: string;
+    base64ImageUrl: string;
+    croppedImage: string;
+  } | null>(() => {
     if (typeof window === "undefined") {
       return;
     }
