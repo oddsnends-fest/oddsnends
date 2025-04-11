@@ -233,6 +233,7 @@ function PhotoUpload({
             alt="Cropped Image"
             width={80}
             height={80}
+            quality={1.0}
             className="-z-20 h-[80px] w-[80px]"
           />
         </div>

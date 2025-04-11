@@ -21,12 +21,10 @@ function Frame() {
     // Store user's selection
 
     // setChecked(true);
-    window.localStorage.setItem("frame", JSON.stringify(index));
 
-    setTimeout(() => {
-      setSelectedFrame(null);
-      router.push("/photoid/form");
-    }, 100);
+    window.localStorage.setItem("frame", JSON.stringify(index));
+    setSelectedFrame(null);
+    router.push("/photoid/form");
   };
 
   return (
@@ -78,7 +76,7 @@ function Frame() {
             className="rounded-full px-20 py-2 text-white"
             onClick={() => handleClickCheckBox(selectedFrame)}
           >
-            Let's Go
+            Let &apos; s Go
           </button>
         )}
       </main>

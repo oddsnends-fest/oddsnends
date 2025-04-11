@@ -106,6 +106,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  display: inline-block
+  /* adjust style for download and share */
 }
 
 .title-photoid {

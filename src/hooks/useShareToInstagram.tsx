@@ -1,23 +1,22 @@
 "use client";
 import { useState } from "react";
 import { CardRef } from "@/types/cardRef";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 
 export default function useShareToInstagram() {
-  const [urlImage, setUrlImage] = useState("");
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
 
   // Function to download the card as an image
-  async function handleDownloadFile(cardRef: CardRef) {
+  async function handleDownloadFile(cardRef: CardRef, frameImagePath: string) {
     if (cardRef.current) {
       try {
-        const canvas = await html2canvas(cardRef.current);
         const link = document.createElement("a");
-        const dataURL = canvas.toDataURL("image/jpg");
+        const dataURL = await convertImage(cardRef.current);
         // console.log(dataURL, "canvas.toDataURL")
         link.href = dataURL;
-        link.download = "image-mock.jpg";
+        link.download = "image-mock.jpeg";
+
         link.click();
       } catch (error) {
         console.error("Error capturing and downloading the image:", error);
@@ -34,7 +33,7 @@ export default function useShareToInstagram() {
     const maxAttempts = 20;
 
     for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
-      dataUrl = await toJpeg(element, { quality: 2, width: 500, height: 200 });
+      dataUrl = await toJpeg(element, { quality: 1.5 });
     }
 
     return dataUrl;
@@ -59,7 +58,11 @@ export default function useShareToInstagram() {
 
     if (dataUrl) {
       try {
-        const blob = await (await fetch(urlImage)).blob();
+        const blob = await (await fetch(dataUrl)).blob();
+        console.log(blob, "blob response");
+        if (!blob) {
+          return;
+        }
         const file = new File([blob], "awesome_ticket.jpg", {
           type: blob.type,
         });
@@ -81,5 +84,5 @@ export default function useShareToInstagram() {
     }
   };
 
-  return { handleRouteToSharePage, handleDownloadFile, handleShare, urlImage };
+  return { handleRouteToSharePage, handleDownloadFile, handleShare };
 }

@@ -1,9 +1,8 @@
 "use client";
-import { useState, FormEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import {
   Popover,
   PopoverContent,
@@ -31,7 +30,7 @@ export default function FormPage() {
   const [openCalendar, setOpenCalendar] = useState(false);
 
   const [isSubmitted, setIsSubmitted] = useState(false); // set to false later
-  const [isEditData, setIsEditData] = useState(false);
+  // const [isEditData, setIsEditData] = useState(false);
 
   const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
 
@@ -110,8 +109,8 @@ export default function FormPage() {
     }
   }, [isSubmitted, gotoResultPage]); // uncomment for design
 
-  const isFilledAllData =
-    name && hobby && date && spiritAnimal && base64ImageUrl && croppedImage;
+  // const isFilledAllData =
+  //   name && hobby && date && spiritAnimal && base64ImageUrl && croppedImage;
 
   return (
     // when isSubmit is false ==> show form and fill in
