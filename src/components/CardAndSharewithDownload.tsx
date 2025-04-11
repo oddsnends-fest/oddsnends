@@ -141,8 +141,8 @@ export default function ShareToInstagram() {
         <div className="mt-4 flex justify-center gap-6">
           <div>
             <button
-              onClick={() => {
-                handleDownloadFile(cardRef, frameImagePath);
+              onClick={async () => {
+                await handleDownloadFile(cardRef, frameImagePath);
               }}
               className="flex items-center justify-center rounded-full bg-[#3D245B] p-3"
             >
@@ -159,8 +159,8 @@ export default function ShareToInstagram() {
           <div>
             <button
               className="flex items-center justify-center rounded-full bg-[#3D245B] p-3"
-              onClick={() => {
-                handleRouteToSharePage(cardRef);
+              onClick={async () => {
+                await handleRouteToSharePage(cardRef);
               }}
             >
               <Image
