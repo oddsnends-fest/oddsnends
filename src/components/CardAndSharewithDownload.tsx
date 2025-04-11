@@ -48,7 +48,10 @@ export default function ShareToInstagram() {
       return;
     }
     const dataParsed: string | null = window.localStorage.getItem("info");
-    return dataParsed ? JSON.parse(dataParsed) : null;
+    if (dataParsed) {
+      return JSON.parse(dataParsed);
+    }
+    return null;
   });
 
   const [selectedFrame] = useState<number | null>(() => {
@@ -57,7 +60,10 @@ export default function ShareToInstagram() {
     }
     const selectedFrameParsed: string | null =
       window.localStorage.getItem("frame");
-    return selectedFrameParsed ? JSON.parse(selectedFrameParsed) : null;
+    if (selectedFrameParsed) {
+      return JSON.parse(selectedFrameParsed);
+    }
+    return null;
   });
 
   const frameImagePath =

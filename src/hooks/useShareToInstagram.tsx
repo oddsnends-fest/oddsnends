@@ -41,7 +41,6 @@ export default function useShareToInstagram() {
 
   // convert dataUrl from jpeg element
 
-  const handleShare = async () => {};
   // Function to convert the card to an image and update the URL
   const handleRouteToSharePage = async (cardRef: {
     current: HTMLDivElement | null;
@@ -84,5 +83,5 @@ export default function useShareToInstagram() {
     }
   };
 
-  return { handleRouteToSharePage, handleDownloadFile, handleShare };
+  return { handleRouteToSharePage, handleDownloadFile };
 }
