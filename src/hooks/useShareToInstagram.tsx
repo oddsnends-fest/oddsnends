@@ -15,7 +15,7 @@ export default function useShareToInstagram() {
         const canvas = await html2canvas(cardRef.current);
         const link = document.createElement("a");
         const dataURL = canvas.toDataURL("image/jpg");
-        // console.log(dataURL, "canvas.toDataURL");
+        // console.log(dataURL, "canvas.toDataURL")
         link.href = dataURL;
         link.download = "image-mock.jpg";
         link.click();

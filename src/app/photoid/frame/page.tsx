@@ -21,7 +21,7 @@ function Frame() {
     // Store user's selection
 
     // setChecked(true);
-    window.localStorage.setItem("frame", JSON.stringify(index - 1));
+    window.localStorage.setItem("frame", JSON.stringify(index));
 
     setTimeout(() => {
       setSelectedFrame(null);
@@ -34,11 +34,11 @@ function Frame() {
       <ImageCanvas />
       <BackGround />
       <BackButton />
-      <main className="flex flex-col items-center justify-center gap-4">
+      <main className="flex flex-col items-center justify-center gap-1">
         <h1 className="title-photoid">Select Frame</h1>
-        <p className="subtitle-photoid">เลือกเฟรมรูปที่ต้องการ</p>
+        <p className="subtitle-photoid mb-1">เลือกเฟรมรูปที่ต้องการ</p>
         {/* Grid containing frame options */}
-        <section className="grid w-[80%] grid-cols-1 gap-6">
+        <section className="grid w-[80%] grid-cols-1 gap-4">
           {frameSrc.map((src, index) => {
             console.log(selectedFrame, "selectedFrame");
             return (

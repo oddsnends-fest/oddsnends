@@ -41,7 +41,7 @@ const SponsorSection = () => {
     <section
       className={
         isPhotoIdRoute
-          ? "absolute bottom-2 left-1/2 z-0 mb-14 -translate-x-1/2 bg-transparent"
+          ? "absolute bottom-0 left-1/2 z-0 mb-14 -translate-x-1/2 bg-transparent"
           : "z-10 mb-14 bg-transparent"
       }
     >

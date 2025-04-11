@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import useShareToInstagram from "@/hooks/useShareToInstagram";
-import Link from "next/link";
+
 // import Link from "next/link";
 import Image from "next/image";
 import BackButton from "@/components/BackButton/BackButton";
@@ -18,7 +18,14 @@ export default function ShareToInstagram() {
   const cardRef = useRef<HTMLDivElement | null>(null);
   console.log(cardRef.current, "cardref");
 
-  const [cardDataInfo, _] = useState(() => {
+  const [cardDataInfo] = useState<{
+    name: string;
+    hobby: string;
+    date: string;
+    spiritAnimal: string;
+    base64ImageUrl: string;
+    croppedImage: string;
+  } | null>(() => {
     if (typeof window === "undefined") {
       return;
     }
@@ -26,16 +33,21 @@ export default function ShareToInstagram() {
     return dataParsed ? JSON.parse(dataParsed) : null;
   });
 
-  const [selectedFrame, __] = useState(() => {
+  const [selectedFrame] = useState(() => {
     if (typeof window === "undefined") {
       return;
     }
     const selectedFrameParsed = window.localStorage.getItem("frame");
     return selectedFrameParsed ? JSON.parse(selectedFrameParsed) : null;
   });
+  console.log(selectedFrame, "selectedFrame");
 
   if (!cardDataInfo) {
     redirect("/photoid/form");
+  }
+
+  if (!selectedFrame) {
+    redirect("/photoid/frame");
   }
 
   function CardComponent() {
@@ -43,14 +55,12 @@ export default function ShareToInstagram() {
     return (
       <section
         ref={cardRef}
-        className="mx-4 mt-3 bg-white px-4 py-2 shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="bg-white p-4 shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
-        <header>
-          <div className="relative w-full py-2">
-            <h1 className="flex items-center justify-center italic">
-              Who is in Odd and Ends?
-            </h1>
-            <HomeIcon className="absolute right-4 top-2" />
+        <header className="relative">
+          <div className="border p-2">
+            Who is in Odd and Ends?
+            <HomeIcon className="border" />
           </div>
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-1 h-full w-full border">
@@ -63,20 +73,21 @@ export default function ShareToInstagram() {
               <p className="text-center text-[0.625rem]">
                 Authorized odd and end festival builder
               </p>
-              <div className="flex flex-col">
-                <div className="mb-2 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
-                  <h1>Name</h1>
-                  <p>Value of Name</p>
+              <div className="">
+                <div className="flex justify-between [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
+                  <h1 className="">Name</h1>
+                  <p className="">Value of Name</p>
                 </div>
-                <div className="mb-2 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
+                <hr className="mb-0.5" />
+                <div className="mb-1 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
                   <h1>Birth</h1>
                   <p>Value of Birth</p>
                 </div>
-                <div className="mb-2 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
+                <div className="mb-1 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
                   <h1>Hobby</h1>
                   <p>Value of Hobby</p>
                 </div>
-                <div className="mb-2 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
+                <div className="mb-1 flex justify-between border-b [&>h1]:text-[0.625rem] [&>p]:text-[0.625rem]">
                   <h1>Spirit Animal</h1>
                   <p>Value of Spirit Animal</p>
                 </div>
@@ -148,7 +159,7 @@ export default function ShareToInstagram() {
       <ImageCanvas />
       <BackGround />
       <BackButton />
-      <div className="flex flex-col gap-6">
+      <div className="">
         <div className="mt-6">
           <p className="text-center">Here's your ID card</p>
           <p className="text-center">Thanks to joining us</p>

@@ -132,7 +132,7 @@ export default function FormPage() {
       {/* name */}
       {!isSubmitted && !gotoResultPage && (
         <section className="grid gap-4 p-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
               <label htmlFor="name" className="mb-2 text-xs font-medium">
                 Name <span>ชื่อ</span>
@@ -246,7 +246,7 @@ export default function FormPage() {
             <div className="col-span-1"></div>
           </section>
 
-          <section className="grid grid-cols-3 gap-6 place-self-start">
+          <section className="grid grid-cols-3 gap-4 place-self-start">
             <label
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
