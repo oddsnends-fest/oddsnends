@@ -55,15 +55,8 @@ export default function ShareToInstagram() {
   });
 
   const [selectedFrame] = useState<number | null>(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-    const selectedFrameParsed: string | null =
-      window.localStorage.getItem("frame");
-    if (selectedFrameParsed) {
-      return JSON.parse(selectedFrameParsed);
-    }
-    return null;
+    const selectedFrameParsed: string | null = localStorage.getItem("frame");
+    return selectedFrameParsed ? JSON.parse(selectedFrameParsed) : null;
   });
 
   const frameImagePath =
