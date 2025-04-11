@@ -34,7 +34,7 @@ export default function ShareToInstagram() {
       }
       try {
         const item: string | null = window.localStorage.getItem(key);
-        return item ? JSON.parse(item) : initialValue;
+        return item ? (JSON.parse(item) as T) : initialValue;
       } catch (error) {
         console.error(error);
         return initialValue;
