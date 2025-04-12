@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
+import { useLiff } from "@/providers/liff-provider";
 
 export default function HomePage() {
+  const { liff, liffError, idToken, userProfile } = useLiff();
+
   return (
     <>  
         {/* Background */}
