@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
 
         // Check if the LINE_LOGIN_CHANNEL_ID is set
         if (!env.LINE_LOGIN_CHANNEL_ID) {
-            return NextResponse.json({ message: "Unauthorized - LINE_LOGIN_CHANNEL_ID is not set in the environment variables." }, { status: 401 });
+            return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
         }
 
         // Verify the ID token with LINE Login API
