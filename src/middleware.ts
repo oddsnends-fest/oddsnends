@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LineApiError, VerifiedToken } from './types/apiModel';
+import { env } from "@/env";
 
 export async function middleware(request: NextRequest) {
 
@@ -14,7 +15,7 @@ export async function middleware(request: NextRequest) {
     try {
 
         // Check if the LINE_LOGIN_CHANNEL_ID is set
-        if (!process.env.LINE_LOGIN_CHANNEL_ID) {
+        if (!env.LINE_LOGIN_CHANNEL_ID) {
             return NextResponse.json({ message: "Unauthorized - LINE_LOGIN_CHANNEL_ID is not set in the environment variables." }, { status: 401 });
         }
 
@@ -26,7 +27,7 @@ export async function middleware(request: NextRequest) {
             },
             body: new URLSearchParams({
                 id_token: idtoken,
-                client_id: process.env.LINE_LOGIN_CHANNEL_ID,
+                client_id: env.LINE_LOGIN_CHANNEL_ID,
             }),
         });
         
