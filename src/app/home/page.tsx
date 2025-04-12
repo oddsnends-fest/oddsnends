@@ -4,12 +4,6 @@ import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
 import { useLiff } from "@/providers/liff-provider";
 
-interface UserProfile {
-  displayName: string;
-  pictureUrl?: string;
-  userId: string;
-}
-
 export default function HomePage() {
   const { liff, liffError, idToken, userProfile } = useLiff();
 
