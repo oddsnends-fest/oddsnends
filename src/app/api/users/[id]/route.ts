@@ -6,11 +6,9 @@ interface Params {
     id: string;
 }
 
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Params }) {
     try {
-      const params = context.params; // Get user id from dynamic route
-      const { id } = await params;
-      const userId = id;
+        const userId = params.id; // Get user ID from the dynamic route
 
         if (!userId) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
