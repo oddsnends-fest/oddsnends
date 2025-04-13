@@ -12,7 +12,8 @@ export default {
                     ...fontFamily.sans
                 ],
 			cooper: ['Cooper Std', ...fontFamily.sans],
-			poppins: ['Poppins', ...fontFamily.sans]
+			poppins: ['Poppins', ...fontFamily.sans],
+			schoolbell: ['Schoolbell', ...fontFamily.sans]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

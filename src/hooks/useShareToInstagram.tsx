@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CardRef } from "@/types/cardRef";
+import type { CardRef } from "@/types/cardRef";
 import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 

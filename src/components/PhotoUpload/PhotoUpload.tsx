@@ -5,13 +5,17 @@ import Image from "next/image";
 import Modal from "../Modal/Modal";
 import ImageCropper from "./ImageCropper/ImageCropper";
 
-function PhotoUpload() {
+interface PhotoUploadProps {
+    setCroppedImage: (props: string) => void;
+}
+
+function PhotoUpload({ setCroppedImage } : PhotoUploadProps) {
     const photoInputRef = useRef<HTMLInputElement>(null);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [confirm, setConfirm] = useState(false);
     // cropped image base64 result from ImageCropper (can be used to process further)
-    const [croppedImage, setCroppedImage] = useState<string | null>(null);
+    // const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
     // handle clicking the hidden input button
     const handleClickUpload = () => {
@@ -149,17 +153,6 @@ function PhotoUpload() {
                 ref={photoInputRef}
                 onChange={handleFileChange}
             />
-            {/* For testing cropped results */}
-            {/* {croppedImage && (
-                <>
-                    <Image
-                        src={croppedImage}
-                        alt="Cropped Image"
-                        width={1440}
-                        height={1440}
-                    />
-                </>
-            )} */}
         </>
     );
 }
