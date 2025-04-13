@@ -8,7 +8,6 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import Header from "@/components/Header/Header";
-import SponsorSection from "@/components/SponsorSection/SponsorSection";
 import { env } from "@/env";
 
 export const metadata: Metadata = {
