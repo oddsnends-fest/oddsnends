@@ -10,13 +10,22 @@ import "swiper/css/pagination"
 
 // src for event's image
 const imgSrc = [
-    {src: "/images/events/Thumbnail_DIYCookie.png", link: "https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform"},
-    {src: "/images/events/Thumbnail_Web.png", link: ""},
-    {src: "/images/events/Thumbnail_Launch.png", link: ""},
-    {src: "/images/events/Thumbnail_RoadTo.png", link: ""},
+    {
+      src: "/images/events/Thumbnail_Festival.png",
+      link: "",
+    },
+    {
+      src: "/images/events/Thumbnail_Workshop.png",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSdVmKSrSb4eHuxhudDcDosVWejYXvboW3Perl6z3a0zD-HPDA/viewform",
+    },
+    { src: "/images/events/Thumbnail_Web.png", link: "" },
+    {
+      src: "/images/events/Thumbnail_DIYCookie.png",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLScpRDeY39gJaVQ1WHkfvKt-1vo8xnPYnuBazcNZsO7pV799EA/viewform",
+    },
     // {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
     // {src: "/", link: "https://www.tiktok.com/@oddsnends.fest"},
-]
+  ];
 
 const autoPlayDelay = 3000; // in ms
 const autoPlaySwipeSpeed = 500 // in ms
