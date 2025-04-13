@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
 
 export default function HomePage() {
   return (
@@ -44,8 +45,8 @@ export default function HomePage() {
                 </button>
             </div>
         </main>
-
-        <div className="absolute bottom-0 h-96 w-full bg-black -z-20" />
+        <SponsorSection/>
+        {/* <div className="absolute bottom-0 h-96 w-full bg-black -z-20" /> */}
     </>
   );
 }
