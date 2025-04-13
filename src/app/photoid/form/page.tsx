@@ -15,6 +15,7 @@ import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import SliderBox from "@/components/SliderBox/SliderBox";
+import Image from "next/image";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -22,11 +23,12 @@ export default function FormPage() {
   const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
   const [openCalendar, setOpenCalendar] = useState(false);
+  const [croppedImage, setCroppedImage] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //prevent null submitting
-    if (!name || !hobby || !date || !spiritAnimal) {
+    if (!name || !hobby || !date || !spiritAnimal || !croppedImage) {
       console.log("Please fill in all fields.");
       return;
     }
@@ -35,6 +37,7 @@ export default function FormPage() {
       hobby,
       date,
       spiritAnimal,
+      croppedImage,
     };
     //submit data
     console.log("Form Data Submitted:", formData);
@@ -148,7 +151,26 @@ export default function FormPage() {
           </div>
         </div>
         <Signature />
-        <PhotoUpload />
+
+        {/* Photo upload */}
+        <div
+          className="flex justify-center items-center"
+        >
+          {!croppedImage ? (
+            <PhotoUpload
+              setCroppedImage={setCroppedImage}
+            />
+          ) : (
+            <Image
+              src={croppedImage}
+              alt="Cropped Photo"
+              width={393}
+              height={852}
+              className="w-[40%] h-auto"
+            />
+          )}
+        </div>
+
         {/* send button */}
         <button
           type="submit"
