@@ -9,14 +9,12 @@ import BackButton from "@/components/BackButton/BackButton";
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 type userInfoType = {
-  image: string;
   name: string;
-  birth: Date;
+  date: Date;
   hobby: string;
-  animal: string;
-  dateOfIssue: Date;
-  sign: string;
-  frame: number;
+  spiritAnimal: string;
+  croppedImage: string;
+  base64ImageUrl: string;
 }
 
 export default function ShareToInstagram() {
@@ -24,14 +22,12 @@ export default function ShareToInstagram() {
 
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [userInfo, setUserInfo] = useState<userInfoType>({
-    image: "/",
     name: "Black Cat",
-    birth: new Date(),
+    date: new Date(),
     hobby: "Listening To Music",
-    animal: "The Enigmatic Wanderer",
-    dateOfIssue: new Date(),
-    sign: "/images/sign-mock.png",
-    frame: 1,
+    spiritAnimal: "The Enigmatic Wanderer",
+    croppedImage: "/",
+    base64ImageUrl: "/images/sign-mock.png",
   });
 
   // To Fetch User PhotoId Info
@@ -49,8 +45,10 @@ export default function ShareToInstagram() {
     }
   }, []);
 
-  const frameImagePath = (userInfo.frame == 1) ? "/images/frame/pink.png" : "/images/frame/blue.png";
-  const textColor = (userInfo.frame == 1) ? 'text-[#553b82]' : "text-[#181748]";
+  const frameSelected = 1; // How to get that??
+
+  const frameImagePath = (frameSelected == 1) ? "/images/frame/pink.png" : "/images/frame/blue.png";
+  const textColor = (frameSelected == 1) ? 'text-[#553b82]' : "text-[#181748]";
 
   function CardComponent() {
     // MOCK
@@ -60,6 +58,7 @@ export default function ShareToInstagram() {
       const year = date.getFullYear();
       return `${day}/${month}/${year}`;
     }
+
     return (
       <div
         ref={cardRef}
@@ -70,7 +69,7 @@ export default function ShareToInstagram() {
           className="relative w-full bg-cover bg-center rounded-lg"
         >
           <Image 
-            src={"/"}
+            src={userInfo.croppedImage}
             alt="userImg"
             width={90}
             height={112}
@@ -78,22 +77,22 @@ export default function ShareToInstagram() {
           />
           <div className="absolute top-[60px] right-[14px] flex flex-col text-[0.6rem] leading-[1.07rem] text-right">
             <div>{userInfo.name}</div>
-            <div>{formatDate(userInfo.birth)}</div>
+            <div>{formatDate(userInfo.date)}</div>
             <div>{userInfo.hobby}</div>
-            <div>{userInfo.animal}</div>
+            <div>{userInfo.spiritAnimal}</div>
           </div>
           <div className="absolute top-[135px] left-[145px] flex flex-col text-[0.65rem] text-right">
-            <div>{formatDate(userInfo.dateOfIssue)}</div>
+            <div>{formatDate(new Date())}</div>
           </div>
 
-          <div className="absolute top-[135px] left-[210px] w-28">
+          <div className="absolute top-[135px] left-[211px] w-28">
             <Image 
-                src={userInfo.sign}
+                src={userInfo.base64ImageUrl}
                 alt="sign"
                 width={40}
                 height={50}
                 className="mx-auto"
-              />
+            />
           </div>
         </div>
       </div>
