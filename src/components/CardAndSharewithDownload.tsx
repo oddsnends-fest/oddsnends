@@ -200,8 +200,9 @@ export default function ShareToInstagram() {
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("info");
-              setSelectedFrame(null);
-              setUserInfo(null);
+              // setSelectedFrame(null);
+              // setUserInfo(null);
+
               redirect("/photoid/frame");
             }}
             style={{
