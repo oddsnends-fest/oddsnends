@@ -6,7 +6,7 @@ interface Params {
     id: string;
 }
 
-export async function GET(req: NextRequest, { params }: { params: Params }) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
     try {
         const userId = params.id; // Get user ID from the dynamic route
 
