@@ -34,13 +34,13 @@ export default function ShareToInstagram() {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await fetch('/api/users/1'); // Replace with the actual user ID
-        const data = await response.json();
-        setUserInfo(data); // Replace the mock data with the fetched data
-      }
+        const response = await fetch('/api/users/1');
+        const rawData = await response.json();
+        const data = rawData as userInfoType; // Explicitly cast the data
+        setUserInfo(data);
+      };
       fetchData();
-
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
   }, []);
