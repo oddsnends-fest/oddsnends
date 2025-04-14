@@ -6,16 +6,19 @@ interface Params {
     id: string;
 }
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
-        const userId = params.id; // Get user ID from the dynamic route
+        const { id } = await params; // Get user ID from the dynamic route
 
-        if (!userId) {
+        if (!id) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
 
         const user = await db.user.findUnique({
-            where: { user_id: userId },
+            where: { user_id: id },
             select: {
                 full_name: true,
                 hobby: true,
