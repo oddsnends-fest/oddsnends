@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
         
         if (!response.ok) {
             const errorData = (await response.json()) as LineApiError;
-            console.log("Error verifying token:", errorData);
+             // console.log("Error verifying token:", errorData);
             return NextResponse.json({ message: "Unauthorized", error: errorData }, { status: 401 });
         }
 
@@ -50,7 +50,7 @@ export async function middleware(request: NextRequest) {
         return res;
     }
     catch (error) {
-        console.log("Server Error:", error);
+         // console.log("Server Error:", error);
         return NextResponse.json({ message: "Server Internal Error" }, { status: 500 });
     }
 }
