@@ -157,11 +157,12 @@ function PhotoUpload({
         <div className="absolute inset-0 top-0 z-20 flex flex-col items-center justify-center">
           <BackGround />
           <Image
-            className="absolute"
+            className="absolute -z-10 h-full w-full"
             src="/photoid/starlogo.png"
             alt="starlogo"
             width={200}
             height={200}
+          
           />
           <div className="absolute top-20 flex w-full flex-col justify-center">
             <h1 className="title-photoid">Your Signature</h1>
