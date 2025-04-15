@@ -47,7 +47,7 @@ export default function FormPage() {
 
   const handleSubmit = async () => {
     //prevent null submitting
-    if (!name || !hobby || !date || !spiritAnimal) {
+    if (!name || !hobby || !date || !spiritAnimal || !base64ImageUrl || !croppedImage) {
       alert("Please fill in all fields.");
       return;
     }
@@ -134,7 +134,7 @@ export default function FormPage() {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label htmlFor="name" className="mb-2 text-xs font-medium">
-                Name <span>ชื่อ</span>
+                Name <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ชื่อ</span>
               </label>
               <input
                 id="name"
@@ -148,7 +148,7 @@ export default function FormPage() {
             {/* hobby */}
             <div>
               <label htmlFor="hobby" className="mb-2 text-xs font-medium">
-                Hobby <span>งานอดิเรก</span>
+                Hobby <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">งานอดิเรก</span>
               </label>
               <select
                 id="hobby"
@@ -170,7 +170,7 @@ export default function FormPage() {
             {/* date of birth */}
             <div className="col-span-1">
               <label htmlFor="date" className="mb-2 text-xs font-medium">
-                Date of birth <span>ชื่อ</span>
+                Date of birth <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ว/ด/ป เกิด</span>
               </label>
               <div className="flex items-center gap-2">
                 <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
@@ -212,10 +212,10 @@ export default function FormPage() {
                 htmlFor="spirit-animal"
                 className="mb-2 text-xs font-medium"
               >
-                Spirit Animal <span>เลือกสัตว์ที่ต้องการ</span>
+                Spirit Animal <span className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">เลือกสัตว์ที่ต้องการ</span>
               </label>
 
-              <ul className="flex gap-4 overflow-auto">
+              <ul className="flex gap-4 no-scrollbar overflow-auto">
                 {ANIMALS.map(({ value, label }) => (
                   <li
                     onClick={() => {
@@ -223,7 +223,7 @@ export default function FormPage() {
                     }}
                     key={value}
                     value={value}
-                    className="flex items-center justify-center bg-white text-black"
+                    className={`flex px-2 cursor-pointer items-center justify-center  ${spiritAnimal === value ? "bg-black text-white":"bg-white text-black"}`}
                   >
                     {label}
                   </li>
@@ -236,7 +236,7 @@ export default function FormPage() {
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
             >
-              Your signature<p>ลายเซ็น</p>
+              Your signature<p className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ลายเซ็น</p>
             </label>
             <Signature
               base64ImageUrl={base64ImageUrl}
@@ -250,7 +250,7 @@ export default function FormPage() {
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
             >
-              Your Photo ID<p>รูปถ่าย</p>
+              Your Photo ID<p className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">รูปถ่าย</p>
             </label>
             <PhotoUpload
               croppedImage={croppedImage}
@@ -260,10 +260,8 @@ export default function FormPage() {
           </section>
           <div className="relative mt-6 flex items-center justify-center">
             <button
-              style={{
-                background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
-              }}
-              className="absolute w-[16rem] rounded-full py-2 text-white"
+             
+              className="absolute bg-purple-gradient w-[16rem] rounded-full py-2 text-white"
               onClick={handleSubmit}
             >
               Submit

@@ -3,11 +3,8 @@ import React from "react";
 const BackGround = () => {
   return (
     <div
-      className="absolute top-0 -z-40 h-full w-full bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "linear-gradient(180deg, #EBD5EB 20.67%, #EDCAAA 72.12%, #F8D57E 100%)",
-      }}
+      className="absolute bg-gradient-to-b from-[#EBD5EB] from-20.67% via-[#EDCAAA] via-72.12% to-[#F8D57E] top-0 -z-40 h-full w-full bg-cover bg-center"
+      
     ></div>
   );
 };

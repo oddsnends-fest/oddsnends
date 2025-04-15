@@ -111,16 +111,23 @@
   font-style: normal;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  display: inline-block
-  /* adjust style for download and share */
-}
 
 .title-photoid {
-  @apply text-center text-4xl font-extrabold leading-[1.25] text-[#3D245B];
+  @apply text-center font-cooper text-4xl font-extrabold leading-[1.25] text-[#3D245B];
 }
 
 .subtitle-photoid {
-  @apply text-center align-middle font-sans text-base font-normal leading-none tracking-normal text-[#3D245B];
+  @apply text-center font-poppins align-middle  text-[1.25rem] font-normal leading-none tracking-normal text-[#3D245B];
 }
+
+@layer utilities {
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+     /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+    }
+  }

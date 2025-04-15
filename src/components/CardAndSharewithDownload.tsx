@@ -106,6 +106,8 @@ export default function ShareToInstagram() {
       const year = date.getFullYear();
       return `${day}/${month}/${year}`;
     };
+
+    
     return (
       <div
         ref={cardRef}
@@ -113,7 +115,7 @@ export default function ShareToInstagram() {
       >
         <div
           style={{ backgroundImage: `url('${frameImagePath}')` }}
-          className="relative w-full rounded-lg bg-cover bg-center"
+          className={`relative w-full rounded-lg bg-cover bg-center `}
         >
           <Image
             src={userInfo!.croppedImage}
@@ -205,7 +207,7 @@ export default function ShareToInstagram() {
         </div>
         <div className="flex justify-center">
           <div
-            className="mt-4 w-[16rem] cursor-pointer rounded-full py-2 text-center text-white"
+            className="mt-4 bg-purple-gradient w-[16rem] cursor-pointer rounded-full py-2 text-center text-white"
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("info");
@@ -214,9 +216,7 @@ export default function ShareToInstagram() {
 
               redirect("/photoid/frame");
             }}
-            style={{
-              background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
-            }}
+            
           >
             Try another one
           </div>

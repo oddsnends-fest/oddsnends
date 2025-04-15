@@ -44,22 +44,3 @@ export async function PATCH(request: Request): Promise<NextResponse> {
     );
   }
 }
-
-export async function GET(): Promise<NextResponse> {
-  try {
-    // Fetch all users from the database
-    const users = await db.user.findMany();
-
-    // Return the list of users
-    return NextResponse.json({
-      message: "Users retrieved successfully",
-      data: users,
-    });
-  } catch (error) {
-    console.error("Error retrieving users:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
-  }
-}

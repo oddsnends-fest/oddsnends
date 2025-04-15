@@ -10,8 +10,8 @@ export default function HomePage() {
   return (
     <>  
         {/* Background */}
-        <div className="absolute top-0 h-full w-full bg-center bg-cover -z-10"
-            style={{ backgroundImage: "url('images/background/home.png')"}}
+        <div className="absolute top-0 h-full w-full bg-[url('/images/background/home.png')] bg-center bg-cover -z-10"
+            
         />
         
         {/* content */}

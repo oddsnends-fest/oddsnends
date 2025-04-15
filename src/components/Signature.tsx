@@ -177,10 +177,8 @@ export default function Signature({
             {/* Save */}
             <button
               onClick={saveSignature}
-              style={{
-                background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
-              }}
-              className="rounded-full px-20 py-2 text-white"
+              
+              className="rounded-full px-20 py-2 text-white bg-purple-gradient"
             >
               Next
             </button>

@@ -70,10 +70,8 @@ export default function FrameSelectionPage() {
         </section>
         {selectedFrame && (
           <button
-            style={{
-              background: "linear-gradient(360deg, #553B82 0%, #B56A95 150%)",
-            }}
-            className="rounded-full px-20 py-2 text-white"
+            
+            className="rounded-full bg-purple-gradient px-20 py-2 text-white"
             onClick={() => handleClickCheckBox(selectedFrame)}
           >
             Let &apos; s Go
