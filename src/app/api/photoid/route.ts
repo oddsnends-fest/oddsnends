@@ -4,11 +4,11 @@ import { UserPatch } from "@/server/validate/user.validate";
 
 export async function PATCH(request: Request): Promise<NextResponse> {
   try {
-    // console.log(request.json(), "request json");
+    // // // console.log(request.json(), "request json");
 
     const data = UserPatch.safeParse(await request.json()); // Use Zod validation
 
-    console.log(data);
+    // // console.log(data);
 
     if (!data.success) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
@@ -16,12 +16,12 @@ export async function PATCH(request: Request): Promise<NextResponse> {
 
     const { user_id, ...updateFields } = data.data; //Destructuring
 
-    console.log(user_id);
-    console.log(updateFields);
+    // // console.log(user_id);
+    // // console.log(updateFields);
 
     const existingUser = await db.user.findUnique({ where: { user_id } }); // can mock user
 
-    console.log(existingUser, "existinguser");
+    // // console.log(existingUser, "existinguser");
     if (!existingUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

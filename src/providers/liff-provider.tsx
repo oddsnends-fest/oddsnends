@@ -27,12 +27,12 @@ export default function Layout({ children }: { children: ReactNode }) {
   // Execute liff.init() when the app is initialized
   useEffect(() => {
     // to avoid `window is not defined` error
-    console.log("LIFF init...");
+    // console.log("LIFF init...");
     liff.use(new LiffMockPlugin());
     liff
       .init({ liffId: env.NEXT_PUBLIC_LIFF_ID, mock: true })
       .then(() => {
-        console.log("LIFF init succeeded.");
+        // console.log("LIFF init succeeded.");
         if (!liff.isInClient()) liff.login();
         liff.$mock.set((p) => ({
           ...p,
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         setLiffObject(liff);
       })
       .catch((error: Error) => {
-        console.log("LIFF init failed.", error);
+        // console.log("LIFF init failed.", error);
         setLiffError(error.toString());
       });
   }, []);

@@ -121,7 +121,7 @@ function PhotoUpload({
 
     setBlob(newBlob);
 
-    console.log("upload already");
+    // console.log("upload already");
   };
 
   return (

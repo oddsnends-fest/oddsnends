@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const SponsorSection = () => {
   const pathName = usePathname();
-  console.log(pathName, "pathName");
+  // console.log(pathName, "pathName");
   const isPhotoIdRoute = pathName.split("/").includes("photoid");
 
   const sponsors = [

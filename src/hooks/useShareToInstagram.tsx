@@ -13,7 +13,7 @@ export default function useShareToInstagram() {
       try {
         const link = document.createElement("a");
         const dataURL = await convertImage(cardRef.current);
-        // console.log(dataURL, "canvas.toDataURL")
+        // // console.log(dataURL, "canvas.toDataURL")
         link.href = dataURL;
         link.download = "image-mock.jpeg";
 
@@ -45,7 +45,7 @@ export default function useShareToInstagram() {
   const handleRouteToSharePage = async (cardRef: {
     current: HTMLDivElement | null;
   }) => {
-    console.log("share route");
+    // console.log("share route");
     if (!cardRef.current) {
       return;
     }
@@ -58,7 +58,7 @@ export default function useShareToInstagram() {
     if (dataUrl) {
       try {
         const blob = await (await fetch(dataUrl)).blob();
-        console.log(blob, "blob response");
+        // console.log(blob, "blob response");
         if (!blob) {
           return;
         }

@@ -9,7 +9,7 @@ import BackGround from "@/components/BackgroundPhotoId";
 import Image from "next/image";
 //import { opacity } from "html2canvas/dist/types/css/property-descriptors/opacity";
 
-function Frame() {
+export default function FrameSelectionPage() {
   const router = useRouter();
   // Dummy data
   const frameSrc = ["/photoid/PurpleFrame(1).png", "/photoid/BlueFrame(1).png"];
@@ -38,7 +38,7 @@ function Frame() {
         {/* Grid containing frame options */}
         <section className="grid w-[80%] grid-cols-1 gap-4">
           {frameSrc.map((src, index) => {
-            console.log(selectedFrame, "selectedFrame");
+            // console.logloglogloglog(selectedFrame, "selectedFrame");
             return (
               <div key={src}>
                 <input
@@ -83,5 +83,3 @@ function Frame() {
     </>
   );
 }
-
-export default Frame;

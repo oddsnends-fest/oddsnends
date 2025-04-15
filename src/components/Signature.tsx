@@ -36,7 +36,7 @@ export default function Signature({
   //   return new Blob([u8arr], { type: mime });
   // }
 
-  console.log(sigCanvas.current, "sigCanvas response");
+  // console.log(sigCanvas.current, "sigCanvas response");
 
   // Function to clear only the signature in the modal
   const resetSignatureInModal = () => {
@@ -55,7 +55,7 @@ export default function Signature({
 
     setBase64ImageUrl(base64ImageUrl);
 
-    console.log(base64ImageUrl, "dataUrl");
+    // console.log(base64ImageUrl, "dataUrl");
 
     closeModal();
   };
@@ -81,7 +81,7 @@ export default function Signature({
     setIsModalOpen(false);
   };
 
-  console.log(base64ImageUrl, "base64ImageUrl");
+  // console.log(base64ImageUrl, "base64ImageUrl");
 
   return (
     <div className="col-span-1">

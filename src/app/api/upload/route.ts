@@ -24,7 +24,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
         // Get notified when the file upload is complete
-        console.log("Blob upload completed", blob, tokenPayload);
+        // // console.log("Blob upload completed", blob, tokenPayload);
       },
     });
 

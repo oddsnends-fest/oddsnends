@@ -42,7 +42,7 @@ export default function FormPage() {
 
   const router = useRouter();
 
-  console.log(name, hobby, date, spiritAnimal, base64ImageUrl, "information");
+  // console.logle.log(name, hobby, date, spiritAnimal, base64ImageUrl, "information");
   // when submit submit  = true change isSubmitted to true and isSubmitted set timeout in 3 sec and
 
   const handleSubmit = async () => {
@@ -82,7 +82,7 @@ export default function FormPage() {
     // };
     window.localStorage.setItem("info", JSON.stringify(formData));
     //submit data
-    console.log("Form Data Submitted:", formData);
+    // console.logle.log("Form Data Submitted:", formData);
     // localStorage should set here
 
     setIsSubmitted(true);
