@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function FrameSelectionPage() {
   const router = useRouter();
   // Dummy data
-  const frameSrc = ["/photoid/PurpleFrame(1).png", "/photoid/BlueFrame(1).png"];
+  const frameSrc = ["/images/frame/pink.png", "/images/frame/blue.png"];
   // Track user's selection
   const [selectedFrame, setSelectedFrame] = useState<number | null>(null);
   // const [checked, setChecked] = useState(false);
@@ -61,7 +61,7 @@ export default function FrameSelectionPage() {
                     height={500}
                     src={src}
                     alt="frame"
-                    className="h-full w-full"
+                    className="h-full w-full rounded-lg"
                   />
                 </label>
               </div>

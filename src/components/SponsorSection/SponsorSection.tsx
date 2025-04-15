@@ -13,22 +13,22 @@ const SponsorSection = () => {
         ? "/images/sponsors/SlowCombo_purple.png"
         : "/images/sponsors/SlowCombo_white.png",
       link: "https://www.instagram.com/slowcombo/?hl=en",
-      size: 80,
+      size: 90,
     },
     {
       src: isPhotoIdRoute
-        ? "/images/sponsors/IOIC_purple.png"
+        ? "/images/sponsors/Binance_purple.png"
         : "/images/sponsors/IOIC_white.png",
       link: "https://www.instagram.com/ioic_chula/?hl=en",
-      size: 95,
+      size: isPhotoIdRoute ? 150: 95,
     },
 
     {
       src: isPhotoIdRoute
-        ? "/images/sponsors/Binance_purple.png"
+        ? "/images/sponsors/IOIC_purple.png"
         : "/images/sponsors/Binance_white.png",
       link: "https://www.instagram.com/binance/?hl=en",
-      size: 120, // provide link please
+      size: isPhotoIdRoute ? 80: 120, // provide link please
     },
 
     //   { src: "/", link: "/"},

@@ -113,11 +113,11 @@
 
 
 .title-photoid {
-  @apply text-center font-cooper text-4xl font-extrabold leading-[1.25] text-[#3D245B];
+  @apply text-center font-cooper mt-3 text-[2.25rem] font-extrabold leading-[1.25] text-[#3D245B];
 }
 
 .subtitle-photoid {
-  @apply text-center font-poppins align-middle  text-[1.25rem] font-normal leading-none tracking-normal text-[#3D245B];
+  @apply text-center font-poppins align-middle  text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
 }
 
 @layer utilities {
