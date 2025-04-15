@@ -104,6 +104,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Schoolbell";
+  src: url("/fonts/Schoolbell-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   display: inline-block

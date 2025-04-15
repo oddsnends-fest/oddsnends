@@ -23,6 +23,15 @@ import { redirect } from "next/navigation";
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+type userInfoType = {
+  name: string;
+  date: Date;
+  hobby: string;
+  spiritAnimal: string;
+  croppedImage: string;
+  base64ImageUrl: string;
+}
+
 export default function ShareToInstagram() {
   function useLocalStorage<T>(
     key: string,
@@ -55,18 +64,18 @@ export default function ShareToInstagram() {
     return [storedValue, setValue];
   }
   // const [step, addStep] = useState(1);
-  const [userAgentData, setUserAgentData] = useState<string>();
-  console.log(userAgentData, "userAgentData");
+  const [, setUserAgentData] = useState<string>();
+  // console.log(userAgentData, "userAgentData");
 
   const cardRef = useRef<HTMLDivElement | null>(null);
-  console.log(cardRef.current, "cardref");
+  // console.log(cardRef.current, "cardref");
 
   useEffect(() => {
     const parser = new UAParser(navigator.userAgent);
     setUserAgentData(parser.getDevice().model);
   }, []);
 
-  const [userInfo, setUserInfo] = useLocalStorage<{
+  const [userInfo] = useLocalStorage<{
     name: string;
     date: string;
     hobby: string;
@@ -75,7 +84,7 @@ export default function ShareToInstagram() {
     base64ImageUrl: string;
   } | null>("info", null);
 
-  const [selectedFrame, setSelectedFrame] = useLocalStorage<number | null>(
+  const [selectedFrame] = useLocalStorage<number | null>(
     "frame",
     null,
   );
@@ -142,7 +151,7 @@ export default function ShareToInstagram() {
   }
 
   const { handleRouteToSharePage, handleDownloadFile } = useShareToInstagram();
-  console.log(cardRef, "cardRef");
+  // console.log(cardRef, "cardRef");
   return (
     <section className={``}>
       <ImageCanvas />
