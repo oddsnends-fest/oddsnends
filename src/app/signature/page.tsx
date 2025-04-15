@@ -1,3 +1,4 @@
+"use client"
 import Signature from "@/components/Signature";
 import { useState } from "react";
 export default function SignaturePage() {
@@ -8,3 +9,5 @@ export default function SignaturePage() {
     </div>
   );
 }
+
+// signature canvas is in /photoid/form

@@ -116,7 +116,7 @@ export default function Signature({
       {isModalOpen && (
         <div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center"
-            // Clicking outside closes the modal
+            // Clicking outside closes the modal ==> onClick = {closeModal}
         >
           <div className="absolute top-20 mt-5">
             <h1 className="title-photoid">Your Signature</h1>
