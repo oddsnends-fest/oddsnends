@@ -4,15 +4,6 @@ import { type CardRef } from "@/types/cardRef";
 // import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 
-type HandleRouteToSharePage = (
-  cardRef: CardRef,
-  addStep: React.Dispatch<React.SetStateAction<number>>,
-) => Promise<void>;
-
-type HandleDownloadFile = (cardRef: CardRef) => Promise<void>;
-
-type HandleShare = () => Promise<void>;
-
 export default function useShareToInstagram() {
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
 
@@ -36,7 +27,7 @@ export default function useShareToInstagram() {
   }
 
   // Helper function to convert the card to an image
-  const convertImage = async (element: HTMLElement): Promise<string> => {
+  const convertImage = async (element: HTMLElement) => {
     let dataUrl = "";
     const minDataLength = 700 * 1024; // 700KB
     const maxAttempts = 20;
