@@ -34,7 +34,7 @@ export default function ShareToInstagram() {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await fetch('/api/users/1');
+        const response = await fetch('/api/users/1'); // Replace "1" with User's ID
         const rawData = await response.json();
         const data = rawData as userInfoType; // Explicitly cast the data
         setUserInfo(data);
