@@ -4,26 +4,18 @@ import type { CardRef } from "@/types/cardRef";
 import html2canvas from "html2canvas";
 import { toJpeg } from "html-to-image";
 
-type HandleRouteToSharePage = (
-  cardRef: CardRef,
-  addStep: React.Dispatch<React.SetStateAction<number>>,
-) => Promise<void>;
-
-type HandleDownloadFile = (cardRef: CardRef) => Promise<void>;
-
-type HandleShare = () => Promise<void>;
-
 export default function useShareToInstagram() {
   const [urlImage, setUrlImage] = useState<string>("");
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
 
   // Function to download the card as an image
-  const handleDownloadFile: HandleDownloadFile = async (cardRef) => {
+  async function handleDownloadFile(cardRef: CardRef) {
     if (cardRef.current) {
       try {
         const canvas = await html2canvas(cardRef.current);
         const link = document.createElement("a");
         const dataURL = canvas.toDataURL("image/jpg");
+        // console.log(dataURL, "canvas.toDataURL");
         link.href = dataURL;
         link.download = "image-mock.jpg";
         link.click();
@@ -33,10 +25,10 @@ export default function useShareToInstagram() {
     } else {
       console.warn("cardRef.current is null or undefined.");
     }
-  };
+  }
 
   // Helper function to convert the card to an image
-  const convertImage = async (element: HTMLElement): Promise<string> => {
+  const convertImage = async (element: HTMLElement) => {
     let dataUrl = "";
     const minDataLength = 150000;
     const maxAttempts = 20;
@@ -48,7 +40,9 @@ export default function useShareToInstagram() {
     return dataUrl;
   };
 
-  const handleShare: HandleShare = async () => {
+  // convert dataUrl from jpeg element
+
+  const handleShare = async () => {
     if (isSharing) return;
     setIsSharing(true);
 
@@ -75,11 +69,10 @@ export default function useShareToInstagram() {
       }
     }
   };
-
   // Function to convert the card to an image and update the URL
-  const handleRouteToSharePage: HandleRouteToSharePage = async (
-    cardRef,
-    addStep,
+  const handleRouteToSharePage = async (
+    cardRef: { current: HTMLDivElement | null },
+    addStep: React.Dispatch<React.SetStateAction<number>>,
   ) => {
     if (cardRef.current) {
       const dataUrl = await convertImage(cardRef.current);
@@ -88,10 +81,5 @@ export default function useShareToInstagram() {
     }
   };
 
-  return {
-    handleRouteToSharePage,
-    handleDownloadFile,
-    handleShare,
-    urlImage,
-  };
+  return { handleRouteToSharePage, handleDownloadFile, handleShare, urlImage };
 }
