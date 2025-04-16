@@ -11,6 +11,7 @@ import { upload } from "@vercel/blob/client";
 import BackGround from "../BackgroundPhotoId";
 import SponsorSection from "../SponsorSection/SponsorSection";
 import SocialMediaBar from "../SocialMediaBar/SocialMediaBar";
+import Header from "../Header/Header";
 function PhotoUpload({
   croppedImage,
   setCroppedImage,
@@ -129,12 +130,12 @@ function PhotoUpload({
       {/* Image + Text aligned horizontally */}
       {!croppedImage && (
         <button
-          className="relative flex w-full items-center justify-center bg-white py-4"
+          className="relative flex items-center justify-center rounded-lg border bg-white px-2 py-4"
           onClick={handleClickUpload}
         >
           <Image
-            className=""
-            src="/photoid/add_photo_alternate.svg"
+            className="flex items-center justify-center"
+            src="/photoid/add_photo_alternate-2.png"
             alt="Upload"
             width={40}
             height={40}
@@ -152,9 +153,22 @@ function PhotoUpload({
         </button>
       )}
 
+      {isModalOpen && (
+        <button
+          className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
+          onClick={closeModal}
+        >
+          ←
+        </button>
+      )}
+
       {/* Modal for Cropping Image */}
       {isModalOpen && (
         <div className="absolute inset-0 top-0 z-20 flex flex-col items-center justify-center">
+          <div className="absolute top-0">
+            <Header />
+          </div>
+
           <BackGround />
           <Image
             className="absolute -z-10 h-full w-full"
@@ -162,11 +176,10 @@ function PhotoUpload({
             alt="starlogo"
             width={200}
             height={200}
-          
           />
-          <div className="absolute top-20 flex w-full flex-col justify-center">
-            <h1 className="title-photoid">Your Signature</h1>
-            <p className="subtitle-photoid">วาดลายเซ็นของคุณ</p>
+          <div className="-mt-20 flex w-full flex-col justify-center">
+            <h1 className="title-photoid">Your ID Photo</h1>
+            <p className="subtitle-photoid">ตกแต่งรูปถ่ายของคุณ</p>
           </div>
           {uploadedImage && (
             <div className="flex flex-col items-center justify-center gap-4 p-4 text-black">
@@ -191,15 +204,19 @@ function PhotoUpload({
               <div className="flex justify-center gap-4">
                 <button
                   onClick={handleClickConfirm}
-                  
-                  className="rounded-full bg-purple-gradient px-20 py-2 text-white"
+                  className="cursor-pointer rounded-full bg-purple-gradient px-20 py-2 text-white"
                 >
                   Next
                 </button>
               </div>
             </div>
           )}
-          <SponsorSection />
+
+          <div className="absolute bottom-14 -z-10">
+            <SponsorSection />
+          </div>
+          {/* COrrect */}
+
           <SocialMediaBar />
         </div>
       )}
@@ -232,7 +249,7 @@ function PhotoUpload({
             width={80}
             height={80}
             quality={1.0}
-            className="-z-20 h-[80px] w-[80px]"
+            className="-z-20 h-[100px] w-[100px] rounded-lg"
           />
         </div>
       )}

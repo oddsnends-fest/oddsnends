@@ -7,8 +7,8 @@ import Image from "next/image";
 import BackButton from "@/components/BackButton/BackButton";
 import BackGround from "./BackgroundPhotoId";
 import ImageCanvas from "./BackgroundPhotoId/ImageCanvas";
-import { UAParser } from "ua-parser-js";
-
+// import { UAParser } from "ua-parser-js";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { redirect } from "next/navigation";
 // type userInfoType = {
 //   image: string;
@@ -30,50 +30,20 @@ type userInfoType = {
   spiritAnimal: string;
   croppedImage: string;
   base64ImageUrl: string;
-}
+};
 
 export default function ShareToInstagram() {
-  function useLocalStorage<T>(
-    key: string,
-    initialValue: T,
-  ): [T, (value: T) => void] {
-    const [storedValue, setStoredValue] = useState<T>(() => {
-      if (typeof window === "undefined") {
-        return initialValue;
-      }
-      try {
-        const item: string | null = window.localStorage.getItem(key);
-        return item ? (JSON.parse(item) as T) : initialValue;
-      } catch (error) {
-        console.error(error);
-        return initialValue;
-      }
-    });
-
-    const setValue = (value: T) => {
-      try {
-        setStoredValue(value);
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(value));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    return [storedValue, setValue];
-  }
   // const [step, addStep] = useState(1);
-  const [, setUserAgentData] = useState<string>();
+  // const [, setUserAgentData] = useState<string>();
   // console.log(userAgentData, "userAgentData");
 
   const cardRef = useRef<HTMLDivElement | null>(null);
   // console.log(cardRef.current, "cardref");
 
-  useEffect(() => {
-    const parser = new UAParser(navigator.userAgent);
-    setUserAgentData(parser.getDevice().model);
-  }, []);
+  // useEffect(() => {
+  //   const parser = new UAParser(navigator.userAgent);
+  //   setUserAgentData(parser.getDevice().model);
+  // }, []);
 
   const [userInfo] = useLocalStorage<{
     name: string;
@@ -84,10 +54,7 @@ export default function ShareToInstagram() {
     base64ImageUrl: string;
   } | null>("info", null);
 
-  const [selectedFrame] = useLocalStorage<number | null>(
-    "frame",
-    null,
-  );
+  const [selectedFrame] = useLocalStorage<number | null>("frame", null);
 
   const frameImagePath =
     selectedFrame === 1 ? "/images/frame/pink.png" : "/images/frame/blue.png";
@@ -107,15 +74,14 @@ export default function ShareToInstagram() {
       return `${day}/${month}/${year}`;
     };
 
-    
     return (
       <div
         ref={cardRef}
-        className={`font-schoolbell flex h-[196px] w-[330px] max-w-screen-sm overflow-hidden rounded-xl shadow-2xl ${textColor}`}
+        className={`flex h-[196px] w-[330px] max-w-screen-sm overflow-hidden rounded-xl font-schoolbell shadow-2xl ${textColor}`}
       >
         <div
           style={{ backgroundImage: `url('${frameImagePath}')` }}
-          className={`relative w-full rounded-lg bg-cover bg-center `}
+          className={`relative w-full rounded-lg bg-cover bg-center`}
         >
           <Image
             src={userInfo!.croppedImage}
@@ -161,15 +127,19 @@ export default function ShareToInstagram() {
       <BackButton />
       <div className="">
         <div className="mt-6">
-          <p className="pb-2 text-center">Here &apos; s your ID card</p>
-          <p className="pb-2 text-center">Thanks to joining us</p>
+          <p className="text-center text-base font-light text-[#2C1E52]">
+            Here&apos;s your ID card!
+          </p>
+          <p className="text-center text-base font-light text-[#2C1E52]">
+            Thanks for enjoy with us!
+          </p>
         </div>
 
-        <div className="mt-2 flex items-center justify-center">
+        <div className="mt-6 flex items-center justify-center">
           {<CardComponent />}
         </div>
 
-        <div className="mt-4 flex justify-center gap-6">
+        <div className="mt-8 flex justify-center gap-6">
           <div>
             <button
               onClick={async () => {
@@ -185,7 +155,7 @@ export default function ShareToInstagram() {
                 className="h-6 w-6"
               />
             </button>
-            <p className="pt-2 text-center">Save</p>
+            <p className="pt-2 text-center font-light text-[#3D245B]">Save</p>
           </div>
           <div>
             <button
@@ -202,12 +172,15 @@ export default function ShareToInstagram() {
                 className="h-6 w-6"
               />
             </button>
-            <p className="pt-2 text-center">Share</p>
+            <p className="pt-2 text-center font-light text-[#3D245B]">Share</p>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="mt-10 flex flex-col items-center justify-center gap-2">
+          <h2 className="text-center font-light text-[#3D245B]">
+            Want more frame?
+          </h2>
           <div
-            className="mt-4 bg-purple-gradient w-[16rem] cursor-pointer rounded-full py-2 text-center text-white"
+            className="w-[16rem] cursor-pointer rounded-full bg-purple-gradient py-2 text-center text-[24px] text-white"
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("info");
@@ -216,9 +189,8 @@ export default function ShareToInstagram() {
 
               redirect("/photoid/frame");
             }}
-            
           >
-            Try another one
+            TRY ANOTHER ONE!
           </div>
         </div>
       </div>

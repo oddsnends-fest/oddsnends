@@ -5,7 +5,7 @@ import BackButton from "@/components/BackButton/BackButton";
 
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 import BackGround from "@/components/BackgroundPhotoId";
-
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
 import Image from "next/image";
 //import { opacity } from "html2canvas/dist/types/css/property-descriptors/opacity";
 
@@ -36,7 +36,7 @@ export default function FrameSelectionPage() {
         <h1 className="title-photoid">Select Frame</h1>
         <p className="subtitle-photoid mb-1">เลือกเฟรมรูปที่ต้องการ</p>
         {/* Grid containing frame options */}
-        <section className="grid w-[80%] grid-cols-1 gap-4">
+        <section className="grid w-[80%] grid-cols-1 gap-6">
           {frameSrc.map((src, index) => {
             // console.logloglogloglog(selectedFrame, "selectedFrame");
             return (
@@ -70,13 +70,15 @@ export default function FrameSelectionPage() {
         </section>
         {selectedFrame && (
           <button
-            
-            className="rounded-full bg-purple-gradient px-20 py-2 text-white"
+            className="mt-4 rounded-full bg-purple-gradient px-20 py-2 text-[1.25rem] text-white"
             onClick={() => handleClickCheckBox(selectedFrame)}
           >
             Let &apos; s Go
           </button>
         )}
+        <div className="absolute bottom-0">
+          <SponsorSection />
+        </div>
       </main>
     </>
   );

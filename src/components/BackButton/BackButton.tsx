@@ -17,7 +17,9 @@ function BackButton() {
       onClick={handleClick}
       className={
         isPhotoidRoute
-          ? "absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
+          ? pathName === "/photoid/form"
+            ? "hidden"
+            : "absolute left-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
           : "absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-transparent text-[1.5rem] text-white hover:bg-black hover:text-white"
       }
     >

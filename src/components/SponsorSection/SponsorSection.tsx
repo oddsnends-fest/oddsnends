@@ -13,22 +13,22 @@ const SponsorSection = () => {
         ? "/images/sponsors/SlowCombo_purple.png"
         : "/images/sponsors/SlowCombo_white.png",
       link: "https://www.instagram.com/slowcombo/?hl=en",
-      size: 90,
+      size: isPhotoIdRoute ? 80 : 95,
     },
     {
       src: isPhotoIdRoute
         ? "/images/sponsors/Binance_purple.png"
-        : "/images/sponsors/IOIC_white.png",
+        : "/images/sponsors/Binance_white.png",
       link: "https://www.instagram.com/ioic_chula/?hl=en",
-      size: isPhotoIdRoute ? 150: 95,
+      size: isPhotoIdRoute ? 140 : 130,
     },
 
     {
       src: isPhotoIdRoute
         ? "/images/sponsors/IOIC_purple.png"
-        : "/images/sponsors/Binance_white.png",
+        : "/images/sponsors/IOIC_white.png",
       link: "https://www.instagram.com/binance/?hl=en",
-      size: isPhotoIdRoute ? 80: 120, // provide link please
+      size: isPhotoIdRoute ? 70 : 85, // provide link please
     },
 
     //   { src: "/", link: "/"},
@@ -38,13 +38,7 @@ const SponsorSection = () => {
   ];
 
   return (
-    <section
-      className={
-        isPhotoIdRoute
-          ? "absolute bottom-2 left-1/2 z-0 mb-14 -translate-x-1/2 bg-transparent"
-          : "z-10 mb-14 bg-transparent"
-      }
-    >
+    <section className={"z-10 mb-14 bg-transparent"}>
       <ul className="flex items-center justify-center">
         {sponsors.map(({ src, link, size }, idx) => (
           <li key={idx}>

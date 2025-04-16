@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import SignatureCanvas from "react-signature-canvas";
 // import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 // import { upload } from "@vercel/blob/client";
@@ -8,6 +8,8 @@ import Image from "next/image";
 import BackGround from "./BackgroundPhotoId";
 import SponsorSection from "./SponsorSection/SponsorSection";
 import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
+import Header from "./Header/Header";
+import { redirect } from "next/navigation";
 export default function Signature({
   base64ImageUrl,
   setBase64ImageUrl,
@@ -16,28 +18,7 @@ export default function Signature({
   setBase64ImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
-  // const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const [blobUrl, setBlobUrl] = useState<string | null>(null);
-
-  // refactor this function for future use convert dataUrl to blob response
-  // function dataURLtoBlob(dataURL: string): Blob {
-  //   const arr = dataURL.split(",");
-  //   const mime = arr[0]?.match(/:(.*?);/)![1]; // Extract MIME type
-  //   const bstr = atob(arr[1]!); // Decode base64 string
-  //   let n = bstr.length;
-  //   const u8arr = new Uint8Array(n);
-
-  //   while (n--) {
-  //     u8arr[n] = bstr.charCodeAt(n);
-  //   }
-
-  //   return new Blob([u8arr], { type: mime });
-  // }
-
-  // console.log(sigCanvas.current, "sigCanvas response");
-
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // Function to clear only the signature in the modal
   const resetSignatureInModal = () => {
     sigCanvas.current?.clear();
@@ -60,20 +41,10 @@ export default function Signature({
     closeModal();
   };
 
-  // const handleUploadandCreateBlobSignature = async () => {
-  //   if (!base64ImageUrl) {
-  //     alert("Please sign your name first.");
-  //     return;
-  //   }
-  //   const url = await handleUploadSignature(base64ImageUrl);
-  //   if (url) {
-  //     setBlobUrl(url);
-  //   }
-  // };
-
   // Function to open modal
   const openModal = () => {
     setIsModalOpen(true);
+    localStorage.setItem("isModalOpenSignature", "true");
   };
 
   // Function to close modal
@@ -86,7 +57,14 @@ export default function Signature({
   return (
     <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
-
+      {isModalOpen && (
+        <button
+          className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
+          onClick={closeModal}
+        >
+          ←
+        </button>
+      )}
       {/* Signature Pad Container */}
       <div className="relative rounded-md border border-gray-300">
         {/* Clickable Signature Box */}
@@ -97,10 +75,10 @@ export default function Signature({
               height={30}
               src={base64ImageUrl}
               alt="Saved Signature"
-              className="h-[80px] w-[80px]"
+              className="h-[80px] w-full rounded-lg bg-white px-2 py-2"
             />
           ) : (
-            <div className="flex items-center justify-center bg-white py-4">
+            <div className="flex items-center justify-center rounded-lg bg-white py-4">
               <Image
                 width={40}
                 height={40}
@@ -116,28 +94,23 @@ export default function Signature({
       {isModalOpen && (
         <div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center"
-            // Clicking outside closes the modal ==> onClick = {closeModal}
+          // Clicking outside closes the modal ==> onClick = {closeModal}
         >
-          <div className="absolute top-20 mt-5">
+          <div className="absolute top-24 mt-10">
             <h1 className="title-photoid">Your Signature</h1>
             <p className="subtitle-photoid">วาดลายเซ็นของคุณ</p>
           </div>
-          <div className="absolute top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 top-0 -z-10">
             <Image
               src="/photoid/starlogo.png"
               alt="starlogo"
               width={200}
               height={200}
-              className="w-full h-full"
+              className="h-full w-full"
             />
           </div>
-          <div className="absolute top-0 mt-10">
-            <Image
-              src="/images/oddsnends-logo.png"
-              alt=""
-              width={50}
-              height={50}
-            />
+          <div className="absolute top-0">
+            <Header />
           </div>
 
           <BackGround></BackGround>
@@ -152,7 +125,7 @@ export default function Signature({
               ref={sigCanvas}
               penColor="black"
               canvasProps={{
-                width: 400,
+                width: 330,
                 height: 300,
                 className: "border border-gray-300 rounded-md",
               }}
@@ -177,14 +150,15 @@ export default function Signature({
             {/* Save */}
             <button
               onClick={saveSignature}
-              
-              className="rounded-full px-20 py-2 text-white bg-purple-gradient"
+              className="rounded-full bg-purple-gradient px-20 py-2 text-white"
             >
               Next
             </button>
           </div>
+          <div className="absolute bottom-16">
+            <SponsorSection />
+          </div>
 
-          <SponsorSection />
           <SocialMediaBar />
         </div>
       )}

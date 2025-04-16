@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 
 import {
   Popover,
@@ -20,7 +20,8 @@ import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 // import SliderBox from "@/components/SliderBox/SliderBox";
 // import StarCanvas from "@/image/Frame 13879.png";
 import BackButton from "@/components/BackButton/BackButton";
-import SponsorSection from "@/components/SponsorSection/SponsorSection";
+// import SponsorSection from "@/components/SponsorSection/SponsorSection";
+// import useLocalStorage from "@/hooks/useLocalStorage";
 // import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -40,6 +41,8 @@ export default function FormPage() {
 
   const [gotoResultPage, setGotoResultPage] = useState(false);
 
+  // when isModalOpen = true
+
   const router = useRouter();
 
   // console.logle.log(name, hobby, date, spiritAnimal, base64ImageUrl, "information");
@@ -47,7 +50,14 @@ export default function FormPage() {
 
   const handleSubmit = async () => {
     //prevent null submitting
-    if (!name || !hobby || !date || !spiritAnimal || !base64ImageUrl || !croppedImage) {
+    if (
+      !name ||
+      !hobby ||
+      !date ||
+      !spiritAnimal ||
+      !base64ImageUrl ||
+      !croppedImage
+    ) {
       alert("Please fill in all fields.");
       return;
     }
@@ -118,8 +128,16 @@ export default function FormPage() {
     // isSubmitted is false
     // cannot show fill in
     <div className="overflow-hidden text-[#3D245B]">
+      <button
+        className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        ←
+      </button>
       <BackGround />
-      <BackButton />
+
       <ImageCanvas />
       {!isSubmitted && !gotoResultPage && (
         <div className="mt-5">
@@ -134,30 +152,36 @@ export default function FormPage() {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label htmlFor="name" className="mb-2 text-xs font-medium">
-                Name <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ชื่อ</span>
+                Name{" "}
+                <span className="font-poppins text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                  ชื่อ
+                </span>
               </label>
               <input
                 id="name"
-                placeholder="Enter your name"
+                placeholder="ชื่อ"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-10 w-full rounded-lg border-2 border-black p-2 text-sm"
+                className="h-10 w-full rounded-lg p-2 text-sm"
               />
             </div>
 
             {/* hobby */}
             <div>
               <label htmlFor="hobby" className="mb-2 text-xs font-medium">
-                Hobby <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">งานอดิเรก</span>
+                Hobby{" "}
+                <span className="font-poppins text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                  งานอดิเรก
+                </span>
               </label>
               <select
                 id="hobby"
-                className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${hobby == "" ? "text-gray-400" : "text-black"}`}
+                className={`h-10 w-full rounded-md p-2 text-sm ${hobby == "" ? "text-gray-400" : "text-black"}`}
                 value={hobby}
                 onChange={(e) => setHobby(e.target.value)}
               >
                 <option value="" disabled className="text-gray-400">
-                  Select. . .
+                  Hobby
                 </option>
                 {HOBBY.map(({ value, label }) => (
                   <option key={value} value={value} className="text-black">
@@ -170,14 +194,17 @@ export default function FormPage() {
             {/* date of birth */}
             <div className="col-span-1">
               <label htmlFor="date" className="mb-2 text-xs font-medium">
-                Date of birth <span className = "font-poppins font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ว/ด/ป เกิด</span>
+                Date of birth{" "}
+                <span className="font-poppins text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                  ว/ด/ป เกิด
+                </span>
               </label>
               <div className="flex items-center gap-2">
                 <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                   <PopoverTrigger asChild>
                     <div
                       onClick={() => setOpenCalendar(true)}
-                      className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${date ? "text-black" : "text-gray-400"}`}
+                      className={`w-full rounded-md bg-white p-2 text-sm ${date ? "text-black" : "text-gray-400"}`}
                     >
                       {date ? format(date, "dd/MM/yyyy") : "DD/MM/YYYY"}
                     </div>
@@ -212,10 +239,13 @@ export default function FormPage() {
                 htmlFor="spirit-animal"
                 className="mb-2 text-xs font-medium"
               >
-                Spirit Animal <span className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">เลือกสัตว์ที่ต้องการ</span>
+                Your Animal{" "}
+                <span className="text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                  เลือกสัตว์ที่ต้องการ
+                </span>
               </label>
 
-              <ul className="flex gap-4 no-scrollbar overflow-auto">
+              <ul className="no-scrollbar flex gap-4 overflow-auto">
                 {ANIMALS.map(({ value, label }) => (
                   <li
                     onClick={() => {
@@ -223,7 +253,7 @@ export default function FormPage() {
                     }}
                     key={value}
                     value={value}
-                    className={`flex px-2 cursor-pointer items-center justify-center  ${spiritAnimal === value ? "bg-black text-white":"bg-white text-black"}`}
+                    className={`flex cursor-pointer items-center justify-center px-2 ${spiritAnimal === value ? "bg-black text-white" : "bg-white text-black"}`}
                   >
                     {label}
                   </li>
@@ -236,7 +266,10 @@ export default function FormPage() {
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
             >
-              Your signature<p className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">ลายเซ็น</p>
+              Your signature
+              <p className="text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                ลายเซ็น
+              </p>
             </label>
             <Signature
               base64ImageUrl={base64ImageUrl}
@@ -250,7 +283,10 @@ export default function FormPage() {
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
             >
-              Your Photo ID<p className="font-light text-xs leading-[100%] text-[#3D245B] tracking-[0]">รูปถ่าย</p>
+              Your Photo ID
+              <p className="text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]">
+                รูปถ่าย
+              </p>
             </label>
             <PhotoUpload
               croppedImage={croppedImage}
@@ -260,8 +296,7 @@ export default function FormPage() {
           </section>
           <div className="relative mt-6 flex items-center justify-center">
             <button
-             
-              className="absolute bg-purple-gradient w-[16rem] rounded-full py-2 text-white"
+              className="absolute w-[16rem] rounded-full bg-purple-gradient py-2 text-[1.25rem] text-white"
               onClick={handleSubmit}
             >
               Submit
@@ -294,9 +329,9 @@ export default function FormPage() {
               <h2 className="text-2xl">Almost Done</h2>
             </div>
           </div>
-          <div>
+          {/* <div className="absolute bottom-0">
             <SponsorSection />
-          </div>
+          </div> */}
         </section>
       )}
     </div>
@@ -306,3 +341,8 @@ export default function FormPage() {
 // when click step 1 add signature verfication
 // when click step 2 add signature verification
 // when click step 3 confirm the verification and go
+
+// step 1 add properties isopenModal and isOpenPhotoid
+// step 2 add localStorage to set item
+// if localStorage openModal has whether signature or  photoupload then redirect to form and then storage data to return value
+// then if data are all then click confirmed and

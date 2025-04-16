@@ -13,9 +13,9 @@ export default function useShareToInstagram() {
       try {
         const link = document.createElement("a");
         const dataURL = await convertImage(cardRef.current);
-        // // console.log(dataURL, "canvas.toDataURL")
+        // console.log(dataURL, "canvas.toDataURL")
         link.href = dataURL;
-        link.download = "image-mock.jpeg";
+        link.download = "oddnends_ticket.jpeg";
 
         link.click();
       } catch (error) {
@@ -62,15 +62,15 @@ export default function useShareToInstagram() {
         if (!blob) {
           return;
         }
-        const file = new File([blob], "awesome_ticket.jpg", {
+        const file = new File([blob], "oddnends_ticket.jpg", {
           type: blob.type,
         });
 
         if (navigator.share) {
           await navigator.share({
             files: [file],
-            title: "Check out this image!",
-            text: "I just created this awesome image. Take a look!",
+            title: "OddsnEnds Ticket",
+            text: "I just created ticket with OddsnEnds!",
           });
         } else {
           console.warn("Web Share API not supported");

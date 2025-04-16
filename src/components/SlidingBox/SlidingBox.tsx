@@ -39,7 +39,7 @@ const SlidingBox = () => {
   // isFirstSlide = true; when the activeIndex state changes to 0
   useEffect(() => {
     setIsFirstSlide(activeIndex === 0 ? true : false);
-    // // console.log(activeIndex)
+    // console.log(activeIndex)
   }, [activeIndex]);
 
   return (
