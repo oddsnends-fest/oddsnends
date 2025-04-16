@@ -1,7 +1,13 @@
 "use client";
 import { env } from "@/env";
 import { liff, type Liff } from "@line/liff";
-import { useState, useEffect, createContext, useContext, type ReactNode } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  type ReactNode,
+} from "react";
 import { jwtDecode } from "jwt-decode";
 
 interface LiffContextProps {
@@ -20,7 +26,7 @@ interface DecodedToken {
 interface UserProfile {
   displayName: string;
   pictureUrl?: string;
-  userId: string
+  userId: string;
 }
 
 const LiffContext = createContext<LiffContextProps>({
@@ -42,19 +48,22 @@ export default function Layout({ children }: { children: ReactNode }) {
       try {
         await liff.init({ liffId: env.NEXT_PUBLIC_LIFF_ID });
         setLiffObject(liff);
-        
+
         // Convert this promise chain to await
         await liff.ready;
-        
+
         if (!liff.isLoggedIn()) {
           console.log("User not logged in, initiating login...");
+          if (env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN === "true") {
+            throw new Error("LIFF login is disabled in this environment.");
+          }
           liff.login();
         } else {
           console.log("User is already logged in, decoding ID token...");
           const token = liff.getIDToken();
           if (token) {
             console.log("ID Token:", token);
-            setIdToken(token)
+            setIdToken(token);
             try {
               const decoded: DecodedToken = jwtDecode(token);
               setUserProfile({
@@ -74,7 +83,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         setLiffError(error instanceof Error ? error.message : String(error));
       }
     };
-    
+
     // Fix the floating promise by using void operator
     void initLiff();
   }, []);
