@@ -111,6 +111,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("/fonts/NotoSansThai.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }

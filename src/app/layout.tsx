@@ -25,7 +25,7 @@ export default function RootLayout({
       <LiffProvider>
         <body className="relative mx-auto flex min-h-screen w-full max-w-md flex-col overflow-x-hidden overscroll-none">
           <Header />
-          <div className="flex-grow">{children}</div>
+          <div className="flex-grow font-auto">{children}</div>
           <SponsorSection />
           {/* Social media bar */}
           <SocialMediaBar />
