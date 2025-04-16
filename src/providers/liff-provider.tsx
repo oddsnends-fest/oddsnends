@@ -53,16 +53,16 @@ export default function Layout({ children }: { children: ReactNode }) {
         await liff.ready;
 
         if (!liff.isLoggedIn()) {
-          // console.log("User not logged in, initiating login...");
+          console.log("User not logged in, initiating login...");
           if (env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN === "true") {
             throw new Error("LIFF login is disabled in this environment.");
           }
           liff.login();
         } else {
-          // console.log("User is already logged in, decoding ID token...");
+          console.log("User is already logged in, decoding ID token...");
           const token = liff.getIDToken();
           if (token) {
-            // console.log("ID Token:", token);
+            console.log("ID Token:", token);
             setIdToken(token);
             try {
               const decoded: DecodedToken = jwtDecode(token);

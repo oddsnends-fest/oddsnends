@@ -73,7 +73,7 @@ export default function FrameSelectionPage() {
             className="mt-4 rounded-full bg-purple-gradient px-20 py-2 text-[1.25rem] text-white"
             onClick={() => handleClickCheckBox(selectedFrame)}
           >
-            Let &apos; s Go
+            LET&apos;S GO!
           </button>
         )}
         <div className="absolute bottom-0">

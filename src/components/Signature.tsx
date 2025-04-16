@@ -152,7 +152,7 @@ export default function Signature({
               onClick={saveSignature}
               className="rounded-full bg-purple-gradient px-20 py-2 text-white"
             >
-              Next
+              NEXT
             </button>
           </div>
           <div className="absolute bottom-16">

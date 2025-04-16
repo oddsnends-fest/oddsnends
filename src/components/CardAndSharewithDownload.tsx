@@ -198,4 +198,4 @@ export default function ShareToInstagram() {
   );
 }
 
-// 145, 163 line of function handle promise resolve and reject.
+// 145, 163 line of function handle download and share

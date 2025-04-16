@@ -299,7 +299,7 @@ export default function FormPage() {
               className="absolute w-[16rem] rounded-full bg-purple-gradient py-2 text-[1.25rem] text-white"
               onClick={handleSubmit}
             >
-              Submit
+              SUBMIT
             </button>
           </div>
 
@@ -326,7 +326,7 @@ export default function FormPage() {
                 <div className="h-4 w-4 rounded-full bg-[#3D245B]"></div>
                 <div className="h-4 w-4 rounded-full bg-[#3D245B]"></div>
               </div>
-              <h2 className="text-2xl">Almost Done</h2>
+              <h2 className="text-2xl">Almost Done!</h2>
             </div>
           </div>
           {/* <div className="absolute bottom-0">
@@ -337,12 +337,3 @@ export default function FormPage() {
     </div>
   );
 }
-
-// when click step 1 add signature verfication
-// when click step 2 add signature verification
-// when click step 3 confirm the verification and go
-
-// step 1 add properties isopenModal and isOpenPhotoid
-// step 2 add localStorage to set item
-// if localStorage openModal has whether signature or  photoupload then redirect to form and then storage data to return value
-// then if data are all then click confirmed and

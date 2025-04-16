@@ -130,18 +130,21 @@ function PhotoUpload({
       {/* Image + Text aligned horizontally */}
       {!croppedImage && (
         <button
-          className="relative flex items-center justify-center rounded-lg border bg-white px-2 py-4"
+          className="relative inline-block rounded-lg border bg-white p-4"
           onClick={handleClickUpload}
         >
-          <Image
-            className="flex items-center justify-center"
-            src="/photoid/add_photo_alternate-2.png"
-            alt="Upload"
-            width={40}
-            height={40}
+          <div className="flex items-center justify-center">
+            <Image
+              className="border"
+              src="/photoid/add_photo_alternate-2.png"
+              alt="Upload"
+              width={40}
+              height={40}
 
-            // Fill height 80% and maintain aspect ratio for width
-          />
+              // Fill height 80% and maintain aspect ratio for width
+            />
+          </div>
+
           <div className="ml-6">
             {" "}
             {/* Added margin-left for spacing between image and text */}
@@ -206,7 +209,7 @@ function PhotoUpload({
                   onClick={handleClickConfirm}
                   className="cursor-pointer rounded-full bg-purple-gradient px-20 py-2 text-white"
                 >
-                  Next
+                  NEXT
                 </button>
               </div>
             </div>
