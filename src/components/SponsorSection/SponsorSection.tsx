@@ -13,22 +13,23 @@ const SponsorSection = () => {
         ? "/images/sponsors/SlowCombo_purple.png"
         : "/images/sponsors/SlowCombo_white.png",
       link: "https://www.instagram.com/slowcombo/?hl=en",
-      size: isPhotoIdRoute ? 80 : 110,
+      size: 96,
     },
     {
       src: isPhotoIdRoute
         ? "/images/sponsors/Binance_purple.png"
         : "/images/sponsors/Binance_white.png",
       link: "https://www.instagram.com/ioic_chula/?hl=en",
-      size: isPhotoIdRoute ? 140 : 132,
+      size: 132,
     },
 
     {
       src: isPhotoIdRoute
         ? "/images/sponsors/IOIC_purple.png"
         : "/images/sponsors/IOIC_white.png",
-      link: "https://www.instagram.com/binance/?hl=en",
-      size: isPhotoIdRoute ? 70 : 95, // provide link please
+      link: "https://www.binance.th/en",
+      size: isPhotoIdRoute ? 45 : 85, // provide link please
+      className: isPhotoIdRoute ? "" : "translate-y-2",
     },
 
     //   { src: "/", link: "/"},
@@ -38,12 +39,18 @@ const SponsorSection = () => {
   ];
 
   return (
-    <section className={"z-10 mb-14 bg-transparent"}>
+    <section className={"z-10 mb-7 bg-transparent"}>
       <ul className="flex items-center justify-center">
-        {sponsors.map(({ src, link, size }, idx) => (
+        {sponsors.map(({ src, link, size, className }, idx) => (
           <li key={idx}>
             <a href={link} target="_blank" rel="noopener noreferrer">
-              <Image src={src} alt={`${idx + 1}`} width={size} height={size} />
+              <Image
+                src={src}
+                alt={`${idx + 1}`}
+                width={size}
+                height={size}
+                className={className}
+              />
             </a>
           </li>
         ))}

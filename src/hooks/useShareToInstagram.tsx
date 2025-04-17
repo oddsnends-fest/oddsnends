@@ -33,7 +33,7 @@ export default function useShareToInstagram() {
     const maxAttempts = 20;
 
     for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
-      dataUrl = await toJpeg(element, { quality: 1 });
+      dataUrl = await toJpeg(element, { quality: 1, pixelRatio: 4 });
     }
 
     return dataUrl;
