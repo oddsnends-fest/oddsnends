@@ -5,6 +5,10 @@ import Image from "next/image"
 import { Eraser } from "lucide-react"
 import { useRouter } from "next/navigation"
 import BackButton from "@/components/BackButton/BackButton"
+import BackGround from "@/components/BackgroundPhotoId"
+import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas"
+import { ANIMALS } from "@/constants/spirit-animals"
+import { SpiritAnimal } from "@prisma/client"
 
 type userInfoType = {
     name: string;
@@ -42,19 +46,23 @@ const RecheckPage = () => {
 
     useEffect(() => {
         const storedData = localStorage.getItem("formData");
-        if(storedData) {
-            const parsed = JSON.parse(storedData);
-            console.log("date: ", parsed.date);
+        if (storedData) {
+          try {
+            const parsed = JSON.parse(storedData) as unknown as Partial<userInfoType>;
             setUserInfo({
-                name: parsed.name || "",
-                date: parsed.date || new Date(),
-                hobby: parsed.hobby || "",
-                spiritAnimal: parsed.spiritAnimal || "",
-                base64ImageUrl: parsed.signatureURL || "/",
-                croppedImage: parsed.croppedImage || "/"
+              name: parsed.name ?? "",
+              date: parsed.date ? new Date(parsed.date) : new Date(),
+              hobby: parsed.hobby ?? "",
+              spiritAnimal: parsed.spiritAnimal ?? "",
+              base64ImageUrl: parsed.base64ImageUrl ?? "/",
+              croppedImage: parsed.croppedImage ?? "/",
             });
+          } catch (error) {
+            console.error("Failed to parse formData:", error);
+          }
         }
-    }, []);
+      }, []);
+      
 
     const handleEditData = () => {
         router.back();
@@ -68,7 +76,8 @@ const RecheckPage = () => {
     return (
         <div className="w-full">
             <BackButton />
-            <div className="absolute top-0 bg-blue-400 w-full h-screen -z-10"/>
+            <BackGround />
+            <ImageCanvas />
             <div className='relative m-5 rounded-xl py-7 bg-white text-[#34245B]'>
                 <Eraser
                     onClick={handleEditData} 
@@ -107,7 +116,7 @@ const RecheckPage = () => {
                                     alt="sign"
                                     width={100}
                                     height={100}
-                                    className=""
+                                    className="object-contain max-w-[200px] max-h-[80px]"
                                 />
                             </div>
                         </div>
@@ -116,7 +125,7 @@ const RecheckPage = () => {
                         <div className="text-center">
                             Animal
                             <div className="mt-1">
-                                {userInfo.spiritAnimal}
+                                {ANIMALS.find(animal => animal.value === userInfo.spiritAnimal)?.label}
                             </div>
                         </div>
                         <div className="text-center">

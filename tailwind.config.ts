@@ -71,6 +71,7 @@ export default {
 		},
 		backgroundImage: {
 			'purple-gradient': 'linear-gradient(to bottom, #B56A95 -30%, #553B82 90%)',
+			
 		},
   	}
   },
