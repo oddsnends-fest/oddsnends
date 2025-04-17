@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format, set } from "date-fns";
-
+import { formatDate } from "@/hooks/formatDate";
 import {
   Popover,
   PopoverContent,
@@ -20,6 +20,7 @@ import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 // import SliderBox from "@/components/SliderBox/SliderBox";
 // import StarCanvas from "@/image/Frame 13879.png";
 import BackButton from "@/components/BackButton/BackButton";
+
 // import SponsorSection from "@/components/SponsorSection/SponsorSection";
 // import useLocalStorage from "@/hooks/useLocalStorage";
 // import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
@@ -36,6 +37,8 @@ export default function FormPage() {
   const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
 
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
+
+  const [isChecking, setIsChecking] = useState(false);
 
   // const [stepForm, setStepForm] = useState(1);
 
@@ -96,6 +99,7 @@ export default function FormPage() {
     // localStorage should set here
 
     setIsSubmitted(true);
+    setIsChecking(false);
 
     setName("");
     setHobby("");
@@ -106,18 +110,19 @@ export default function FormPage() {
   };
 
   useEffect(() => {
-    if (isSubmitted) {
+    if (isSubmitted && !isChecking) {
       const timeId = setInterval(() => {
         setIsSubmitted(false);
+
         setGotoResultPage(true);
       }, 3000); // custom time appropiate with video
 
       return () => clearInterval(timeId); // Proper cleanup
     }
-    if (!isSubmitted && gotoResultPage) {
+    if (!isSubmitted && !isChecking && gotoResultPage) {
       router.push("/photoid/result");
     }
-  }, [isSubmitted, gotoResultPage]); // uncomment for design
+  }, [isSubmitted, isChecking, gotoResultPage]); // uncomment for design
 
   // const isFilledAllData =
   //   name && hobby && date && spiritAnimal && base64ImageUrl && croppedImage;
@@ -139,7 +144,7 @@ export default function FormPage() {
       <BackGround />
 
       <ImageCanvas />
-      {!isSubmitted && !gotoResultPage && (
+      {!isSubmitted && !gotoResultPage && !isChecking && (
         <div className="mt-5">
           <h1 className="title-photoid">Your info</h1>
           <p className="subtitle-photoid">ใส่ข้อมูลของคุณ</p>
@@ -147,7 +152,7 @@ export default function FormPage() {
       )}
 
       {/* name */}
-      {!isSubmitted && !gotoResultPage && (
+      {!isSubmitted && !gotoResultPage && !isChecking && (
         <section className="grid gap-4 p-6">
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -294,20 +299,129 @@ export default function FormPage() {
             />
             <div className="col-span-1"></div>
           </section>
-          <div className="relative mt-6 flex items-center justify-center">
-            <button
-              className="absolute w-[16rem] rounded-full bg-purple-gradient py-2 text-[1.25rem] text-white"
-              onClick={handleSubmit}
-            >
-              SUBMIT
-            </button>
-          </div>
+          {name &&
+            hobby &&
+            date &&
+            spiritAnimal &&
+            base64ImageUrl &&
+            croppedImage && (
+              <div className="relative mt-6 flex items-center justify-center">
+                <button
+                  className="absolute w-[16rem] rounded-full bg-purple-gradient py-2 text-[1.25rem] text-white"
+                  onClick={() => {
+                    setIsChecking(true);
+                  }}
+                >
+                  SUBMIT
+                </button>
+              </div>
+            )}
 
           {/* send button */}
         </section>
       )}
+
+      {!isSubmitted && !gotoResultPage && isChecking && (
+        <>
+          <div className="relative m-6 bg-white py-2">
+            <button
+              className="absolute right-2 top-2 z-20"
+              onClick={() => {
+                setIsChecking(false);
+              }}
+            >
+              <Image
+                src={"/photoid/eraser.svg"}
+                alt="eraser"
+                width={20}
+                height={20}
+              />
+            </button>
+            <div>
+              <h2 className="text-center font-cooper text-[2.25rem]">
+                Your Info
+              </h2>
+              <p className="text-center">ตรวจสอบข้อมูลของคุณ</p>
+            </div>
+
+            <div className="grid grid-cols-3 p-4">
+              <div className="col-span-2 p-3">
+                <div className="mb-2">
+                  <span>Name</span>
+                  <p className="w-full rounded-sm border border-black px-3 py-1">
+                    {name}
+                  </p>
+                </div>
+                <div className="mb-2">
+                  <span>Hobby</span>
+                  <p className="w-full rounded-sm border border-black px-3 py-1">
+                    {hobby}
+                  </p>
+                </div>
+                <div className="mb-2">
+                  <span>Date</span>
+                  <p className="w-full rounded-sm border border-black px-3 py-1">
+                    {date && formatDate(new Date(date.toISOString()))}
+                  </p>
+                </div>
+                <div className="mb-2">
+                  <span>Signature</span>
+                  <div className="relative h-16 w-full rounded-sm border border-black">
+                    {base64ImageUrl && (
+                      <Image
+                        src={base64ImageUrl}
+                        className="object-contain"
+                        fill={true}
+                        alt="signature"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="relative col-span-1 p-3">
+                <div>
+                  <span>Animal</span>
+                  <p>{spiritAnimal}</p>
+                </div>
+                <div>
+                  <span>ID Photo</span>
+                  <div className="relative h-24 w-24 rounded-sm border border-black">
+                    {croppedImage && (
+                      <Image
+                        className="rounded-sm"
+                        src={croppedImage}
+                        fill={true}
+                        alt=""
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <span>Checking page</span>
+          <button
+            onClick={() => {
+              setIsChecking(false);
+            }}
+          >
+            Cancel (rubber)
+          </button>
+          <button onClick={handleSubmit}>Go to result</button> */}
+          </div>
+          <div className="flex w-full justify-center">
+            <button
+              onClick={handleSubmit}
+              className="w-[16rem] rounded-full bg-purple-gradient py-2 text-[1.25rem] text-white"
+            >
+              LET&#39;S GO!
+            </button>
+          </div>
+        </>
+      )}
       {/* Printing Page */}
-      {(isSubmitted || (!isSubmitted && gotoResultPage)) && (
+      {((isSubmitted && !isChecking) ||
+        (!isSubmitted && !isChecking && gotoResultPage)) && (
         <section className="">
           <div>
             <BackButton />

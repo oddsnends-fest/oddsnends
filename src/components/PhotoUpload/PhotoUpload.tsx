@@ -135,7 +135,6 @@ function PhotoUpload({
         >
           <div className="flex items-center justify-center">
             <Image
-              className="border"
               src="/photoid/add_photo_alternate-2.png"
               alt="Upload"
               width={40}

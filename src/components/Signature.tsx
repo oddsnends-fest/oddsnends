@@ -155,7 +155,7 @@ export default function Signature({
               NEXT
             </button>
           </div>
-          <div className="absolute bottom-16">
+          <div className="absolute bottom-16 -z-10">
             <SponsorSection />
           </div>
 
