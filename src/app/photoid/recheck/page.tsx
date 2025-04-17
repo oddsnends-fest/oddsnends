@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Eraser } from "lucide-react"
 import { useRouter } from "next/navigation"
+import BackButton from "@/components/BackButton/BackButton"
 
 type userInfoType = {
     name: string;
@@ -70,6 +71,7 @@ const RecheckPage = () => {
 
     return (
         <div className="w-full">
+            <BackButton />
             <div className="absolute top-0 bg-blue-400 w-full h-screen -z-10"/>
             <div className='relative m-5 rounded-xl py-7 bg-white text-[#34245B]'>
                 <Eraser
@@ -122,7 +124,7 @@ const RecheckPage = () => {
                                 alt="animal"
                                 width={100}
                                 height={115}
-                                className="mt-2 border border-[#3D245B] rounded-xl"
+                                className="mt-1 border border-[#3D245B] rounded-xl"
                             />
                         </div>
                         <div className="text-center">
@@ -132,7 +134,7 @@ const RecheckPage = () => {
                                 alt="id photo"
                                 width={100}
                                 height={140}
-                                className="mt-2 border border-[#3D245B] rounded-xl"
+                                className="mt-1 border border-[#3D245B] rounded-xl"
                             />
                         </div>
                     </div>
