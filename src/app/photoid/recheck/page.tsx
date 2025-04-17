@@ -71,7 +71,7 @@ const RecheckPage = () => {
     return (
         <div className="w-full">
             <div className="absolute top-0 bg-blue-400 w-full h-screen -z-10"/>
-            <div className='relative m-5 border rounded-xl py-7 bg-white text-[#34245B]'>
+            <div className='relative m-5 rounded-xl py-7 bg-white text-[#34245B]'>
                 <Eraser
                     onClick={handleEditData} 
                     size={29}
@@ -89,17 +89,17 @@ const RecheckPage = () => {
                         <div>
                             Name 
                             <span className='ml-2 opacity-50'>ชื่อ</span>
-                            <div className='mt-1 border border-[#563C84] rounded-xl py-2 px-3 text-[#2E1E53]/60'>{userInfo.name}</div>
+                            <div className='mt-1 border border-[#3D245B] rounded-xl py-2 px-3 text-[#2E1E53]/60'>{userInfo.name}</div>
                         </div>
                         <div>
                             Hobby 
                             <span className='ml-2 opacity-50'>งานอดิเรก</span>
-                            <div className='mt-1 border border-black rounded-xl py-2 px-3 text-[#2E1E53]/60'>{userInfo.hobby}</div>
+                            <div className='mt-1 border border-[#3D245B] rounded-xl py-2 px-3 text-[#2E1E53]/60'>{userInfo.hobby}</div>
                         </div>
                         <div>
                             Date of Birth 
                             <span className='ml-2 opacity-50'>ว/ด/ป เกิด</span>
-                            <div className='mt-1 border border-black rounded-xl py-2 px-3 text-[#2E1E53]/60'>{formatDate(userInfo.date)}</div>
+                            <div className='mt-1 border border-[#3D245B] rounded-xl py-2 px-3 text-[#2E1E53]/60'>{formatDate(userInfo.date)}</div>
                         </div>
                         <div className="mt-2">
                             Signature
@@ -122,7 +122,7 @@ const RecheckPage = () => {
                                 alt="animal"
                                 width={100}
                                 height={115}
-                                className="mt-2 border border-black rounded-xl"
+                                className="mt-2 border border-[#3D245B] rounded-xl"
                             />
                         </div>
                         <div className="text-center">
@@ -132,7 +132,7 @@ const RecheckPage = () => {
                                 alt="id photo"
                                 width={100}
                                 height={140}
-                                className="mt-2 border border-black rounded-xl"
+                                className="mt-2 border border-[#3D245B] rounded-xl"
                             />
                         </div>
                     </div>
