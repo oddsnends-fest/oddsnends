@@ -1,11 +1,9 @@
 export const HOBBY = [
-  { value: "READING", label: "Reading" },
-  { value: "PAINTING", label: "Painting" },
-  { value: "GAMING", label: "Gaming" },
-  { value: "COOKING", label: "Cooking" },
-  { value: "PHOTOGRAPHY", label: "Photography" },
-  { value: "TRAVELING", label: "Traveling" },
-  { value: "GARDENING", label: "Gardening" },
-  { value: "FISHING", label: "Fishing" },
-  { value: "WRITING", label: "Writing" },
+  { value: "painting", label: "Painting" },
+  { value: "cooking", label: "Cooking" },
+  { value: "reading", label: "Reading" },
+  { value: "vibing", label: "Vibing" },
+  { value: "gardening", label: "Gardening" },
+  { value: "collecting", label: "Collecting" },
+  { value: "listening_to_music", label: "Listening to Music" },
 ];
