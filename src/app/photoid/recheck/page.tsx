@@ -28,7 +28,7 @@ const RecheckPage = () => {
         name: "David Johny",
         date: new Date(),
         hobby: "Listening to Music",
-        spiritAnimal: "Black Cat",
+        spiritAnimal: "",
         croppedImage: "/",
         base64ImageUrl: "/",
     });
@@ -53,17 +53,18 @@ const RecheckPage = () => {
     }, []);
 
     useEffect(() => {
-        if(userInfo.spiritAnimal !== '/')
-        try {
-            // Fetch spirit animal image after receiving animal data ?? 
-            // const fetchAnimalImage = async () => {
-            //     const response = await fetch("/api/animal???...");
-            //     const data = await response.json();
-            //     setSpiritAnimalImageUrl(data);
-            // }
-            // fetchAnimalImage();
-        } catch(error) {
-            console.log(error);
+        if(userInfo.spiritAnimal.length) {
+            try {
+                // Fetch spirit animal image after receiving animal data ?? 
+                // const fetchAnimalImage = async () => {
+                //     const response = await fetch("/api/animal???...");
+                //     const data = await response.json();
+                //     setSpiritAnimalImageUrl(data);
+                // }
+                // fetchAnimalImage();
+            } catch(error) {
+                console.log(error);
+            }
         }
     }, [userInfo.spiritAnimal]);
 
