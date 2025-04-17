@@ -1,12 +1,16 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 
-export default function Signature() {
+type SignatureProps = {
+  signatureURL: string;
+  setSignatureURL: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Signature({signatureURL, setSignatureURL}: SignatureProps) {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
-  const [imageURL, setImageURL] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Function to clear only the signature in the modal
@@ -18,7 +22,7 @@ export default function Signature() {
   const saveSignature = () => {
     if (sigCanvas.current) {
       const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-      setImageURL(dataURL);
+      setSignatureURL(dataURL);
       closeModal();
     }
   };
@@ -45,8 +49,8 @@ export default function Signature() {
       <div className="relative w-[350px] h-[80px] border border-gray-300 rounded-md p-4">
         {/* Clickable Signature Box */}
         <div onClick={openModal} className="cursor-pointer w-full h-full">
-          {imageURL ? (
-            <img src={imageURL} alt="Saved Signature" className="w-full h-full object-contain" />
+          {signatureURL ? (
+            <img src={signatureURL} alt="Saved Signature" className="w-full h-full object-contain" />
           ) : null}
         </div>
       </div>

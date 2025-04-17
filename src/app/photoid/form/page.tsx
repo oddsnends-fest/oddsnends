@@ -1,5 +1,5 @@
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -16,6 +16,7 @@ import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import SliderBox from "@/components/SliderBox/SliderBox";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -23,12 +24,28 @@ export default function FormPage() {
   const [date, setDate] = useState<Date>();
   const [spiritAnimal, setSpiritAnimal] = useState("");
   const [openCalendar, setOpenCalendar] = useState(false);
+  const [signatureURL, setSignatureURL] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("formData");
+    if(storedData) {
+      const parsed = JSON.parse(storedData);
+      setName(parsed.name || "");
+      setHobby(parsed.hobby || "");
+      setDate(parsed.date ?? undefined);
+      setSpiritAnimal(parsed.spiritAnimal || "");
+      setSignatureURL(parsed.signatureURL || "");
+      setCroppedImage(parsed.croppedImage || "");
+    }
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //prevent null submitting
-    if (!name || !hobby || !date || !spiritAnimal || !croppedImage) {
+    if (!name || !hobby || !date || !spiritAnimal || !signatureURL || !croppedImage) {
       console.log("Please fill in all fields.");
       return;
     }
@@ -37,14 +54,19 @@ export default function FormPage() {
       hobby,
       date,
       spiritAnimal,
+      signatureURL,
       croppedImage,
     };
+
     //submit data
-    console.log("Form Data Submitted:", formData);
+    console.log("Form Data Submitted: ", formData);
+    localStorage.setItem("formData", JSON.stringify(formData));
+
+    router.push("/photoid/recheck");
   };
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="overflow-hidden">
       <div className="mt-5 flex justify-center text-center text-4xl font-extrabold">
         Fill in
       </div>
@@ -150,7 +172,12 @@ export default function FormPage() {
             </select>
           </div>
         </div>
-        <Signature />
+
+        {/* Signature */}
+        <Signature 
+          signatureURL={signatureURL}
+          setSignatureURL={setSignatureURL}
+        />
 
         {/* Photo upload */}
         <div
@@ -174,7 +201,7 @@ export default function FormPage() {
         {/* send button */}
         <button
           type="submit"
-          className="mx-auto mt-60 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
+          className="mx-auto mt-10 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
         >
           Send
         </button>

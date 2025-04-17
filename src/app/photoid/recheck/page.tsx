@@ -15,59 +15,55 @@ type userInfoType = {
     base64ImageUrl: string;
 }
 
-const formatDate = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+const formatDate = (dateInput: Date | string): string => {
+    const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  
+    if (isNaN(date.getTime())) return ""; // Invalid date
+  
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
+  
     return `${day}/${month}/${year}`;
-  }
+  };
+  
 
 const RecheckPage = () => {
     const router = useRouter();
 
     const [userInfo, setUserInfo] = useState<userInfoType>({
-        name: "David Johny",
+        name: "",
         date: new Date(),
-        hobby: "Listening to Music",
+        hobby: "",
         spiritAnimal: "",
         croppedImage: "/",
         base64ImageUrl: "/",
     });
-    const [spiritAnimalImageUrl, setSpiritAnimalImageUrl] = useState<string>("/");
-
-    const handleEditData = () => {
-        // Back to the form page ??
-        // router.push("/photoid/form"); ???
-    };
-
-    const handleSubmit = () => {
-        // Go to print page
-        // router.push("/photoid/print"); ???
-    };
 
     useEffect(() => {
-        try {
-            // To get form data 
-        } catch(error) {
-            console.log(error);
+        const storedData = localStorage.getItem("formData");
+        if(storedData) {
+            const parsed = JSON.parse(storedData);
+            console.log("date: ", parsed.date);
+            setUserInfo({
+                name: parsed.name || "",
+                date: parsed.date || new Date(),
+                hobby: parsed.hobby || "",
+                spiritAnimal: parsed.spiritAnimal || "",
+                base64ImageUrl: parsed.signatureURL || "/",
+                croppedImage: parsed.croppedImage || "/"
+            });
         }
     }, []);
 
-    useEffect(() => {
-        if(userInfo.spiritAnimal.length) {
-            try {
-                // Fetch spirit animal image after receiving animal data ?? 
-                // const fetchAnimalImage = async () => {
-                //     const response = await fetch("/api/animal???...");
-                //     const data = await response.json();
-                //     setSpiritAnimalImageUrl(data);
-                // }
-                // fetchAnimalImage();
-            } catch(error) {
-                console.log(error);
-            }
-        }
-    }, [userInfo.spiritAnimal]);
+    const handleEditData = () => {
+        router.back();
+    };
+
+    const handleSubmit = () => {
+        router.push("/photoid/print");
+    };
+
 
     return (
         <div className="w-full">
@@ -109,23 +105,19 @@ const RecheckPage = () => {
                                 <Image 
                                     src={userInfo.base64ImageUrl}
                                     alt="sign"
-                                    width={150}
-                                    height={60}
+                                    width={100}
+                                    height={100}
                                     className=""
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col justify-between mx-auto'>
+                    <div className='flex flex-col justify-start gap-10 mx-auto'>
                         <div className="text-center">
                             Animal
-                            <Image 
-                                src={spiritAnimalImageUrl}
-                                alt="animal"
-                                width={100}
-                                height={115}
-                                className="mt-1 border border-[#3D245B] rounded-xl"
-                            />
+                            <div className="mt-1">
+                                {userInfo.spiritAnimal}
+                            </div>
                         </div>
                         <div className="text-center">
                             ID Photo
@@ -133,7 +125,7 @@ const RecheckPage = () => {
                                 src={userInfo.croppedImage}
                                 alt="id photo"
                                 width={100}
-                                height={140}
+                                height={125}
                                 className="mt-1 border border-[#3D245B] rounded-xl"
                             />
                         </div>
