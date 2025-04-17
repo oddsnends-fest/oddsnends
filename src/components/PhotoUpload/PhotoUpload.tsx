@@ -179,7 +179,7 @@ function PhotoUpload({
             width={200}
             height={200}
           />
-          <div className="-mt-20 flex w-full flex-col justify-center">
+          <div className="mt-2 flex w-full flex-col justify-center">
             <h1 className="title-photoid">Your ID Photo</h1>
             <p className="subtitle-photoid">ตกแต่งรูปถ่ายของคุณ</p>
           </div>
@@ -214,7 +214,7 @@ function PhotoUpload({
             </div>
           )}
 
-          <div className="absolute bottom-14 -z-10">
+          <div className="absolute -bottom-6 -z-10">
             <SponsorSection />
           </div>
           {/* COrrect */}
