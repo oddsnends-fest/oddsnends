@@ -141,7 +141,7 @@ const RecheckPage = () => {
                 onClick={handleSubmit}
                 className="mx-auto mt-8 py-3 w-52 text-center text-xl text-white font-poppins font-semibold bg-purple-gradient rounded-full tracking-wider shadow-lg active:scale-90"
             >
-                LET'S GO!
+                LET&apos;S GO!
             </div>
         </div>
     )
