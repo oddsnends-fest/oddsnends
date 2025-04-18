@@ -15,6 +15,7 @@ import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
 import SliderBox from "@/components/SliderBox/SliderBox";
+import AnimalSelection from "@/components/AnimalSelection/AnimalSelection";
 
 export default function FormPage() {
   const [name, setName] = useState("");
@@ -123,36 +124,28 @@ export default function FormPage() {
           </div>
 
           {/* spirit animal */}
-          <div>
-            <label
-              htmlFor="spirit-animal"
-              className="mb-2 text-2xl font-medium"
-            >
-              Spirit Animal
-            </label>
-            <select
-              id="spirit-animal"
-              className={`h-10 w-full rounded-md border-2 border-black p-2 text-sm ${spiritAnimal == "" ? "text-gray-400" : "text-black"}`}
-              value={spiritAnimal}
-              onChange={(e) => setSpiritAnimal(e.target.value)}
-            >
-              <option value="" disabled className="text-gray-400">
-                Select. . .
-              </option>
-              {ANIMALS.map(({ value, label }) => (
-                <option key={value} value={value} className="text-black">
-                  {label}
-                </option>
-              ))}
-            </select>
+          <div className="col-span-2">
+            <div className="flex items-baseline gap-2">
+              <label className="mb-2 block text-2xl font-medium">
+                Your Animal
+              </label>
+              <div>เลือกสัตว์ที่ต้องการ</div>
+            </div>
+            <AnimalSelection onSelectAnimal={setSpiritAnimal} />
+            {spiritAnimal && (
+              <p className="mt-2 text-custom-dark-gray">
+                Spirited Animal: {spiritAnimal}
+              </p>
+            )}
           </div>
         </div>
         <Signature />
         <PhotoUpload />
         {/* send button */}
+
         <button
           type="submit"
-          className="mx-auto mt-60 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
+          className="mx-auto mt-20 w-3/4 rounded-2xl bg-custom-dark-gray p-2 text-xl text-white hover:bg-custom-light-gray"
         >
           Send
         </button>
