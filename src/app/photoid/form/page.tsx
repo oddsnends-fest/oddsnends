@@ -252,11 +252,6 @@ export default function FormPage() {
               </label>
 
               <AnimalSelection onSelectAnimal={setSpiritAnimal} />
-              {spiritAnimal && (
-                <p className="mt-2 text-custom-dark-gray">
-                  Spirited Animal: {spiritAnimal}
-                </p>
-              )}
             </div>
           </div>
           <section className="grid grid-cols-3 gap-6 place-self-start">

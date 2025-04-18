@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { CardRef } from "@/types/cardRef";
+import { type CardRef } from "@/types/cardRef";
 // import html2canvas from "html2canvas";
-import { toJpeg } from "html-to-image";
+import { toPng } from "html-to-image";
 
 export default function useShareToInstagram() {
   const [isSharing, setIsSharing] = useState(false); // sharing state to prevent multiple sharing
@@ -15,7 +15,7 @@ export default function useShareToInstagram() {
         const dataURL = await convertImage(cardRef.current);
         // console.log(dataURL, "canvas.toDataURL")
         link.href = dataURL;
-        link.download = "oddnends_ticket.jpeg";
+        link.download = "oddnends_ticket.png";
 
         link.click();
       } catch (error) {
@@ -33,7 +33,7 @@ export default function useShareToInstagram() {
     const maxAttempts = 20;
 
     for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
-      dataUrl = await toJpeg(element, { quality: 1, pixelRatio: 4 });
+      dataUrl = await toPng(element, { quality: 1, pixelRatio: 4 });
     }
 
     return dataUrl;
@@ -62,7 +62,7 @@ export default function useShareToInstagram() {
         if (!blob) {
           return;
         }
-        const file = new File([blob], "oddnends_ticket.jpg", {
+        const file = new File([blob], "oddnends_ticket.png", {
           type: blob.type,
         });
 
