@@ -176,7 +176,7 @@ export default function ShareToInstagram() {
             className="w-[17rem] cursor-pointer rounded-full bg-purple-gradient py-3 text-center font-semibold text-[24px] text-white"
             onClick={() => {
               localStorage.removeItem("frame");
-              localStorage.removeItem("info");
+              localStorage.removeItem("formData");
               // setSelectedFrame(null);
               // setUserInfo(null);
 

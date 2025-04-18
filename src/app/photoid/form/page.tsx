@@ -13,7 +13,7 @@ import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import BackGround from "@/components/BackgroundPhotoId";
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 import BackButton from "@/components/BackButton/BackButton";
@@ -62,7 +62,9 @@ export default function FormPage() {
   };
 
   useEffect(() => {
+    const frameSelected = localStorage.getItem("frame");
     const storedData = localStorage.getItem("formData");
+    if(!frameSelected) redirect("/photoid/frame");
     if (storedData) {
       try {
         const parsed = JSON.parse(storedData) as unknown as {
