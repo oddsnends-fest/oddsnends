@@ -12,7 +12,8 @@ export default {
                     ...fontFamily.sans
                 ],
 			cooper: ['Cooper Std', ...fontFamily.sans],
-			poppins: ['Poppins', ...fontFamily.sans]
+			poppins: ['Poppins', ...fontFamily.sans],
+			schoolbell: ['Schoolbell', ...fontFamily.sans]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -68,6 +69,7 @@ export default {
 		},
 		backgroundImage: {
 			'purple-gradient': 'linear-gradient(to bottom, #B56A95 -30%, #553B82 90%)',
+			
 		},
   	}
   },

@@ -104,6 +104,33 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Schoolbell";
+  src: url("/fonts/Schoolbell-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif;
+}
+
+.title-photoid {
+  @apply mt-3 text-center font-cooper text-[2.25rem] font-extrabold leading-[1.25] text-[#3D245B];
+}
+
+.subtitle-photoid {
+  @apply text-center align-middle font-poppins text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
