@@ -26,7 +26,7 @@ function AnimalSelection({ onSelectAnimal }: Props) {
         {ANIMALS.map(({ value, label }, idx) => (
           <SwiperSlide key={idx}>
             <button type="button" onClick={() => handleSelect(value)}>
-              <div className="flex h-[94px] w-[94px] items-center justify-center rounded-xl bg-custom-light-gray text-sm">
+              <div className="flex h-[94px] w-[94px] items-center justify-center rounded-xl bg-white text-sm">
                 {label}
               </div>
             </button>
