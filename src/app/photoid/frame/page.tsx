@@ -36,7 +36,7 @@ export default function FrameSelectionPage() {
         <h1 className="title-photoid">Select Frame</h1>
         <p className="subtitle-photoid mb-1">เลือกเฟรมรูปที่ต้องการ</p>
         {/* Grid containing frame options */}
-        <section className="grid w-[80%] grid-cols-1 gap-6">
+        <section className="mt-5 grid w-[80%] grid-cols-1 gap-6">
           {frameSrc.map((src, index) => {
             // console.logloglogloglog(selectedFrame, "selectedFrame");
             return (

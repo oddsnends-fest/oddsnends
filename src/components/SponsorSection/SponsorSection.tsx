@@ -19,7 +19,7 @@ const SponsorSection = () => {
       src: isPhotoIdRoute
         ? "/images/sponsors/Binance_purple.png"
         : "/images/sponsors/Binance_white.png",
-      link: "https://www.instagram.com/ioic_chula/?hl=en",
+      link: "https://www.binance.th/en",
       size: 132,
     },
 
@@ -27,7 +27,7 @@ const SponsorSection = () => {
       src: isPhotoIdRoute
         ? "/images/sponsors/IOIC_purple.png"
         : "/images/sponsors/IOIC_white.png",
-      link: "https://www.binance.th/en",
+      link: "https://www.instagram.com/ioic_chula/?hl=en",
       size: isPhotoIdRoute ? 45 : 85, // provide link please
       className: isPhotoIdRoute ? "" : "translate-y-2",
     },
@@ -39,7 +39,7 @@ const SponsorSection = () => {
   ];
 
   return (
-    <section className={"z-10 mb-7 bg-transparent"}>
+    <section className={"z-10 mb-10 bg-transparent"}>
       <ul className="flex items-center justify-center">
         {sponsors.map(({ src, link, size, className }, idx) => (
           <li key={idx}>
