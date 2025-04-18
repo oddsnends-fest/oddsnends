@@ -10,9 +10,11 @@ type Props = {
 
 function AnimalSelection({ onSelectAnimal }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedAnimal, setSelectedAnimal] = useState<string | null>(null);
 
   const handleSelect = (value: string) => {
     onSelectAnimal(value);
+    setSelectedAnimal(value);
   };
 
   return (
@@ -26,7 +28,9 @@ function AnimalSelection({ onSelectAnimal }: Props) {
         {ANIMALS.map(({ value, label }, idx) => (
           <SwiperSlide key={idx}>
             <button type="button" onClick={() => handleSelect(value)}>
-              <div className="flex h-[94px] w-[94px] items-center justify-center rounded-xl bg-white text-sm">
+              <div
+                className={`flex h-[94px] w-[94px] items-center justify-center rounded-xl ${selectedAnimal == value ? "bg-custom-light-gray" : "bg-white"}`}
+              >
                 {label}
               </div>
             </button>
