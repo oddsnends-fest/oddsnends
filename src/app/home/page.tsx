@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import SlidingBox from "@/components/SlidingBox/SlidingBox";
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
 import { useLiff } from "@/providers/liff-provider";
 
 export default function HomePage() {
@@ -49,8 +50,8 @@ export default function HomePage() {
                 </button>
             </div>
         </main>
-
-        <div className="absolute bottom-0 h-96 w-full bg-black -z-20" />
+        <SponsorSection/>
+        {/* <div className="absolute bottom-0 h-96 w-full bg-black -z-20" /> */}
     </>
   );
 }
