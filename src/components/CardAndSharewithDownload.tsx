@@ -70,7 +70,7 @@ export default function ShareToInstagram() {
     return (
       <div
         ref={cardRef}
-        className={`flex aspect-[9/16] h-[196px] w-[330px] max-w-screen-sm overflow-hidden rounded-xl font-schoolbell shadow-2xl ${textColor}`}
+        className={`flex h-[196px] w-[330px] max-w-screen-sm overflow-hidden rounded-xl font-schoolbell shadow-2xl ${textColor}`}
       >
         <div
           style={{ backgroundImage: `url('${frameImagePath}')` }}
