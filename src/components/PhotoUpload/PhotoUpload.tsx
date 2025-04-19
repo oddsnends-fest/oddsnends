@@ -10,6 +10,7 @@ import BackGround from "../BackgroundPhotoId";
 import SponsorSection from "../SponsorSection/SponsorSection";
 import SocialMediaBar from "../SocialMediaBar/SocialMediaBar";
 import Header from "../Header/Header";
+import BackButton from "../BackButton/BackButton";
 
 const FILE_SIZE_LIMIT = 4 * 1024 * 1024; // 4MB
 
@@ -164,14 +165,7 @@ function PhotoUpload({
         </button>
       )}
 
-      {isModalOpen && (
-        <button
-          className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
-          onClick={closeModal}
-        >
-          ←
-        </button>
-      )}
+      {isModalOpen && <BackButton onClick={closeModal} />}
 
       {/* Modal for Cropping Image */}
       {isModalOpen && (
