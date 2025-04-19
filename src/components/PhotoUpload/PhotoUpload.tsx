@@ -206,7 +206,7 @@ function PhotoUpload({
               <div className="flex justify-center gap-4">
                 <button
                   onClick={handleClickConfirm}
-                  className="cursor-pointer rounded-full bg-purple-gradient px-20 py-2 text-white"
+                  className="cursor-pointer rounded-full bg-purple-gradient px-20 py-2 font-semibold text-white"
                 >
                   NEXT
                 </button>
