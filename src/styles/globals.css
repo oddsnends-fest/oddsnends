@@ -111,6 +111,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("/fonts/NotoSansThai.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -120,7 +127,7 @@ body {
 }
 
 .subtitle-photoid {
-  @apply text-center align-middle font-poppins text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
+  @apply text-center align-middle text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
 }
 
 @layer utilities {
@@ -134,3 +141,37 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+@keyframes bounceDot {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+  40% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.dot {
+  display: inline-block;
+  animation: bounceDot 2s infinite ease-in-out;
+  font-weight: bold;
+  font-size: 4.5rem;
+  margin-left: 0.15rem;
+  margin-right: 0.15rem;
+  color: #5B2A86;
+}
+
+.dot1 {
+  animation-delay: 0s;
+}
+
+.dot2 {
+  animation-delay: 0.2s;
+}
+
+.dot3 {
+  animation-delay: 0.4s;
+}
+
