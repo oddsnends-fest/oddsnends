@@ -1,26 +1,29 @@
 "use client";
-import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, type Dispatch, type SetStateAction } from "react";
 import Image from "next/image";
 // import Modal from "../Modal/Modal";
 import ImageCropper from "./ImageCropper/ImageCropper";
-
-import { type PutBlobResult } from "@vercel/blob";
-import { upload } from "@vercel/blob/client";
+// import { type PutBlobResult } from "@vercel/blob";
+// import { upload } from "@vercel/blob/client";
 // import Link from "next/link";
 import BackGround from "../BackgroundPhotoId";
 import SponsorSection from "../SponsorSection/SponsorSection";
 import SocialMediaBar from "../SocialMediaBar/SocialMediaBar";
 import Header from "../Header/Header";
+
+const FILE_SIZE_LIMIT = 4 * 1024 * 1024; // 4MB
+
 function PhotoUpload({
   croppedImage,
   setCroppedImage,
+  setUploadError,
 }: {
   croppedImage: string | null;
-  setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
+  setCroppedImage: Dispatch<SetStateAction<string | null>>;
+  setUploadError: Dispatch<SetStateAction<string | null>>;
 }) {
   const photoInputRef = useRef<HTMLInputElement>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  // const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,6 +48,11 @@ function PhotoUpload({
 
     if (file) {
       try {
+        if (file.size > FILE_SIZE_LIMIT) {
+          setUploadError("กรุณาอัปโหลดรูปขนาดไม่เกิน 4 MB");
+          return;
+        }
+
         const reader = new FileReader(); // filereader
         reader.onload = () => {
           setUploadedImage(reader.result as string);
@@ -105,25 +113,26 @@ function PhotoUpload({
     setCroppedImage(croppedImage);
     closeModal();
     setConfirm(false);
+    setUploadError(null);
   };
 
-  const handleSubmitUpload = async (croppedImage: string) => {
-    if (!croppedImage) {
-      alert("Please crop and choose the image before uploading.");
-      return;
-    }
+  // const handleSubmitUpload = async (croppedImage: string) => {
+  //   if (!croppedImage) {
+  //     alert("Please crop and choose the image before uploading.");
+  //     return;
+  //   }
 
-    const file = dataURLtoFile(croppedImage, "cropped-image.png");
+  //   const file = dataURLtoFile(croppedImage, "cropped-image.png");
 
-    const newBlob = await upload(file.name, file, {
-      access: "public",
-      handleUploadUrl: "/api/upload",
-    });
+  //   const newBlob = await upload(file.name, file, {
+  //     access: "public",
+  //     handleUploadUrl: "/api/upload",
+  //   });
 
-    setBlob(newBlob);
+  //   setBlob(newBlob);
 
-    // console.log("upload already");
-  };
+  //   console.log("upload already");
+  // };
 
   return (
     <div className="">
@@ -217,7 +226,7 @@ function PhotoUpload({
           <div className="absolute -bottom-6 -z-10">
             <SponsorSection />
           </div>
-          {/* COrrect */}
+          {/* Correct */}
 
           <SocialMediaBar />
         </div>
