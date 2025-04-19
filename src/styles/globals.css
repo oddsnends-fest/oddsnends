@@ -111,6 +111,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("/fonts/NotoSansThai.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -120,7 +127,7 @@ body {
 }
 
 .subtitle-photoid {
-  @apply text-center align-middle font-poppins text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
+  @apply text-center align-middle text-[1.25rem] font-light leading-none tracking-normal text-[#3D245B];
 }
 
 @layer utilities {
