@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 // import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 // import { upload } from "@vercel/blob/client";
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 import Image from "next/image";
 import BackGround from "./BackgroundPhotoId";
 import SponsorSection from "./SponsorSection/SponsorSection";
@@ -82,7 +82,7 @@ export default function Signature({
               height={30}
               src={base64ImageUrl}
               alt="Saved Signature"
-              className="h-[80px] w-full rounded-lg bg-white px-2 py-2"
+              className="h-[80px] w-[123px] rounded-lg bg-white px-2 py-2"
             />
           ) : (
             <div className="flex items-center justify-center rounded-lg bg-white py-4">
@@ -128,7 +128,7 @@ export default function Signature({
             {/* Modal Header */}
 
             {/* Signature Canvas */}
-            
+
             <Sig
               ref={sigCanvas}
               penColor="black"

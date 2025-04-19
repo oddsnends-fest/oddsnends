@@ -229,6 +229,7 @@ function PhotoUpload({
         accept="image/jpeg, image/png, image/jpg"
         className="hidden"
         ref={photoInputRef}
+        id="photo"
         onChange={handleFileChange}
       />
 
@@ -248,10 +249,10 @@ function PhotoUpload({
           <Image
             src={croppedImage}
             alt="Cropped Image"
-            width={80}
-            height={80}
+            width={100}
+            height={124.6}
             quality={1.0}
-            className="-z-20 h-[100px] w-[100px] rounded-lg"
+            className="-z-20 h-[124.6px] w-[100px] rounded-lg"
           />
         </div>
       )}

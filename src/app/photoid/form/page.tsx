@@ -198,7 +198,7 @@ export default function FormPage() {
               <AnimalSelection onSelectAnimal={setSpiritAnimal} />{" "}
             </div>
           </div>
-          <section className="mt-3 grid grid-cols-3 gap-6 place-self-start">
+          <section className="mt-3 grid grid-cols-3 gap-x-4 gap-y-4 place-self-start">
             <label
               htmlFor="signature"
               className="col-span-1 mb-2 text-xs font-medium"
@@ -208,16 +208,14 @@ export default function FormPage() {
                 ลายเซ็น
               </p>
             </label>
-            <Signature
-              base64ImageUrl={base64ImageUrl}
-              setBase64ImageUrl={setBase64ImageUrl}
-            />
-            <div className="col-span-1"></div>
-          </section>
-
-          <section className="grid grid-cols-3 gap-4 place-self-start">
+            <div className="col-span-2">
+              <Signature
+                base64ImageUrl={base64ImageUrl}
+                setBase64ImageUrl={setBase64ImageUrl}
+              />
+            </div>
             <label
-              htmlFor="signature"
+              htmlFor="photo"
               className="col-span-1 mb-2 text-xs font-medium"
             >
               Your Photo ID
@@ -225,12 +223,14 @@ export default function FormPage() {
                 รูปถ่าย
               </p>
             </label>
-            <PhotoUpload
-              croppedImage={croppedImage}
-              setCroppedImage={setCroppedImage}
-            />
-            <div className="col-span-1"></div>
+            <div className="col-span-2">
+              <PhotoUpload
+                croppedImage={croppedImage}
+                setCroppedImage={setCroppedImage}
+              />
+            </div>
           </section>
+
           {name &&
             hobby &&
             date &&
@@ -242,7 +242,7 @@ export default function FormPage() {
                   className="absolute w-[16rem] rounded-full bg-purple-gradient py-3 text-center font-poppins text-[1.25rem] text-xl font-semibold tracking-wider text-white shadow-lg active:scale-90"
                   onClick={handleSubmit}
                 >
-                  SUBMIT
+                  NEXT
                 </button>
               </div>
             )}
