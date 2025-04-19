@@ -155,8 +155,8 @@ const RecheckPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex flex-col justify-start gap-10 mx-auto'>
-                                <div className="text-center">
+                            <div className='flex flex-col justify-between gap-10 mx-auto'>
+                                <div className="text-center h-[100px]">
                                     Animal
                                     <div className="mt-1">
                                         {ANIMALS.find(animal => animal.value === userInfo.spiritAnimal)?.label}
