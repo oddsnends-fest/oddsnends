@@ -32,13 +32,17 @@ const SponsorSection = () => {
     //   className: isPhotoIdRoute ? "" : "translate-y-2",
     // },
     {
-      src: "/images/sponsors/CUNEX.png",
+      src: isPhotoIdRoute
+        ? "/images/sponsors/CUNEX_purple.png"
+        : "/images/sponsors/CUNEX_white.png",
       // CUNEX link
       link: "https://www.instagram.com/ioic_chula/?hl=en",
-      size: 82,
+      size: 48,
     },
     {
-      src: "/images/sponsors/MajorCineplex.png",
+      src: isPhotoIdRoute
+        ? "/images/sponsors/MajorCineplex_purple.png"
+        : "/images/sponsors/MajorCineplex_white.png",
       // Major link
       link: "https://www.instagram.com/ioic_chula/?hl=en",
       size: 65,
