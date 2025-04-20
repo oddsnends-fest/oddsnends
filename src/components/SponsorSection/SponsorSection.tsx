@@ -34,8 +34,8 @@ const sponsors: Sponsor[] = [
 
 const SponsorSection = () => {
   return (
-    <section className="z-10 mb-7 bg-transparent">
-      <ul className="flex flex-wrap items-center justify-center">
+    <section className="z-10 mb-9 bg-transparent">
+      <ul className="flex flex-nowrap items-center justify-center">
         {sponsors.map(({ src, link, size, className }, idx) => (
           <li key={idx}>
             <a href={link} target="_blank" rel="noopener noreferrer">
