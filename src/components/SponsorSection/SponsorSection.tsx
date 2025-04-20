@@ -23,13 +23,25 @@ const SponsorSection = () => {
       size: 132,
     },
 
+    // {
+    //   src: isPhotoIdRoute
+    //     ? "/images/sponsors/IOIC_purple.png"
+    //     : "/images/sponsors/IOIC_white.png",
+    //   link: "https://www.instagram.com/ioic_chula/?hl=en",
+    //   size: isPhotoIdRoute ? 45 : 85, // provide link please
+    //   className: isPhotoIdRoute ? "" : "translate-y-2",
+    // },
     {
-      src: isPhotoIdRoute
-        ? "/images/sponsors/IOIC_purple.png"
-        : "/images/sponsors/IOIC_white.png",
+      src: "/images/sponsors/CUNEX.png",
+      // CUNEX link
       link: "https://www.instagram.com/ioic_chula/?hl=en",
-      size: isPhotoIdRoute ? 45 : 85, // provide link please
-      className: isPhotoIdRoute ? "" : "translate-y-2",
+      size: 82,
+    },
+    {
+      src: "/images/sponsors/MajorCineplex.png",
+      // Major link
+      link: "https://www.instagram.com/ioic_chula/?hl=en",
+      size: 65,
     },
 
     //   { src: "/", link: "/"},
@@ -39,9 +51,9 @@ const SponsorSection = () => {
   ];
 
   return (
-    <section className={"z-10 mb-7 bg-transparent"}>
+    <section className={"z-10 mb-9 bg-transparent"}>
       <ul className="flex items-center justify-center">
-        {sponsors.map(({ src, link, size, className }, idx) => (
+        {sponsors.map(({ src, link, size }, idx) => (
           <li key={idx}>
             <a href={link} target="_blank" rel="noopener noreferrer">
               <Image
@@ -49,7 +61,7 @@ const SponsorSection = () => {
                 alt={`${idx + 1}`}
                 width={size}
                 height={size}
-                className={className}
+                // className={className}
               />
             </a>
           </li>
