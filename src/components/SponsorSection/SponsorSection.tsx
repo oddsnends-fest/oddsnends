@@ -35,8 +35,7 @@ const SponsorSection = () => {
       src: isPhotoIdRoute
         ? "/images/sponsors/CUNEX_purple.png"
         : "/images/sponsors/CUNEX_white.png",
-      // CUNEX link
-      link: "https://www.instagram.com/ioic_chula/?hl=en",
+      link: "https://www.instagram.com/cunex.review/",
       size: 48,
     },
     {
@@ -44,7 +43,7 @@ const SponsorSection = () => {
         ? "/images/sponsors/MajorCineplex_purple.png"
         : "/images/sponsors/MajorCineplex_white.png",
       // Major link
-      link: "https://www.instagram.com/ioic_chula/?hl=en",
+      link: "https://www.instagram.com/majorgroup/",
       size: 65,
     },
 

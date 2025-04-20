@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 const imgSrc = [
   {
       src: "/images/events/Thumbnail_GetYourID.png",
-      link: "/photoid/form"
+      link: "/photoid/frame"
   },
   {
       src: "/images/events/Thumbnail_Apply.png",
