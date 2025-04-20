@@ -9,7 +9,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import React from "react";
-import { ANIMALS } from "@/constants/spirit-animals";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
@@ -27,6 +26,7 @@ export default function FormPage() {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const router = useRouter();
   // console.logle.log(name, hobby, date, spiritAnimal, base64ImageUrl, "information");
@@ -224,11 +224,15 @@ export default function FormPage() {
               <p className="text-xs font-light leading-[100%] tracking-[0] text-[#3D245B]/60">
                 รูปถ่าย
               </p>
+              <p className="mt-2 text-xs font-light leading-[100%] tracking-[0] text-red-600">
+                {uploadError}
+              </p>
             </label>
             <div className="col-span-2">
               <PhotoUpload
                 croppedImage={croppedImage}
                 setCroppedImage={setCroppedImage}
+                setUploadError={setUploadError}
               />
             </div>
           </section>

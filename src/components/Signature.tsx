@@ -10,6 +10,7 @@ import BackGround from "./BackgroundPhotoId";
 import SponsorSection from "./SponsorSection/SponsorSection";
 import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
 import Header from "./Header/Header";
+import BackButton from "./BackButton/BackButton";
 
 interface CustomSignatureProps {
   penColor?: string;
@@ -64,14 +65,7 @@ export default function Signature({
   return (
     <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
-      {isModalOpen && (
-        <button
-          className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
-          onClick={closeModal}
-        >
-          ←
-        </button>
-      )}
+      {isModalOpen && <BackButton onClick={closeModal} />}
       {/* Signature Pad Container */}
       <div className="relative rounded-md border border-gray-300">
         {/* Clickable Signature Box */}
