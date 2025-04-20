@@ -54,7 +54,7 @@ export default function HomePage() {
                         className="relative flex"
                     >
                         <a
-                            href="/photoid/form"
+                            href="/photoid/frame"
                             className="py-4 px-4 translate-x-12 rounded-full bg-purple-gradient text-white text-lg font-semibold tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)] relative z-10"
                         >
                             GET YOUR <span className="text-[#FFDF58]">ID CARD!</span>
