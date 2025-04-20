@@ -11,7 +11,7 @@ const sponsors: Sponsor[] = [
   {
     src: "/images/sponsors/SlowCombo.png",
     link: "https://www.instagram.com/slowcombo/?hl=en",
-    size: 110,
+    size: 96,
   },
   {
     src: "/images/sponsors/Binance TH.png",
@@ -19,10 +19,16 @@ const sponsors: Sponsor[] = [
     size: 132,
   },
   {
-    src: "/images/sponsors/IOIC.png",
+    src: "/images/sponsors/CUNEX.png",
+    // CUNEX link
     link: "https://www.instagram.com/ioic_chula/?hl=en",
-    size: 95,
-    className: "translate-y-2",
+    size: 82,
+  },
+  {
+    src: "/images/sponsors/MajorCineplex.png",
+    // Major link
+    link: "https://www.instagram.com/ioic_chula/?hl=en",
+    size: 65,
   },
 ];
 
