@@ -39,7 +39,7 @@ const SponsorSection = () => {
   ];
 
   return (
-    <section className={"z-10 mb-10 bg-transparent"}>
+    <section className={"z-10 mb-7 bg-transparent"}>
       <ul className="flex items-center justify-center">
         {sponsors.map(({ src, link, size, className }, idx) => (
           <li key={idx}>
