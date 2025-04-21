@@ -1,20 +1,15 @@
 import { NextResponse, NextRequest } from "next/server";
+import { headers } from 'next/headers';
 import { PrismaClient } from "@prisma/client";
 import { db } from "@/server/db";
 
-interface Params {
-    id: string;
-}
-
-export async function GET(
-    request: Request,
-    { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET() {
     try {
-        const { id } = await params; // Get user ID from the dynamic route
+        const User = await headers()
+        const id = User.get('X-User-Id'); // Get the user ID from the headers
 
         if (!id) {
-            return NextResponse.json({ error: "User ID is required" }, { status: 400 });
+            return NextResponse.json({ error: "Unauthorized - No User ID found" }, { status: 401 });
         }
 
         const user = await db.user.findUnique({
@@ -37,5 +32,7 @@ export async function GET(
     } catch (error) {
         console.error("Error fetching user data:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } finally {
+        await db.$disconnect();
     }
 }
