@@ -1,7 +1,9 @@
 const SupportersSection = () => {
     const sponsors = [
-      { logo: "/images/sponsors/IOIC.png", website: "#" },
-      { logo: "/images/sponsors/SlowCombo.png", website: "#" },
+      { logo: "/images/sponsors/SlowCombo_white.png", website: "https://www.instagram.com/slowcombo/?hl=en" },
+      { logo: "/images/sponsors/Binance_white.png", website: "https://www.binance.th/en" },
+      { logo: "/images/sponsors/CUNEX_white.png", website: "https://www.instagram.com/cunex.review/" },
+      { logo: "/images/sponsors/MajorCineplex_white.png", website: "https://www.instagram.com/majorgroup/" },
     ];
   
     return (

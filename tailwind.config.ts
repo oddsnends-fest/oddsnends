@@ -11,9 +11,11 @@ export default {
   				'var(--font-geist-sans)',
                     ...fontFamily.sans
                 ],
+			auto: ['Poppins', '"NotoSansThai"', 'sans-serif'],
 			cooper: ['Cooper Std', ...fontFamily.sans],
 			poppins: ['Poppins', ...fontFamily.sans],
-			schoolbell: ['Schoolbell', ...fontFamily.sans]
+			schoolbell: ['Schoolbell', ...fontFamily.sans],
+			notosansthai: ['NotoSansThai', ...fontFamily.sans],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -69,6 +71,7 @@ export default {
 		},
 		backgroundImage: {
 			'purple-gradient': 'linear-gradient(to bottom, #B56A95 -30%, #553B82 90%)',
+			
 		},
   	}
   },

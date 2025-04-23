@@ -26,6 +26,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_LIFF_ID: z.string(),
     NEXT_PUBLIC_GA_ID: z.string(),
+    NEXT_PUBLIC_DISABLE_LIFF_LOGIN: z.enum(["true", "false"]).default("false"),
   },
 
   /**
@@ -38,6 +39,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_LIFF_ID: process.env.NEXT_PUBLIC_LIFF_ID,
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+    NEXT_PUBLIC_DISABLE_LIFF_LOGIN: process.env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN,
     LINE_LOGIN_CHANNEL_ID: process.env.LINE_LOGIN_CHANNEL_ID,
   },
   /**

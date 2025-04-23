@@ -13,6 +13,13 @@ const config = {
         hostname: "plus.unsplash.com",
         port: "",
       },
+
+      {
+        protocol: "https",
+        hostname: "**.public.blob.vercel-storage.com", // Replace with your blob hostname
+        port: "",
+        pathname: "/**", // Allow all paths under this hostname
+      },
     ],
   },
 };
