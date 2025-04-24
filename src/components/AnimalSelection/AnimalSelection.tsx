@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { ANIMALS } from "@/constants/spirit-animals";
+import Image from "next/image";
 
 type Props = {
   onSelectAnimal: (value: string) => void;
@@ -18,7 +19,7 @@ function AnimalSelection({ onSelectAnimal }: Props) {
   };
 
   return (
-    <div className="flex w-full flex-col items-center overflow-hidden">
+    <div className="mt-1 flex w-full flex-col items-center overflow-hidden">
       <Swiper
         spaceBetween={12}
         slidesPerView={3.5}
@@ -31,7 +32,13 @@ function AnimalSelection({ onSelectAnimal }: Props) {
               <div
                 className={`flex h-[94px] w-[94px] items-center justify-center rounded-xl ${selectedAnimal == value ? "bg-custom-light-gray" : "bg-white"}`}
               >
-                {label}
+                <Image
+                  src={`/images/spirit-animals/${value}.png`}
+                  alt={label}
+                  width={64}
+                  height={64}
+                  className="object-contain"
+                />
               </div>
             </button>
           </SwiperSlide>

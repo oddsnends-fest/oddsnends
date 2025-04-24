@@ -162,12 +162,14 @@ const RecheckPage = () => {
               <div className="mx-auto flex flex-col justify-between gap-10">
                 <div className="h-[100px] text-center">
                   Animal
-                  <div className="mt-1 flex aspect-square w-full items-center justify-center rounded-xl border border-[#3D245B] bg-custom-light-gray">
-                    {
-                      ANIMALS.find(
-                        (animal) => animal.value === userInfo.spiritAnimal,
-                      )?.label
-                    }
+                  <div className="mt-1 flex aspect-square w-full items-center justify-center rounded-xl border border-[#3D245B] bg-white">
+                    <Image
+                      src={`/images/spirit-animals/${userInfo.spiritAnimal}.png`}
+                      alt={userInfo.spiritAnimal}
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                    />
                   </div>
                 </div>
                 <div className="text-center">

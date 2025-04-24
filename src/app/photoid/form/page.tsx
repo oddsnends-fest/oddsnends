@@ -64,7 +64,7 @@ export default function FormPage() {
   useEffect(() => {
     const frameSelected = localStorage.getItem("frame");
     const storedData = localStorage.getItem("formData");
-    if(!frameSelected) redirect("/photoid/frame");
+    if (!frameSelected) redirect("/photoid/frame");
     if (storedData) {
       try {
         const parsed = JSON.parse(storedData) as unknown as {
