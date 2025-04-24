@@ -173,7 +173,7 @@ export default function ShareToInstagram() {
             Want more frame?
           </h2>
           <div
-            className="w-[17rem] cursor-pointer rounded-full bg-purple-gradient py-3 text-center font-semibold text-[24px] text-white"
+            className="w-[17rem] cursor-pointer rounded-full bg-purple-gradient py-3 text-center text-[24px] font-semibold text-white"
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("formData");

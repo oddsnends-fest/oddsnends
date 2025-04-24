@@ -69,6 +69,7 @@
     "@types/eslint": "^8.56.10",
     "@types/jest": "^29.5.14",
     "@types/jsdom": "^21.1.7",
+    "@types/jwt-decode": "^3.1.0",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
@@ -90,6 +91,7 @@
     "prisma": "^5.14.0",
     "react-icons": "^5.4.0",
     "react-image-crop": "^11.0.7",
+    "react-image-file-resizer": "^0.4.8",
     "react-signature-canvas": "^1.0.7",
     "swiper": "^11.2.2",
     "swr": "^2.3.0",
@@ -98,11 +100,10 @@
     "ts-jest": "^29.2.5",
     "typescript": "^5.5.3",
     "ua-parser-js": "^2.0.3",
-    "vercel": "^39.2.6",
-    "@types/jwt-decode": "^3.1.0"
+    "vercel": "^39.2.6"
   },
   "ct3aMetadata": {
     "initVersion": "7.38.1"
   },
-  "packageManager": "pnpm@10.8.0"
+  "packageManager": "pnpm@10.9.0"
 }

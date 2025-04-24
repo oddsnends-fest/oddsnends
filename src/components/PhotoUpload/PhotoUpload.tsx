@@ -244,14 +244,14 @@ function PhotoUpload({
 
       {/* For testing cropped results */}
       {croppedImage && (
-        <div className="relative z-0 w-fit" onClick={handleClickUpload}>
+        <div className="relative z-0 h-full w-full" onClick={handleClickUpload}>
           <Image
             src={croppedImage}
             alt="Cropped Image"
             width={80}
             height={80}
             quality={1.0}
-            className="-z-20 h-[100px] w-[100px] rounded-lg"
+            className="-z-20 rounded-lg object-contain"
           />
         </div>
       )}

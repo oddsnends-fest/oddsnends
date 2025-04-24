@@ -7,6 +7,7 @@ import ReactCrop, {
 } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Image from "next/image";
+import Resizer from "react-image-file-resizer";
 import { useState, useRef, useEffect, useCallback } from "react";
 
 interface ImageCropperProps {
@@ -57,7 +58,7 @@ function ImageCropper({ src, onSaveCrop, confirm }: ImageCropperProps) {
     const scaleY = imgRef.current.naturalHeight / imgRef.current.height;
 
     const TARGET_HEIGHT = 100; // 6.25rem = 100px (assuming 1rem = 16px)
-    const TARGET_WIDTH = (TARGET_HEIGHT * scaleY) / scaleX;
+    const TARGET_WIDTH = (TARGET_HEIGHT * 4) / 5;
 
     canvas.width = TARGET_WIDTH;
     canvas.height = TARGET_HEIGHT;
@@ -67,6 +68,9 @@ function ImageCropper({ src, onSaveCrop, confirm }: ImageCropperProps) {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
 
     ctx.drawImage(
       imgRef.current,
@@ -80,7 +84,7 @@ function ImageCropper({ src, onSaveCrop, confirm }: ImageCropperProps) {
       canvas.height,
     );
 
-    const base64Image = canvas.toDataURL("image/png");
+    const base64Image = canvas.toDataURL("image/png", 1.0);
     onSaveCrop(base64Image); // Call the callback function with the cropped image data
 
     // canvas.toBlob((blob) => {
