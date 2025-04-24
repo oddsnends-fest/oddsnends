@@ -22,7 +22,10 @@ export default function FormPage() {
   const [name, setName] = useState("");
   const [hobby, setHobby] = useState("");
   const [date, setDate] = useState<Date>();
-  const [spiritAnimal, setSpiritAnimal] = useState("");
+  const [spiritAnimal, setSpiritAnimal] = useState<{
+    value: string;
+    name: string;
+  } | null>(null);
   const [openCalendar, setOpenCalendar] = useState(false);
   const [base64ImageUrl, setBase64ImageUrl] = useState<string | null>(null);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
@@ -38,7 +41,7 @@ export default function FormPage() {
       !name ||
       !hobby ||
       !date ||
-      !spiritAnimal ||
+      !spiritAnimal?.value ||
       !base64ImageUrl ||
       !croppedImage
     ) {
@@ -50,7 +53,8 @@ export default function FormPage() {
       name,
       hobby,
       date,
-      spiritAnimal,
+      spiritAnimal: spiritAnimal.value,
+      spiritAnimalName: spiritAnimal.name,
       base64ImageUrl,
       croppedImage,
     };
@@ -72,6 +76,7 @@ export default function FormPage() {
           hobby?: string;
           date?: string;
           spiritAnimal?: string;
+          spiritAnimalName?: string;
           base64ImageUrl?: string;
           croppedImage?: string;
         };
@@ -79,7 +84,10 @@ export default function FormPage() {
         setName(parsed.name ?? "");
         setHobby(parsed.hobby ?? "");
         setDate(parsed.date ? new Date(parsed.date) : undefined);
-        setSpiritAnimal(parsed.spiritAnimal ?? "");
+        setSpiritAnimal({
+          value: parsed.spiritAnimal ?? " ",
+          name: parsed.spiritAnimalName ?? " ",
+        });
         setBase64ImageUrl(parsed.base64ImageUrl ?? "/");
         setCroppedImage(parsed.croppedImage ?? "/");
       } catch (error) {
