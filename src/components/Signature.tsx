@@ -1,15 +1,22 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 // import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 // import { upload } from "@vercel/blob/client";
+import type { ComponentType } from 'react';
 import Image from "next/image";
 import BackGround from "./BackgroundPhotoId";
 import SponsorSection from "./SponsorSection/SponsorSection";
 import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
 import Header from "./Header/Header";
-import { redirect } from "next/navigation";
+
+interface CustomSignatureProps {
+  penColor?: string;
+  canvasProps?: React.CanvasHTMLAttributes<HTMLCanvasElement>;
+  // add other props you use here
+}
+
 export default function Signature({
   base64ImageUrl,
   setBase64ImageUrl,
@@ -53,7 +60,7 @@ export default function Signature({
   };
 
   // console.log(base64ImageUrl, "base64ImageUrl");
-
+  const Sig: ComponentType<CustomSignatureProps> = SignatureCanvas;
   return (
     <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
@@ -121,7 +128,8 @@ export default function Signature({
             {/* Modal Header */}
 
             {/* Signature Canvas */}
-            <SignatureCanvas
+            
+            <Sig
               ref={sigCanvas}
               penColor="black"
               canvasProps={{
