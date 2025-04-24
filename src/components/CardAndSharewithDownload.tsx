@@ -7,9 +7,10 @@ import Image from "next/image";
 import BackButton from "@/components/BackButton/BackButton";
 import BackGround from "./BackgroundPhotoId";
 import ImageCanvas from "./BackgroundPhotoId/ImageCanvas";
-// import { UAParser } from "ua-parser-js";
+import { UAParser } from "ua-parser-js";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { redirect } from "next/navigation";
+import { Download } from "lucide-react";
 // type userInfoType = {
 //   image: string;
 //   name: string;
@@ -34,16 +35,16 @@ type userInfoType = {
 
 export default function ShareToInstagram() {
   // const [step, addStep] = useState(1);
-  // const [, setUserAgentData] = useState<string>();
+  const [userAgentData, setUserAgentData] = useState<string>();
   // console.log(userAgentData, "userAgentData");
 
   const cardRef = useRef<HTMLDivElement | null>(null);
   // console.log(cardRef.current, "cardref");
 
-  // useEffect(() => {
-  //   const parser = new UAParser(navigator.userAgent);
-  //   setUserAgentData(parser.getDevice().model);
-  // }, []);
+  useEffect(() => {
+    const parser = new UAParser(navigator.userAgent);
+    setUserAgentData(parser.getDevice().model);
+  }, []);
 
   const [userInfo] = useLocalStorage<{
     name: string;
@@ -137,17 +138,15 @@ export default function ShareToInstagram() {
           <div>
             <button
               onClick={async () => {
-                await handleDownloadFile(cardRef, frameImagePath);
+                if (userAgentData === "iPhone") {
+                  await handleRouteToSharePage(cardRef);
+                } else {
+                  await handleDownloadFile(cardRef, frameImagePath);
+                }
               }}
               className="flex items-center justify-center rounded-full bg-[#3D245B] p-3"
             >
-              <Image
-                src="/photoid/Download.svg"
-                alt="download"
-                width={20}
-                height={20}
-                className="h-6 w-6"
-              />
+              <Download className="text-white" />
             </button>
             <p className="pt-2 text-center font-light text-[#3D245B]">Save</p>
           </div>

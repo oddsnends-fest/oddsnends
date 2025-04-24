@@ -256,7 +256,7 @@ export default function FormPage() {
                   className="absolute w-[16rem] rounded-full bg-purple-gradient py-3 text-center font-poppins text-[1.25rem] text-xl font-semibold tracking-wider text-white shadow-lg active:scale-90"
                   onClick={handleSubmit}
                 >
-                  NEXT
+                  SUBMIT
                 </button>
               </div>
             )}
