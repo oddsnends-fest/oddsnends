@@ -69,7 +69,7 @@ function ImageCropper({ src, onSaveCrop, confirm }: ImageCropperProps) {
             canvas.height
         );
 
-        const base64Image = canvas.toDataURL("image/png");
+        const base64Image = canvas.toDataURL("image/jpeg");
         onSaveCrop(base64Image); // Call the callback function with the cropped image data
 
         // canvas.toBlob((blob) => {
