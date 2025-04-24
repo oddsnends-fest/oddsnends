@@ -4,12 +4,13 @@ import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 // import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
 // import { upload } from "@vercel/blob/client";
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 import Image from "next/image";
 import BackGround from "./BackgroundPhotoId";
 import SponsorSection from "./SponsorSection/SponsorSection";
 import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
 import Header from "./Header/Header";
+import BackButton from "./BackButton/BackButton";
 
 interface CustomSignatureProps {
   penColor?: string;
@@ -64,14 +65,7 @@ export default function Signature({
   return (
     <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
-      {isModalOpen && (
-        <button
-          className="absolute left-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#3D245B]"
-          onClick={closeModal}
-        >
-          ←
-        </button>
-      )}
+      {isModalOpen && <BackButton onClick={closeModal} />}
       {/* Signature Pad Container */}
       <div className="relative rounded-md border border-gray-300">
         {/* Clickable Signature Box */}
@@ -82,7 +76,7 @@ export default function Signature({
               height={30}
               src={base64ImageUrl}
               alt="Saved Signature"
-              className="h-[80px] w-full rounded-lg bg-white px-2 py-2"
+              className="h-[80px] w-[123px] rounded-lg bg-white px-2 py-2"
             />
           ) : (
             <div className="flex items-center justify-center rounded-lg bg-white py-4">
@@ -128,7 +122,7 @@ export default function Signature({
             {/* Modal Header */}
 
             {/* Signature Canvas */}
-            
+
             <Sig
               ref={sigCanvas}
               penColor="black"
@@ -158,7 +152,7 @@ export default function Signature({
             {/* Save */}
             <button
               onClick={saveSignature}
-              className="rounded-full bg-purple-gradient px-20 py-2 text-white"
+              className="rounded-full bg-purple-gradient px-20 py-2 font-semibold text-white"
             >
               NEXT
             </button>

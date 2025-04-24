@@ -50,6 +50,7 @@ export default function ShareToInstagram() {
     date: string;
     hobby: string;
     spiritAnimal: string;
+    spiritAnimalName: string;
     croppedImage: string;
     base64ImageUrl: string;
   } | null>("formData", null);
@@ -89,7 +90,7 @@ export default function ShareToInstagram() {
             <div>{userInfo!.name}</div>
             <div>{formatDate(new Date(userInfo!.date))}</div>
             <div>{userInfo!.hobby}</div>
-            <div>{userInfo!.spiritAnimal}</div>
+            <div>{userInfo!.spiritAnimalName}</div>
           </div>
           <div className="absolute left-[145px] top-[135px] flex flex-col text-right text-[0.65rem]">
             <div>{formatDate(new Date())}</div>
@@ -173,7 +174,7 @@ export default function ShareToInstagram() {
             Want more frame?
           </h2>
           <div
-            className="w-[17rem] cursor-pointer rounded-full bg-purple-gradient py-3 text-center font-semibold text-[24px] text-white"
+            className="w-[17rem] cursor-pointer rounded-full bg-purple-gradient py-3 text-center text-[24px] font-semibold text-white"
             onClick={() => {
               localStorage.removeItem("frame");
               localStorage.removeItem("formData");

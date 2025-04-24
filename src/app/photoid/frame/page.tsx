@@ -70,7 +70,7 @@ export default function FrameSelectionPage() {
         </section>
         {selectedFrame && (
           <button
-            className="mt-4 rounded-full bg-purple-gradient px-20 py-2 text-[1.25rem] text-white"
+            className="mt-4 rounded-full bg-purple-gradient px-20 py-2 text-[1.25rem] font-semibold text-white"
             onClick={() => handleClickCheckBox(selectedFrame)}
           >
             LET&apos;S GO!
