@@ -33,7 +33,7 @@ function AnimalSelection({ onSelectAnimal }: Props) {
                 className={`flex h-[94px] w-[94px] items-center justify-center rounded-xl ${selectedAnimal == value ? "bg-custom-light-gray" : "bg-white"}`}
               >
                 <Image
-                  src={`/images/spirit-animals/${label}.png`}
+                  src={`/images/spirit-animals/${value}.png`}
                   alt={label}
                   width={64}
                   height={64}
