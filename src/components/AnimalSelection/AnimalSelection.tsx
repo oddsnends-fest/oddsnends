@@ -35,9 +35,9 @@ function AnimalSelection({ onSelectAnimal }: Props) {
                 <Image
                   src={`/images/spirit-animals/${value}.png`}
                   alt={label}
-                  width={64}
-                  height={64}
-                  className="object-contain"
+                  width={744 / 4}
+                  height={924 / 4}
+                  className="h-[90px] object-contain"
                 />
               </div>
             </button>
