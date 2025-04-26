@@ -29,7 +29,7 @@ export default function useShareToInstagram() {
   // Helper function to convert the card to an image
   const convertImage = async (element: HTMLElement) => {
     let dataUrl = "";
-    const minDataLength = 400 * 1024; // 400KB
+    const minDataLength = 700 * 1024; // 700KB
     const maxAttempts = 20;
 
     for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
