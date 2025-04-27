@@ -126,7 +126,7 @@ export default function ShareToInstagram() {
             Here&apos;s your ID card!
           </p>
           <p className="text-center text-base font-light text-[#2C1E52]">
-            Thanks for enjoy with us!
+            Thanks for enjoying with us!
           </p>
         </div>
 
