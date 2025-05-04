@@ -2,30 +2,57 @@
 
 import { useState, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
+// import { RotateCcw, Check, PenTool } from "lucide-react"; // Import Lucide icons
+// import { upload } from "@vercel/blob/client";
+import type { ComponentType } from "react";
+import Image from "next/image";
+import BackGround from "./BackgroundPhotoId";
+import SponsorSection from "./SponsorSection/SponsorSection";
+import SocialMediaBar from "./SocialMediaBar/SocialMediaBar";
+import Header from "./Header/Header";
+import BackButton from "./BackButton/BackButton";
 
-export default function Signature() {
+interface CustomSignatureProps {
+  penColor?: string;
+  canvasProps?: React.CanvasHTMLAttributes<HTMLCanvasElement>;
+  // add other props you use here
+}
+
+export default function Signature({
+  base64ImageUrl,
+  setBase64ImageUrl,
+}: {
+  base64ImageUrl: string | null;
+  setBase64ImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
   const sigCanvas = useRef<SignatureCanvas | null>(null);
-  const [imageURL, setImageURL] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // Function to clear only the signature in the modal
   const resetSignatureInModal = () => {
     sigCanvas.current?.clear();
   };
 
   // Function to save the signature as an image
-  const saveSignature = () => {
-    if (sigCanvas.current) {
-      const dataURL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-      setImageURL(dataURL);
-      closeModal();
+  const saveSignature = async () => {
+    if (!sigCanvas.current) {
+      return;
     }
+
+    const base64ImageUrl = sigCanvas.current
+      .getTrimmedCanvas()
+      .toDataURL("image/png"); // base64
+
+    setBase64ImageUrl(base64ImageUrl);
+
+    // console.log(base64ImageUrl, "dataUrl");
+
+    closeModal();
   };
 
   // Function to open modal
   const openModal = () => {
     setIsModalOpen(true);
+    localStorage.setItem("isModalOpenSignature", "true");
   };
 
   // Function to close modal
@@ -33,73 +60,112 @@ export default function Signature() {
     setIsModalOpen(false);
   };
 
+  // console.log(base64ImageUrl, "base64ImageUrl");
+  const Sig: ComponentType<CustomSignatureProps> = SignatureCanvas;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="col-span-1">
       {/* Signature Pad Header with PenTool Icon */}
-      <div className="flex items-center gap-2 text-left mb-2">
-        <p className="text-[22px] font-medium">Signature</p>
-        <PenTool size={22} className="text-gray-700 transform " />
-      </div>
-
+      {isModalOpen && <BackButton onClick={closeModal} />}
       {/* Signature Pad Container */}
-      <div className="relative w-[350px] h-[80px] border border-gray-300 rounded-md p-4">
+      <div className="relative rounded-md border border-gray-300">
         {/* Clickable Signature Box */}
-        <div onClick={openModal} className="cursor-pointer w-full h-full">
-          {imageURL ? (
-            <img src={imageURL} alt="Saved Signature" className="w-full h-full object-contain" />
-          ) : null}
+        <div onClick={openModal} className="cursor-pointer">
+          {base64ImageUrl && base64ImageUrl.length > 500 ? (
+            <Image
+              width={30}
+              height={30}
+              src={base64ImageUrl}
+              alt="Saved Signature"
+              className="h-[80px] w-[123px] rounded-lg bg-white px-2 py-2"
+            />
+          ) : (
+            <div className="flex items-center justify-center rounded-lg bg-white py-4">
+              <Image
+                width={40}
+                height={40}
+                src="/photoid/Pentool.png"
+                alt="Pentool signature"
+              />
+            </div>
+          )}
         </div>
       </div>
 
       {/* Modal for Signature Pad */}
-        {isModalOpen && (
-          <div
-            className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center backdrop-blur-sm"
-            onClick={closeModal} // Clicking outside closes the modal
-          >
-            <div 
-              className="flex flex-col items-start w-auto bg-white rounded-lg p-4"
-              onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
-            >
-              {/* Modal Header */}
-              <div className="flex items-center gap-2 text-left mb-4 px-4">
-                <p className="text-[22px] font-medium">Signature</p>
-                <PenTool size={22} className="text-gray-700 transform" />
-              </div>
-
-              {/* Signature Canvas */}
-              <SignatureCanvas
-                ref={sigCanvas}
-                penColor="black"
-                canvasProps={{
-                  width: 400,
-                  height: 150,
-                  className: "border border-gray-300 rounded-md",
-                }}
-              />
-
-              {/* Buttons */}
-              <div className="flex justify-center gap-8 mt-4">
-                {/* Reset */}
-                <button
-                  onClick={resetSignatureInModal}
-                  className="p-3 bg-gray-800 text-white rounded-full"
-                >
-                  <RotateCcw size={24} />
-                </button>
-
-                {/* Save */}
-                <button
-                  onClick={saveSignature}
-                  className="p-3 bg-gray-800 text-white rounded-full"
-                >
-                  <Check size={24} />
-                </button>
-              </div>
-            </div>
+      {isModalOpen && (
+        <div
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center"
+          // Clicking outside closes the modal ==> onClick = {closeModal}
+        >
+          <div className="absolute top-24 mt-10">
+            <h1 className="title-photoid">Your Signature</h1>
+            <p className="subtitle-photoid">วาดลายเซ็นของคุณ</p>
           </div>
-        )}
+          <div className="absolute inset-0 top-0 -z-10">
+            <Image
+              src="/photoid/starlogo.png"
+              alt="starlogo"
+              width={200}
+              height={200}
+              className="h-full w-full"
+            />
+          </div>
+          <div className="absolute top-0">
+            <Header />
+          </div>
 
+          <BackGround></BackGround>
+          <div
+            className="relative flex w-auto flex-col items-start rounded-lg bg-white"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            {/* Modal Header */}
+
+            {/* Signature Canvas */}
+
+            <Sig
+              ref={sigCanvas}
+              penColor="black"
+              canvasProps={{
+                width: 330,
+                height: 300,
+                className: "border border-gray-300 rounded-md",
+              }}
+            />
+            <button
+              onClick={resetSignatureInModal}
+              className="absolute right-2 top-2"
+            >
+              <Image
+                src="/photoid/eraser.svg"
+                alt="eraser"
+                width={30}
+                height={30}
+              />
+            </button>
+
+            {/* Buttons */}
+          </div>
+          <div className="mt-4 flex w-full justify-center gap-8">
+            {/* Reset */}
+
+            {/* Save */}
+            <button
+              onClick={saveSignature}
+              className="rounded-full bg-purple-gradient px-20 py-2 font-semibold text-white"
+            >
+              NEXT
+            </button>
+          </div>
+          <div className="absolute bottom-16 -z-10">
+            <SponsorSection />
+          </div>
+
+          <SocialMediaBar />
+        </div>
+      )}
+
+      {/* <button onClick={handleUploadandCreateBlobSignature}>Upload</button> */}
     </div>
   );
 }
