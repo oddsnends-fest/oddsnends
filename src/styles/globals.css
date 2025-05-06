@@ -175,3 +175,8 @@ body {
   animation-delay: 0.4s;
 }
 
+.gradient-background {
+  background: linear-gradient(to bottom, #191748 -10%, #3D245B 20%, #B56A95 70%, #D693B9 90%);
+}
+
+
