@@ -35,7 +35,7 @@ const RegisterPage = () => {
           <p className='font-thin tracking-wide text-xl italic'>please enter your personal info</p>
 
           {/* form */}
-          <form className='mt-4 rounded-2xl shadow-xl py-5 px-4 flex flex-col w-[85%] text-[0.8rem] leading-[1.2rem] gap-4'>
+          <form className='border border-black/10 mt-4 rounded-2xl shadow-xl py-6 px-4 flex flex-col w-[85%] text-[0.8rem] leading-[1.2rem] gap-4'>
             {/* name */}
             <div className='flex flex-col gap-2'>
               <label htmlFor='name'>Name <span className='ml-1 opacity-50'>ชื่อ</span></label>
