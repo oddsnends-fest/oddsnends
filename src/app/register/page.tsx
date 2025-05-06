@@ -2,7 +2,8 @@
 
 import BackButton from '@/components/BackButton/BackButton';
 import ImageCanvas from '@/components/BackgroundPhotoId/ImageCanvas'
-import Image from 'next/image'
+import FormSelection from '@/components/RegisterForm/FormSelection';
+import formSelection from '@/components/RegisterForm/FormSelection';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -14,6 +15,65 @@ const RegisterPage = () => {
   const [occupation, setOccupation] = useState<string>("");
   const [whatBringsHere, setWhatBringsHere] = useState<string>("");
   const [hearAboutUs, setHearAboutUs] = useState<string>("");
+
+
+  {/* form options */}
+  const formSelections = [
+    {
+      labelEn: "Age",
+      labelTH: "อายุ",
+      state: age,
+      setState: setAge,
+      options: [
+        { value: "under18", label: "ต่ำกว่า 18 / under 18" },
+        { value: "18-24", label: "18-24" },
+        { value: "25-34", label: "25-34" },
+        { value: "35-44", label: "35-44" },
+        { value: "45plus", label: "45 ขึ้นไป / 45+" },
+      ],
+    },
+    {
+      labelEn: "Occupation",
+      labelTH: "อาชีพ",
+      state: occupation,
+      setState: setOccupation,
+      options: [
+        { value: "student", label: "นักเรียน / student" },
+        { value: "uni-student", label: "นักศึกษา / University Student" },
+        { value: "employee", label: "พนักงานบริษัท / Employee" },
+        { value: "bussiness-owner", label: "เจ้าของกิจการ / Business Owner" },
+        { value: "freelancer", label: "ฟรีแลนซ์ / Freelancer" },
+        { value: "others", label: "อื่น ๆ / Others" },
+      ],
+    },
+    {
+      labelEn: "What brings you to this event?",
+      labelTH: "คุณมาทำอะไรในงานนี้",
+      state: whatBringsHere,
+      setState: setWhatBringsHere,
+      options: [
+        { value: "exploring", label: "มาเดินเล่น / Just exploring" },
+        { value: "workshop", label: "มาทำเวิร์กชอป / Join workshops" },
+        { value: "music", label: "มาฟังดนตรี / Listen to live music" },
+        { value: "friends", label: "มาเจอเพื่อน / Meet friends" },
+        { value: "others", label: "อื่น ๆ / Others" },
+      ],
+    },
+    {
+      labelEn: "How did you hear about us?",
+      labelTH: "รู้จักงานนี้ได้อย่างไร",
+      state: hearAboutUs,
+      setState: setHearAboutUs,
+      options: [
+        { value: "friends", label: "เพื่อน / Friends" },
+        { value: "social-media", label: "โซเชียลมีเดีย / Social Media" },
+        { value: "website", label: "เว็บไซต์ / Website" },
+        { value: "influencer", label: "อินฟลูเอนเซอร์ / KOL / Influencer" },
+        { value: "others", label: "อื่น ๆ / Others" },
+      ],
+    },
+  ];
+  
 
   const handleSubmit = () => {
     if(name === "" || age === "" || occupation === "" || whatBringsHere === "" || hearAboutUs === "") {
@@ -46,122 +106,19 @@ const RegisterPage = () => {
                 placeholder='ชื่อ'
               />
             </div>
-            
-            {/* age */}
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='age'>Age <span className='ml-1 opacity-50'>อายุ</span></label>
-              <div className='relative'>
-                <select 
-                  onChange={(e) => setAge(e.target.value)}
-                  className={`w-full appearance-none px-4 py-2 rounded-xl ${age === "" ? "text-gray-400" : "text-black"}`}
-                  required
-                  defaultValue={""}
-                >
-                  <option value={""} disabled hidden className='text-gray-400'>
-                    อายุ
-                  </option>
-                  <option value={"under18"}>ต่ำกว่า 18 / under 18</option>
-                  <option value={"18-24"}>18-24</option>
-                  <option value={"25-34"}>25-34</option>
-                  <option value={"35-44"}>35-44</option>
-                  <option value={"45plus"}>45 ขึ้นไป / 45+</option>
-                </select>
-                <Image 
-                  src={"/images/register/drop-down.png"}
-                  alt='dropdown'
-                  width={10}
-                  height={10}
-                  className='absolute right-4 top-1/2 -translate-y-1/2'
-                />
-              </div>
-            </div>
 
-            {/* Occupation */}
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='occupation'>Occupation <span className='ml-1 opacity-50'>อาชีพ</span></label>
-              <div className='relative'>
-                <select 
-                  onChange={(e) => setOccupation(e.target.value)}
-                  className={`w-full appearance-none px-4 py-2 rounded-xl ${occupation === "" ? "text-gray-400" : "text-black"}`}
-                  required
-                  defaultValue={""}
-                >
-                  <option value={""} disabled hidden className='text-gray-400'>
-                    อาชีพ
-                  </option>
-                  <option value={"student"}>นักเรียน / student</option>
-                  <option value={"uni-student"}>นักศึกษา / University Student</option>
-                  <option value={"employee"}>พนักงานบริษัท / Employee</option>
-                  <option value={"bussiness-owner"}>เจ้าของกิจการ / Business Owner</option>
-                  <option value={"freelancer"}>ฟรีแลนซ์ / Freelancer</option>
-                  <option value={"others"}>อื่น ๆ / Others</option>
-                </select>
-                <Image 
-                  src={"/images/register/drop-down.png"}
-                  alt='dropdown'
-                  width={10}
-                  height={10}
-                  className='absolute right-4 top-1/2 -translate-y-1/2'
+            {
+              formSelections.map(({labelEn, labelTH, state, setState, options}, idx) => (
+                <FormSelection 
+                  key={idx}
+                  labelEn={labelEn}
+                  labelTH={labelTH}
+                  state={state}
+                  setState={setState}
+                  options={options}
                 />
-              </div>
-            </div>
-
-            {/* What Brings You */}
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='whatBringsHere' className='tracking-tighter'>What brings you to this event?<span className='ml-1 opacity-50'>คุณมาทำอะไรในงานนี้</span></label>
-              <div className='relative'>
-                <select 
-                  onChange={(e) => setWhatBringsHere(e.target.value)}
-                  className={`w-full appearance-none px-4 py-2 rounded-xl ${whatBringsHere === "" ? "text-gray-400" : "text-black"}`}
-                  required
-                  defaultValue={""}
-                >
-                  <option value={""} disabled hidden className='text-gray-400'>
-                    คุณมาทำอะไรในงานนี้
-                  </option>
-                  <option value={"exploring"}>มาเดินเล่น / Just exploring</option>
-                  <option value={"workshop"}>มาทำเวิร์กชอป / Join workshops</option>
-                  <option value={"music"}>มาฟังดนตรี / Listen to live music</option>
-                  <option value={"friends"}>มาเจอเพื่อน / Meet friends</option>
-                  <option value={"others"}>อื่น ๆ / Others</option>
-                </select>
-                <Image 
-                  src={"/images/register/drop-down.png"}
-                  alt='dropdown'
-                  width={10}
-                  height={10}
-                  className='absolute right-4 top-1/2 -translate-y-1/2'
-                />
-              </div>
-            </div>
-
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='hearAboutUs' className='tracking-tight'>How did you here about us?<span className='ml-1 opacity-50'>รู้จักงานนี้ได้อย่างไร</span></label>
-              <div className='relative'>
-                <select 
-                  onChange={(e) => setHearAboutUs(e.target.value)}
-                  className={`w-full appearance-none px-4 py-2 rounded-xl ${hearAboutUs === "" ? "text-gray-400" : "text-black"}`}
-                  required
-                  defaultValue={""}
-                >
-                  <option value={""} disabled hidden className='text-gray-400'>
-                    รู้จักงานนี้ได้อย่างไร
-                  </option>
-                  <option value={"friends"}>เพื่อน / Friends</option>
-                  <option value={"social-media"}>โซเชียลมีเดีย / Social Media</option>
-                  <option value={"website"}>เว็บไซต์ / Website</option>
-                  <option value={"influencer"}>อินฟลูเอนเซอร์ / KOL / Influencer</option>
-                  <option value={"others"}>อื่น ๆ / Others</option>
-                </select>
-                <Image 
-                  src={"/images/register/drop-down.png"}
-                  alt='dropdown'
-                  width={10}
-                  height={10}
-                  className='absolute right-4 top-1/2 -translate-y-1/2'
-                />
-              </div>
-            </div>
+              ))
+            }
           </form>
 
           <div className="mt-12 flex items-center justify-center">
