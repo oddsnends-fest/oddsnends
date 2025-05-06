@@ -94,7 +94,7 @@ const RegisterPage = () => {
                   <option value={"employee"}>พนักงานบริษัท / Employee</option>
                   <option value={"bussiness-owner"}>เจ้าของกิจการ / Business Owner</option>
                   <option value={"freelancer"}>ฟรีแลนซ์ / Freelancer</option>
-                  <option value={"others"}>อื่นๆ / Others</option>
+                  <option value={"others"}>อื่น ๆ / Others</option>
                 </select>
                 <Image 
                   src={"/images/register/drop-down.png"}
