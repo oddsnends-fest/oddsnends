@@ -18,7 +18,7 @@ export default function EventInfo() {
                     height={363}
                     className="w-[366px] h-auto drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)]"
                 />
-                <div className="flex gap-2 items-center text-custom-yellow font-cooper">
+                <div className="flex gap-2 items-center text-custom-yellow font-cooper drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">
                     <MapPinned size={36} />
                     <h1 className="text-3xl pt-3">
                         GalileOasis
