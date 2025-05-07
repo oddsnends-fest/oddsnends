@@ -26,7 +26,7 @@ export default function EventInfo() {
                 </div>
                 <Button
                     asChild={true}
-                    className="bg-purple-gradient text-white rounded-full px-8 py-6 tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)] text-lg font-medium"
+                    className="bg-purple-gradient text-white rounded-full px-8 py-6 tracking-wider drop-shadow-[0_5px_3px_rgba(0,0,0,0.3)] text-lg font-semibold"
                 >
                     <a
                         href="https://maps.app.goo.gl/D936UuP1SzsoyoL88"
