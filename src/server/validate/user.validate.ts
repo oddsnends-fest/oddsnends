@@ -3,7 +3,7 @@ import { z } from "zod";
 export const User = z.object({
   user_id: z.string(),
   display_name: z.string(),
-  full_name: z.string(),
+  full_name: z.string().optional(),
   line_profile_pic: z.string().url("Invalid URL").optional(),
   phone: z
     .string()
@@ -17,12 +17,11 @@ export const User = z.object({
   occupation: z.string(),
   email: z.string().email("Invalid email format"),
   channel: z.enum([
-    "INSTAGRAM",
-    "FACEBOOK",
-    "TIKTOK",
-    "LINE",
+    "SOCIAL_MEDIA",
+    "WEBSITE",
     "FRIENDS",
-    "POSTER",
+    "INFLUENCER",
+    "OTHERS",
   ]),
   photoid_name: z.string(),
   dob: z.coerce.date(),
