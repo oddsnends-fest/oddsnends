@@ -116,7 +116,7 @@ const MajorGroupPage = () => {
 
             <div className="mt-4">
               <div className="font-cooper text-lg tracking-wider">
-                For Film Industry
+                For the Film Industry
               </div>
               <div>
                 Film Production & Distribution: Supporting and bringing diverse
