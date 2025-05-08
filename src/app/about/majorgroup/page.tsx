@@ -2,9 +2,8 @@
 
 import BackButton from "@/components/BackButton/BackButton";
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
+import ContactSection from "@/components/ContactSection/ContactSection";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const MajorGroupPage = () => {
   return (
@@ -98,11 +97,34 @@ const MajorGroupPage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 h-[143px] w-[379px] rounded-xl bg-custom-pink">
-          <div className="text-custom-yellow mt-2 text-center font-cooper text-xl tracking-wider">
-            Contact
-          </div>
-        </div>
+        <ContactSection
+          className="mt-8"
+          contacts={[
+            {
+              icon: "/images/social-media/facebook-white.png",
+              alt: "facebook",
+              text: "Major Group",
+              href: "https://www.facebook.com/MajorGroup",
+            },
+            {
+              icon: "/images/social-media/youtube-white.png",
+              alt: "youtube",
+              text: "Major Group",
+              href: "https://www.youtube.com/@MajorGroup",
+            },
+            {
+              icon: "/images/social-media/tiktok-white.png",
+              alt: "tiktok",
+              text: "@majorgroup",
+              href: "",
+            },
+            {
+              icon: "/images/social-media/line-white.png",
+              alt: "line",
+              text: "Line OA: Major Group",
+            },
+          ]}
+        />
         <div className="mt-8">
           <div className="text-xl font-medium text-custom-purple">
             ที่ตั้งร้าน
