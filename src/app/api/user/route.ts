@@ -13,13 +13,13 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    const { email, user_id, ...userData } = parsedData.data;
+    const { user_id, ...userData } = parsedData.data;
 
     // Check if user already exists
-    const existingUser = await db.user.findUnique({ where: { email } });
+    const existingUser = await db.user.findUnique({ where: { user_id } });
     if (existingUser) {
       return NextResponse.json(
-        { error: "Email already registered" },
+        { error: "User already registered" },
         { status: 409 },
       );
     }
@@ -28,7 +28,6 @@ export async function POST(request: Request): Promise<NextResponse> {
     const newUser = await db.user.create({
       data: {
         user_id,
-        email,
         ...userData, // Spread other fields
         line_profile_pic: userData.line_profile_pic ?? "",
         phone: userData.phone ?? null,
