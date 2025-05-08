@@ -1,6 +1,5 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { headers } from 'next/headers';
-import { PrismaClient } from "@prisma/client";
 import { db } from "@/server/db";
 
 export async function GET() {
@@ -14,14 +13,6 @@ export async function GET() {
 
         const user = await db.user.findUnique({
             where: { user_id: id },
-            select: {
-                full_name: true,
-                hobby: true,
-                dob: true,
-                spirit_animal: true,
-                signature: true,
-                photo: true,
-            },
         });
 
         if (!user) {
