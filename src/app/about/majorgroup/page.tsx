@@ -38,7 +38,7 @@ const MajorGroupPage = () => {
       <div className="gradient-background absolute top-0 -z-30 h-full w-full" />
       <ImageCanvas />
 
-      <main className="mt-8 flex flex-col items-center gap-1 text-base text-white">
+      <main className="text-shadow mt-8 flex flex-col items-center gap-1 text-base text-white">
         <h1 className="font-cooper text-4xl tracking-wider">Our Supporter</h1>
         <Image
           src={"/images/sponsors/MajorCineplex_white.png"}

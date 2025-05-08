@@ -52,7 +52,7 @@ const BinancePage = () => {
       <div className="gradient-background absolute top-0 -z-30 h-full w-full" />
       <ImageCanvas />
 
-      <main className="mt-8 flex flex-col items-center gap-1 text-base text-white">
+      <main className="text-shadow mt-8 flex flex-col items-center gap-1 text-base text-white">
         <h1 className="font-cooper text-4xl tracking-wider">Our Supporter</h1>
         <Image
           src={"/images/sponsors/Binance_white.png"}
@@ -106,7 +106,7 @@ const BinancePage = () => {
             height={200}
             className="mt-4"
           />
-          <div className="text-3lg mt-4 font-cooper tracking-wider">
+          <div className="mt-4 font-cooper text-lg tracking-wider">
             Odds & Opportunities
           </div>
           <div className="mt-4 text-start">
