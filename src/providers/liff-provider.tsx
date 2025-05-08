@@ -9,6 +9,8 @@ import {
   type ReactNode,
 } from "react";
 import { jwtDecode } from "jwt-decode";
+import { usePathname } from "next/navigation";
+import { fetchUserData } from "@/lib/fetch-user-data";
 
 interface LiffContextProps {
   liff: Liff | null;
@@ -41,6 +43,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [liffError, setLiffError] = useState<string | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const pathname = usePathname();
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
@@ -52,7 +55,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         // Convert this promise chain to await
         await liff.ready;
 
-        if (!liff.isLoggedIn()) {
+        if (!liff.isLoggedIn() && pathname.startsWith("/register")) {
           console.log("User not logged in, initiating login...");
           if (env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN === "true") {
             throw new Error("LIFF login is disabled in this environment.");
@@ -61,19 +64,22 @@ export default function Layout({ children }: { children: ReactNode }) {
         } else {
           console.log("User is already logged in, decoding ID token...");
           const token = liff.getIDToken();
-          if (token) {
-            console.log("ID Token:", token);
-            setIdToken(token);
-            try {
-              const decoded: DecodedToken = jwtDecode(token);
-              setUserProfile({
-                displayName: decoded.name,
-                pictureUrl: decoded.picture,
-                userId: decoded.sub,
-              });
-            } catch (err) {
-              console.error("Error decoding ID token:", err);
+          if (!token) throw new Error("Token is null.");
+
+          console.log("ID Token:", token);
+          setIdToken(token);
+          try {
+            const decoded: DecodedToken = jwtDecode(token);
+            setUserProfile({
+              displayName: decoded.name,
+              pictureUrl: decoded.picture,
+              userId: decoded.sub,
+            });
+            const user = await fetchUserData(token);
+            if (!user) {
             }
+          } catch (err) {
+            console.error("Error decoding ID token:", err);
           }
         }
       } catch (error) {
