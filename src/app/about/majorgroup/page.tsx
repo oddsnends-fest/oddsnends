@@ -23,7 +23,7 @@ const MajorGroupPage = () => {
       icon: "/images/social-media/tiktok-white.png",
       alt: "tiktok",
       text: "@majorgroup",
-      href: "",
+      href: "https://www.tiktok.com/@majorgroup",
     },
     {
       icon: "/images/social-media/line-white.png",
