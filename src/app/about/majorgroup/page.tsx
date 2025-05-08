@@ -6,6 +6,31 @@ import ContactSection from "@/components/ContactSection/ContactSection";
 import Image from "next/image";
 
 const MajorGroupPage = () => {
+  const contactList = [
+    {
+      icon: "/images/social-media/facebook-white.png",
+      alt: "facebook",
+      text: "Major Group",
+      href: "https://www.facebook.com/MajorGroup",
+    },
+    {
+      icon: "/images/social-media/youtube-white.png",
+      alt: "youtube",
+      text: "Major Group",
+      href: "https://www.youtube.com/@MajorGroup",
+    },
+    {
+      icon: "/images/social-media/tiktok-white.png",
+      alt: "tiktok",
+      text: "@majorgroup",
+      href: "",
+    },
+    {
+      icon: "/images/social-media/line-white.png",
+      alt: "line",
+      text: "Line OA: Major Group",
+    },
+  ];
   return (
     <div>
       <BackButton />
@@ -97,34 +122,7 @@ const MajorGroupPage = () => {
             </div>
           </div>
         </div>
-        <ContactSection
-          className="mt-8"
-          contacts={[
-            {
-              icon: "/images/social-media/facebook-white.png",
-              alt: "facebook",
-              text: "Major Group",
-              href: "https://www.facebook.com/MajorGroup",
-            },
-            {
-              icon: "/images/social-media/youtube-white.png",
-              alt: "youtube",
-              text: "Major Group",
-              href: "https://www.youtube.com/@MajorGroup",
-            },
-            {
-              icon: "/images/social-media/tiktok-white.png",
-              alt: "tiktok",
-              text: "@majorgroup",
-              href: "",
-            },
-            {
-              icon: "/images/social-media/line-white.png",
-              alt: "line",
-              text: "Line OA: Major Group",
-            },
-          ]}
-        />
+        <ContactSection className="mt-8" contacts={contactList} />
         <div className="mt-8">
           <div className="text-xl font-medium text-custom-purple">
             ที่ตั้งร้าน
