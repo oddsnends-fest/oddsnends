@@ -51,9 +51,12 @@ const MajorGroupPage = () => {
             About Major Group
           </div>
           <div className="mt-4 text-center">
-            <div> ‘Thailand's Leading Entertainment Powerhouse.’</div>
+            <div>
+              {" "}
+              &ldquo;Thailand&apos;s Leading Entertainment Powerhouse.&rdquo;
+            </div>
             <div className="mt-4">
-              Major Group is Thailand's premier entertainment and lifestyle
+              Major Group is Thailand&apos;s premier entertainment and lifestyle
               company, established in 1995. Publicly listed (SET: MAJOR), we
               operate a nationwide network of innovative cinemas (Major
               Cineplex, EGV, Mega Cineplex), offer impactful media and
