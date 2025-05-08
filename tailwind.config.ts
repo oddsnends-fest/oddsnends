@@ -25,6 +25,7 @@ export default {
         "custom-purple": "#553B82",
         "custom-pink": "#B56A95",
         "custom-dark-purple": "#1C1026",
+        "custom-yellow": "#FFDF57",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
