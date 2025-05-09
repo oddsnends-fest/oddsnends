@@ -15,9 +15,9 @@ interface ContactSectionProps {
 function ContactSection({ contacts, className = "" }: ContactSectionProps) {
   return (
     <div
-      className={`h-[143px] w-[379px] items-center rounded-xl bg-custom-pink text-white ${className}`}
+      className={`h-auto w-[379px] items-center rounded-xl bg-custom-pink p-4 text-white ${className}`}
     >
-      <div className="text-custom-yellow mt-2 text-center font-cooper text-xl tracking-wider">
+      <div className="text-center font-cooper text-xl tracking-wider text-custom-yellow">
         Contact
       </div>
       <div className="mx-auto flex flex-wrap items-center justify-center gap-2">
