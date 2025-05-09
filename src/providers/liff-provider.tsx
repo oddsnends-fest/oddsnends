@@ -60,7 +60,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         // Convert this promise chain to await
         await liff.ready;
 
-        if (!liff.isLoggedIn() && pathname.startsWith("/register")) {
+        if (!liff.isLoggedIn()) {
           console.log("User not logged in, initiating login...");
           if (env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN === "true") {
             throw new Error("LIFF login is disabled in this environment.");
@@ -102,8 +102,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     };
 
     // Fix the floating promise by using void operator
+    if (pathname !== "/register") return;
     void initLiff();
-  }, []);
+  }, [pathname]);
 
   return (
     <LiffContext.Provider
