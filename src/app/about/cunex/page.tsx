@@ -134,7 +134,7 @@ export default function Cunex() {
 
                             {/* Survival Guide */}
                             <Card className="w-full text-custom-purple">
-                                <div className="flex w-full gap-4 p-4">
+                                <div className="flex w-full gap-4 p-4 text-shadow-none">
                                     <CardTitle className="text-left text-base">
                                         Survival Guide
                                     </CardTitle>
