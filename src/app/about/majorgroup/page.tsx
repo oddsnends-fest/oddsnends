@@ -38,7 +38,7 @@ const MajorGroupPage = () => {
       <div className="gradient-background absolute top-0 -z-30 h-full w-full" />
       <ImageCanvas />
 
-      <main className="text-shadow mt-8 flex flex-col items-center gap-1 text-base text-white">
+      <main className="mt-8 flex flex-col items-center gap-1 text-base text-white text-shadow">
         <h1 className="font-cooper text-4xl tracking-wider">Our Supporter</h1>
         <Image
           src={"/images/sponsors/MajorCineplex_white.png"}
@@ -47,7 +47,7 @@ const MajorGroupPage = () => {
           height={153}
         />
         <div className="w-full px-4">
-          <div className="text-custom-yellow font-cooper text-xl tracking-wider">
+          <div className="font-cooper text-xl tracking-wider text-custom-yellow">
             About Major Group
           </div>
           <div className="mt-4 text-center">
@@ -70,7 +70,7 @@ const MajorGroupPage = () => {
         </div>
 
         <div className="mt-8 w-full px-4">
-          <div className="text-custom-yellow font-cooper text-xl tracking-wider">
+          <div className="font-cooper text-xl tracking-wider text-custom-yellow">
             Company Service
           </div>
           <div className="mt-4 text-center">
@@ -79,8 +79,11 @@ const MajorGroupPage = () => {
               services:
             </div>
             <div className="mt-4">
-              <div className="font-cooper text-lg tracking-wider">
-                For Audience
+              <div className="relative inline-block">
+                <div className="absolute -z-10 h-full w-full rounded-full bg-white/40 blur-xl"></div>
+                <div className="text-center font-cooper text-lg tracking-wider text-white">
+                  For Audiences
+                </div>
               </div>
               <ul className="list-inside list-disc">
                 <li>
@@ -99,8 +102,11 @@ const MajorGroupPage = () => {
             </div>
 
             <div className="mt-4">
-              <div className="font-cooper text-lg tracking-wider">
-                For Bussinesses
+              <div className="relative inline-block">
+                <div className="absolute -z-10 h-full w-full rounded-full bg-white/40 blur-xl"></div>
+                <div className="text-center font-cooper text-lg tracking-wider text-white">
+                  For Businesses
+                </div>
               </div>
               <ul className="list-inside list-disc">
                 <li>
@@ -115,8 +121,11 @@ const MajorGroupPage = () => {
             </div>
 
             <div className="mt-4">
-              <div className="font-cooper text-lg tracking-wider">
-                For the Film Industry
+              <div className="relative inline-block">
+                <div className="absolute -z-10 h-full w-full rounded-full bg-white/40 blur-xl"></div>
+                <div className="text-center font-cooper text-lg tracking-wider text-white">
+                  For the Film Industry
+                </div>
               </div>
               <div>
                 Film Production & Distribution: Supporting and bringing diverse

@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { User } from "@/server/validate/user.validate";
+import { RegisteredInfo } from "@/server/validate/registeredInfo.validate";
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     // Validate input data
-    const parsedData = User.safeParse(await request.json());
+    const parsedData = RegisteredInfo.safeParse(await request.json());
     if (!parsedData.success) {
       return NextResponse.json(
         { error: parsedData.error.format() },
@@ -13,27 +13,13 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    const { user_id, ...userData } = parsedData.data;
-
-    // Check if user already exists
-    const existingUser = await db.user.findUnique({ where: { user_id } });
-    if (existingUser) {
-      return NextResponse.json(
-        { error: "User already registered" },
-        { status: 409 },
-      );
-    }
-
     // Create new user in database
-    const newUser = await db.user.create({
-      data: {
-        user_id,
-        ...userData, // Spread other fields
-      },
+    const newRegisteredInfo = await db.registeredInfo.create({
+      data: parsedData.data,
     });
 
     return NextResponse.json(
-      { message: "User registered successfully", data: newUser },
+      { message: "Register info saved successfully", data: newRegisteredInfo },
       { status: 201 },
     );
   } catch (error) {

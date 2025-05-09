@@ -37,7 +37,6 @@ export default function ShareToInstagram() {
   // const [step, addStep] = useState(1);
   const [userAgentData, setUserAgentData] = useState<string>();
   // console.log(userAgentData, "userAgentData");
-
   const cardRef = useRef<HTMLDivElement | null>(null);
   // console.log(cardRef.current, "cardref");
 
