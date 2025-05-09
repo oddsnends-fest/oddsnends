@@ -10,31 +10,26 @@ import "swiper/css/pagination";
 // src for event's image
 const imgSrc = [
   {
-      src: "/images/events/Thumbnail_GetYourID.png",
-      link: "/photoid/frame"
+    src: "/images/events/Thumbnail_Festival2.png",
+    link: "/register",
   },
   {
-      src: "/images/events/Thumbnail_Apply.png",
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSf4D5FsEwahLVOFbzvXlhWLgtYcEkh2agDVUhxqDVTa8cAdNQ/viewform?usp=dialog",
+    src: "/images/events/Thumbnail_GetYourID2.png",
+    link: "/photoid/frame",
   },
   {
-      src: "/images/events/Thumbnail_Festival.png",
-      link: ""
+    src: "/images/events/Thumbnail_CUNEXWorkshop.png",
+    link: "",
   },
   {
-      src: "/images/events/Thumbnail_CUNEXWorkshop.png",
-      link: ""
+    src: "/images/events/Thumbnail_Workshop.png",
+    link: "",
   },
   {
-      src: "/images/events/Thumbnail_Workshop.png",
-      link: ""
+    src: "/images/events/Thumbnail_DIYCookie.png",
+    link: "",
   },
-  {
-      src: "/images/events/Thumbnail_DIYCookie.png",
-      link: ""
-  }
 ];
-
 
 const autoPlayDelay = 3000; // in ms
 const autoPlaySwipeSpeed = 500; // in ms
@@ -72,29 +67,29 @@ const SlidingBox = () => {
           {/* Map through the image src links*/}
           {imgSrc.map(({ src, link }, idx) => (
             <SwiperSlide key={idx}>
-            <div
-                className={ // define transition to ensure smooth animation between box changing
-                    `flex justify-center transition-all duration-500
-                    ${idx === activeIndex ? "opacity-100 " : "opacity-50" /* Unfocused boxes(the beside one) is faded */}
-                    ${isFirstSlide && idx !== 0 && imgSrc.length < 4 ? "translate-x-20" : "" /* For loop mode disabled, when focusing the first box, all the boxes are being moved to the right*/}
-                    ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx < (imgSrc.length) / 2 ? "translate-x-20" : "" /* For loop mode, when focusing the first box, all the first half boxes are being moved to the right*/}
-                    ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx > (imgSrc.length) / 2 ? "-translate-x-20" : ""/* On the other hand, all the second half boxes are being move to the left*/}
-                `}
-            >
-                <a href={link} 
-                    {...(link.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`${link.length === 0 && "pointer-events-none"}`}
+              <div
+                className={
+                  // define transition to ensure smooth animation between box changing
+                  `flex justify-center transition-all duration-500 ${idx === activeIndex ? "opacity-100" : "opacity-50" /* Unfocused boxes(the beside one) is faded */} ${isFirstSlide && idx !== 0 && imgSrc.length < 4 ? "translate-x-20" : "" /* For loop mode disabled, when focusing the first box, all the boxes are being moved to the right*/} ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx < imgSrc.length / 2 ? "translate-x-20" : "" /* For loop mode, when focusing the first box, all the first half boxes are being moved to the right*/} ${isFirstSlide && idx !== 0 && imgSrc.length >= 4 && idx > imgSrc.length / 2 ? "-translate-x-20" : "" /* On the other hand, all the second half boxes are being move to the left*/} `
+                }
+              >
+                <a
+                  href={link}
+                  {...(link.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={`${link.length === 0 && "pointer-events-none"}`}
                 >
-                    <Image
-                        src={src}
-                        alt={`Event ${idx + 1}`}
-                        width={260}
-                        height={260}
-                        className="text-black rounded-3xl bg-white"
-                    />
+                  <Image
+                    src={src}
+                    alt={`Event ${idx + 1}`}
+                    width={260}
+                    height={260}
+                    className="rounded-3xl bg-white text-black"
+                  />
                 </a>
-            </div>
-        </SwiperSlide>
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
 
