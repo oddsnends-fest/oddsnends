@@ -25,7 +25,7 @@ export default {
         "custom-purple": "#553B82",
         "custom-pink": "#B56A95",
         "custom-dark-purple": "#1C1026",
-        "custom-yellow": "#FFDF58",
+        "custom-yellow": "#FFDF57",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -71,7 +71,10 @@ export default {
         "purple-gradient":
           "linear-gradient(to bottom, #B56A95 -30%, #553B82 90%)",
       },
+      textShadow: {
+        default: "0 2px 2px rgba(0,0,0,0.25)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-textshadow")],
 } satisfies Config;
