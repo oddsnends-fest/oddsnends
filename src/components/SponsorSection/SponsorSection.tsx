@@ -7,6 +7,8 @@ const SponsorSection = () => {
   // console.log(pathName, "pathName");
   const isPhotoIdRoute = pathName.split("/").includes("photoid");
 
+  if (pathName === "/aboutus") return null;
+  
   const sponsors = [
     {
       src: isPhotoIdRoute

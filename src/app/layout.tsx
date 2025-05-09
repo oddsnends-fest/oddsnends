@@ -2,14 +2,14 @@ import LiffProvider from "@/providers/liff-provider";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/styles/globals.css";
+import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
-import SocialMediaBar from "@/components/SocialMediaBar/SocialMediaBar";
 import Header from "@/components/Header/Header";
-import SponsorSection from "@/components/SponsorSection/SponsorSection";
 import { env } from "@/env";
+import SponsorSection from "@/components/SponsorSection/SponsorSection";
 
 export const metadata: Metadata = {
   title: "Odds & Ends Festival",
