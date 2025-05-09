@@ -1,6 +1,26 @@
+"use client";
 import Image from "next/image"
+import { useState } from "react";
+const animals: string[] = [
+    '/images/spirit-animals/BUTTERFLY.png',
+    '/images/spirit-animals/CAT.png',
+    '/images/spirit-animals/DOG.png',
+    '/images/spirit-animals/DUCK.png',
+    '/images/spirit-animals/FISH.png',
+    '/images/spirit-animals/OTTER.png',
+    '/images/spirit-animals/SQUIRREL.png',
+    '/images/spirit-animals/SWAN.png',
+    '/images/spirit-animals/WATER_MONITOR.png',
+  ];
 
-export default function roll(){
+export default function Roll(){
+    const [animalSrc, setAnimalSrc] = useState<string>('/images/spirit-animals/OTTER.png');
+
+    const handleClick = () => {
+    const random = animals[Math.floor(Math.random() * animals.length)]!;
+    setAnimalSrc(random);
+  };
+
     return (
         <div className="flex flex-col items-center justify-center">
             {/* Background */}
@@ -13,7 +33,8 @@ export default function roll(){
             </div>
             <div>
                 <Image
-                    src="/images/spirit-animals/OTTER.png"
+                    onClick={handleClick}
+                    src= {animalSrc}
                     width={300}
                     height={300}
                     alt="Picture of the author"
@@ -27,6 +48,6 @@ export default function roll(){
                     EVENT INFORMATION
                 </a>
             </div>
-        </div>
+        </div>  
     )
 }
