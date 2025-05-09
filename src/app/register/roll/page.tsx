@@ -20,7 +20,12 @@ export default function roll(){
                 />
             </div>
             <div>
-                <p className=" bg-gradient-to-b from-[#B56A95] to-[#553B82] rounded-3xl  p-3 text-white">EVENT INFORMATION</p>
+                <a
+                    href="/photoid/frame"
+                    className=" bg-gradient-to-b from-[#B56A95] to-[#553B82] rounded-3xl  p-3 text-white font-semibold tracking-widest"
+                >
+                    EVENT INFORMATION
+                </a>
             </div>
         </div>
     )
