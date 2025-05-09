@@ -11,6 +11,7 @@ import {
 import { jwtDecode } from "jwt-decode";
 import { usePathname } from "next/navigation";
 import { fetchUserData } from "@/lib/fetch-user-data";
+import { createUser } from "@/lib/create-user";
 
 interface LiffContextProps {
   liff: Liff | null;
@@ -25,7 +26,7 @@ interface DecodedToken {
   sub: string;
 }
 
-interface UserProfile {
+export interface UserProfile {
   displayName: string;
   pictureUrl?: string;
   userId: string;
@@ -66,7 +67,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           const token = liff.getIDToken();
           if (!token) throw new Error("Token is null.");
 
-          console.log("ID Token:", token);
           setIdToken(token);
           try {
             const decoded: DecodedToken = jwtDecode(token);
@@ -77,6 +77,11 @@ export default function Layout({ children }: { children: ReactNode }) {
             });
             const user = await fetchUserData(token);
             if (!user) {
+              const newUser = await createUser(token, {
+                displayName: decoded.name,
+                pictureUrl: decoded.picture,
+                userId: decoded.sub,
+              });
             }
           } catch (err) {
             console.error("Error decoding ID token:", err);

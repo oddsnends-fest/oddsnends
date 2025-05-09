@@ -3,17 +3,30 @@
 import BackButton from "@/components/BackButton/BackButton";
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
 import FormSelection from "@/components/RegisterForm/FormSelection";
+import { createRegisteredInfo } from "@/lib/create-register-info";
+import { useLiff } from "@/providers/liff-provider";
+import {
+  type Channel,
+  type Occupation,
+  type WhatBringsUHere,
+} from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const RegisterPage = () => {
   const router = useRouter();
+  const { idToken, userProfile } = useLiff();
 
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
   const [occupation, setOccupation] = useState<string>("");
   const [whatBringsHere, setWhatBringsHere] = useState<string>("");
   const [hearAboutUs, setHearAboutUs] = useState<string>("");
+
+  useEffect(() => {
+    if (!userProfile) return;
+    if (name === "") setName(userProfile.displayName);
+  }, [userProfile]);
 
   {
     /* form options */
@@ -84,8 +97,21 @@ const RegisterPage = () => {
     ) {
       alert("Please complete all required fields before submitting the form.");
     } else {
-      // router.push("/");
-      // POST somewhere ??
+      if (!idToken) {
+        console.error("ID token is null. ");
+        return;
+      }
+
+      void createRegisteredInfo(
+        idToken,
+        name,
+        age,
+        occupation as Occupation,
+        whatBringsHere as WhatBringsUHere,
+        hearAboutUs as Channel,
+        userProfile?.userId,
+      );
+      router.push("/register/roll");
     }
   };
   return (
@@ -94,7 +120,6 @@ const RegisterPage = () => {
       {/* Background */}
       <div className="gradient-background absolute top-0 -z-30 h-full w-full" />
       <ImageCanvas />
-
       <main className="mt-8 flex flex-col items-center gap-1 text-white">
         <h1 className="font-cooper text-4xl tracking-wider">Welcome</h1>
         <p className="text-xl font-thin italic tracking-wide">
@@ -132,8 +157,15 @@ const RegisterPage = () => {
 
         <div className="mt-12 flex items-center justify-center">
           <button
-            className="absolute w-[16rem] rounded-full bg-purple-gradient py-3 text-center font-poppins text-[1.25rem] text-xl font-semibold tracking-wider text-white shadow-lg active:scale-90"
             onClick={handleSubmit}
+            disabled={
+              name === "" ||
+              age === "" ||
+              occupation === "" ||
+              whatBringsHere === "" ||
+              hearAboutUs === ""
+            }
+            className="w-[16rem] rounded-full bg-purple-gradient py-3 text-center font-poppins text-[1.25rem] text-xl font-semibold tracking-wider text-white shadow-lg active:scale-90 disabled:cursor-none disabled:opacity-0"
           >
             SUBMIT
           </button>
