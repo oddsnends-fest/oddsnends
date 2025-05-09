@@ -67,7 +67,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           const token = liff.getIDToken();
           if (!token) throw new Error("Token is null.");
 
-          console.log("ID Token:", token);
           setIdToken(token);
           try {
             const decoded: DecodedToken = jwtDecode(token);
