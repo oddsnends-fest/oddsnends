@@ -18,9 +18,11 @@ interface LiffContextProps {
   liffError: string | null;
   idToken: string | null;
   userProfile: UserProfile | null;
+  accessToken: string | null;
 }
 
 interface DecodedToken {
+  exp: number;
   name: string;
   picture?: string;
   sub: string;
@@ -37,12 +39,14 @@ const LiffContext = createContext<LiffContextProps>({
   liffError: null,
   idToken: null,
   userProfile: null,
+  accessToken: null,
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const pathname = usePathname();
 
@@ -65,8 +69,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         } else {
           console.log("User is already logged in, decoding ID token...");
           const token = liff.getIDToken();
-          if (!token) throw new Error("Token is null.");
-
+          if (!token) throw new Error("ID Token is null.");
+          const accessToken = liff.getAccessToken();
+          if (!accessToken) throw new Error("Access Token is null.");
+          setAccessToken(accessToken);
           setIdToken(token);
           try {
             const decoded: DecodedToken = jwtDecode(token);
@@ -75,9 +81,9 @@ export default function Layout({ children }: { children: ReactNode }) {
               pictureUrl: decoded.picture,
               userId: decoded.sub,
             });
-            const user = await fetchUserData(token);
+            const user = await fetchUserData(accessToken);
             if (!user) {
-              const newUser = await createUser(token, {
+              const newUser = await createUser(accessToken, {
                 displayName: decoded.name,
                 pictureUrl: decoded.picture,
                 userId: decoded.sub,
@@ -106,6 +112,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         liffError,
         idToken,
         userProfile,
+        accessToken,
       }}
     >
       {children}

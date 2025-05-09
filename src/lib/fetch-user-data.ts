@@ -1,10 +1,10 @@
 import { type User } from "@prisma/client";
 
-export const fetchUserData = async (idToken: string) => {
+export const fetchUserData = async (token: string) => {
   try {
     const response = await fetch("/api/me", {
       headers: {
-        Authorization: `Bearer ${idToken}`, // Include the ID token in the header
+        Authorization: `Bearer ${token}`, // Include the ID token in the header
       },
     });
     if (!response.ok) {

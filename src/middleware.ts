@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { LineApiError, VerifiedToken } from "./types/apiModel";
+import { type LineApiError, type UserProfile } from "./types/apiModel";
 import { env } from "@/env";
 
 export async function middleware(request: NextRequest) {
   // Extract the ID token from the Authorization header
-  const idtoken = request.headers.get("Authorization")?.split("Bearer ")[1];
+  const accessToken = request.headers.get("Authorization")?.split("Bearer ")[1];
 
-  if (!idtoken) {
+  if (!accessToken) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
@@ -18,15 +18,12 @@ export async function middleware(request: NextRequest) {
     }
 
     // Verify the ID token with LINE Login API
-    const response = await fetch("https://api.line.me/oauth2/v2.1/verify", {
+    const response = await fetch("https://api.line.me/v2/profile", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${accessToken}`,
       },
-      body: new URLSearchParams({
-        id_token: idtoken,
-        client_id: env.LINE_LOGIN_CHANNEL_ID,
-      }),
     });
 
     if (!response.ok) {
@@ -38,14 +35,13 @@ export async function middleware(request: NextRequest) {
       );
     }
 
-    const responseJson = (await response.json()) as VerifiedToken;
+    const responseJson = (await response.json()) as UserProfile;
     const res = NextResponse.next();
 
     // Set user details in custom headers
-    res.headers.set("X-User-Name", responseJson.name);
-    res.headers.set("X-User-Picture", responseJson.picture);
-    res.headers.set("X-User-Email", responseJson.email);
-    res.headers.set("X-User-Id", responseJson.sub);
+    res.headers.set("X-User-Name", responseJson.displayName);
+    res.headers.set("X-User-Picture", responseJson.pictureUrl);
+    res.headers.set("X-User-Id", responseJson.userId);
 
     return res;
   } catch (error) {

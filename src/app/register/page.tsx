@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 const RegisterPage = () => {
   const router = useRouter();
-  const { idToken, userProfile } = useLiff();
+  const { accessToken, userProfile } = useLiff();
 
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
@@ -97,13 +97,13 @@ const RegisterPage = () => {
     ) {
       alert("Please complete all required fields before submitting the form.");
     } else {
-      if (!idToken) {
+      if (!accessToken) {
         console.error("ID token is null. ");
         return;
       }
 
       void createRegisteredInfo(
-        idToken,
+        accessToken,
         name,
         age,
         occupation as Occupation,

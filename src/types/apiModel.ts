@@ -15,3 +15,10 @@ export interface VerifiedToken {
   picture: string;
   email: string;
 }
+
+export interface UserProfile {
+  displayName: string;
+  pictureUrl: string;
+  userId: string;
+  statusMessage: string;
+}

@@ -6,7 +6,7 @@ import {
 } from "@prisma/client";
 
 export const createRegisteredInfo = async (
-  idToken: string,
+  token: string,
   name: string,
   age_range: string,
   occupation: Occupation,
@@ -18,7 +18,7 @@ export const createRegisteredInfo = async (
     const response = await fetch("/api/register", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${idToken}`, // Include the ID token in the header
+        Authorization: `Bearer ${token}`, // Include the ID token in the header
       },
       body: JSON.stringify({
         user_id,
