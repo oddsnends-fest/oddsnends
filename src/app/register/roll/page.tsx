@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function roll(){
     return (
-        <div className="flex flex-col items-center justify-center h-screen ">
+        <div className="flex flex-col items-center justify-center">
             {/* Background */}
             <div className="absolute top-0 h-full w-full bg-[url('/images/background/registerbg.jpg')] bg-center bg-cover -z-10"></div>
             <div>
