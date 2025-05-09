@@ -12,6 +12,8 @@ import React from "react";
 import { HOBBY } from "@/constants/hobby";
 import Signature from "@/components/Signature";
 import PhotoUpload from "@/components/PhotoUpload/PhotoUpload";
+import SliderBox from "@/components/SliderBox/SliderBox";
+import FourChoice from "@/components/FourChoice/FourChoice";
 import { redirect, useRouter } from "next/navigation";
 import BackGround from "@/components/BackgroundPhotoId";
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
