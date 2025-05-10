@@ -6,12 +6,12 @@ import {
 } from "@prisma/client";
 
 export const createRegisteredInfo = async (
-  token: string,
   name: string,
   age_range: string,
   occupation: Occupation,
   whatBringsUHere: WhatBringsUHere,
   channel: Channel,
+  token: string | null,
   user_id?: string,
 ) => {
   try {

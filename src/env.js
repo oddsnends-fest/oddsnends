@@ -16,6 +16,7 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     LINE_LOGIN_CHANNEL_ID: z.string(),
+    BYPASS_AUTH: z.enum(["true", "false"]).default("false"),
   },
 
   /**
@@ -41,6 +42,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
     NEXT_PUBLIC_DISABLE_LIFF_LOGIN: process.env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN,
     LINE_LOGIN_CHANNEL_ID: process.env.LINE_LOGIN_CHANNEL_ID,
+    BYPASS_AUTH: process.env.BYPASS_AUTH,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

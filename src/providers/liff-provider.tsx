@@ -63,7 +63,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         if (!liff.isLoggedIn()) {
           console.log("User not logged in, initiating login...");
           if (env.NEXT_PUBLIC_DISABLE_LIFF_LOGIN === "true") {
-            throw new Error("LIFF login is disabled in this environment.");
+            console.log("LIFF login is disabled in this environment.");
+            return;
           }
           liff.login();
         } else {

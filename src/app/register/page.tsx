@@ -99,16 +99,16 @@ const RegisterPage = () => {
     } else {
       if (!accessToken) {
         console.error("ID token is null. ");
-        return;
+        // return;
       }
 
       void createRegisteredInfo(
-        accessToken,
         name,
         age,
         occupation as Occupation,
         whatBringsHere as WhatBringsUHere,
         hearAboutUs as Channel,
+        accessToken,
         userProfile?.userId,
       );
       router.push("/register/roll");

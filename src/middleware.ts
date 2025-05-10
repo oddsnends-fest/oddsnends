@@ -5,6 +5,9 @@ import { env } from "@/env";
 
 export async function middleware(request: NextRequest) {
   // Extract the ID token from the Authorization header
+  if (env.BYPASS_AUTH) {
+    return NextResponse.next();
+  }
   const accessToken = request.headers.get("Authorization")?.split("Bearer ")[1];
 
   if (!accessToken) {
@@ -39,8 +42,8 @@ export async function middleware(request: NextRequest) {
     const res = NextResponse.next();
 
     // Set user details in custom headers
-    res.headers.set("X-User-Name", responseJson.displayName);
-    res.headers.set("X-User-Picture", responseJson.pictureUrl);
+    // res.headers.set("X-User-Name", responseJson.displayName);
+    // res.headers.set("X-User-Picture", responseJson.pictureUrl);
     res.headers.set("X-User-Id", responseJson.userId);
 
     return res;
