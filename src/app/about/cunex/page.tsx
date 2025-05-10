@@ -1,12 +1,12 @@
 'use client';
 import BackButton from "@/components/BackButton/BackButton";
 import ImageCanvas from "@/components/BackgroundPhotoId/ImageCanvas";
-import ContactSection from "@/components/ContactSection/ContactSection";
 import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa6";
+import ServiceCard from "@/components/ServiceCard/ServiceCard";
 
 const services = [
     [
@@ -217,15 +217,3 @@ export default function Cunex() {
     );
 };
 
-function ServiceCard({ title, children }: { title: string; children: React.ReactNode }) {
-    return (
-        <Card className="w-full text-custom-purple">
-            <CardTitle className="text-center text-base pt-4 text-shadow-none">
-                {title}
-            </CardTitle>
-            <CardContent className="text-center text-sm p-4 whitespace-pre-line text-shadow-none">
-                {children}
-            </CardContent>
-        </Card>
-    );
-};
